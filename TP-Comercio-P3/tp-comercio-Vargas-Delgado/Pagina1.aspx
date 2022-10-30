@@ -30,7 +30,7 @@
                     <div class="row">
                         <asp:Button ID="btnIngresar" CCsClass="btn btn-primary btn-dark" runat="server" Text="Ingresar"/>
      
-                        <a href="Default.aspx">default</a>
+                        <a href="Default.aspx">Inicio</a>
                     </div>
                     <br />
                     <div class="row">

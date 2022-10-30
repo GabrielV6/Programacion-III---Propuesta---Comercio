@@ -14,15 +14,15 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <nav class="navbar navbar-dark bg-dark fixed-top">
+            <nav class="navbar navbar-dark bg-dark ">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="Pagina1.aspx">Comercio</a>
+                    <a class="navbar-brand" href="Default.aspx">Inicio</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
                         <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu - Comercio</h5>
+                            <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Menu</h5>
                             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
                         <div class="offcanvas-body">
@@ -44,26 +44,21 @@
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Proveedores
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li><a class="dropdown-item" href="#">Altas</a></li>
-                                        <li><a class="dropdown-item" href="#">Bajas</a></li>
-                                        <li><a class="dropdown-item" href="#">Modificaciones</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                                        <li><a class="dropdown-item" href="#">Ver</a></li>
+                                    </ul>
+                                </li>          
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Marcas
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-dark">
+                                        <li><a class="dropdown-item" href="WebVerMarca.aspx">Ver</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Productos
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Articulos
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                        <li><a class="dropdown-item" href="#">Altas</a></li>
-                                        <li><a class="dropdown-item" href="#">Bajas</a></li>
-                                        <li><a class="dropdown-item" href="#">Modificaciones</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <!-- <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                                          <li><a class="dropdown-item" href="WebVerArticulo.aspx">Ver</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">
@@ -89,9 +84,6 @@
             </nav>
             <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             </asp:ContentPlaceHolder>
-            <!-- <footer>
-                mi footer
-            </footer> -->
         </div>
     </form>
 </body>
