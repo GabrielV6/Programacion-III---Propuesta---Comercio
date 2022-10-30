@@ -130,11 +130,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\TP_ABM\TPWinform_Vargas_Delgado\Dominio\Dominio.csproj">
+    <ProjectReference Include="..\Dominio\Dominio.csproj">
       <Project>{e0a370c6-d864-4297-8f63-0c05c6a297bb}</Project>
       <Name>Dominio</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\TP_ABM\TPWinform_Vargas_Delgado\Negocio\Negocio.csproj">
+    <ProjectReference Include="..\Negocio\Negocio.csproj">
       <Project>{75106ee0-d9f1-43e7-9f7f-ec7b22af679c}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
