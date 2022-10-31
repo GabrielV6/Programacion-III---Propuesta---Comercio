@@ -11,7 +11,21 @@ namespace tp_comercio_Vargas_Delgado
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuariologueado"] != null)
+            {
+                string usuariologueado = Session["usuariologueado"].ToString();
+                lblBienvenida.Text = "Bienvenido/a " + usuariologueado;
+            }
+            else
+            {
+                Response.Redirect("Logon.aspx");
+            }
+        }
 
+        protected void btnCerrar_Click(object sender, EventArgs e)
+        {
+            Session.Remove("usuariologueado");
+            Response.Redirect("Logon.aspx");
         }
     }
 }

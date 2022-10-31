@@ -70,7 +70,7 @@
     <Content Include="Content\CCS\Estilo.css" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Pagina1.aspx" />
+    <Content Include="Logon.aspx" />
     <Content Include="Script\jquery-1.9.1.min.js" />
     <Content Include="Script\nicepage.css" />
     <Content Include="Script\Page-5.css" />
@@ -96,12 +96,12 @@
     <Compile Include="MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
     </Compile>
-    <Compile Include="Pagina1.aspx.cs">
-      <DependentUpon>Pagina1.aspx</DependentUpon>
+    <Compile Include="Logon.aspx.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Pagina1.aspx.designer.cs">
-      <DependentUpon>Pagina1.aspx</DependentUpon>
+    <Compile Include="Logon.aspx.designer.cs">
+      <DependentUpon>Logon.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WebVerArticulo.aspx.cs">

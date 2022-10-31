@@ -23,7 +23,7 @@ namespace Negocio
         {
             //ESTEF: server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security=true            
             //GABI: Data Source = .; Initial Catalog=CATALOGO_DB; integrated security=true
-            conexion = new SqlConnection("server=.\\SQLEXPRESS; database=CATALOGO_DB; integrated security=true");
+            conexion = new SqlConnection("Data Source = .; Initial Catalog=CATALOGO_DB; integrated security=true");
             comando = new SqlCommand();
         }
 
