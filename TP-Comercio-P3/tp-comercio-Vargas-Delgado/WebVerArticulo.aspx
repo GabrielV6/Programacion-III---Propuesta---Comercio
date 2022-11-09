@@ -20,6 +20,8 @@
                             <p class="card-price"><%#Eval("Precio")%></p>
                             <div class="buttons">
                                <a href="DetalleArticulo.aspx?id=<%#Eval("Id")%>" class="btn btn-primary">Ver detalle</a>
+                               <a class="btn btn-success">Editar</a>
+                               <a class="btn btn-danger">Eliminar</a>
                             </div>
                          </div>
                     </div>           

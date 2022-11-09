@@ -1,4 +1,6 @@
 -- SP para listar articulos...
+
+
 Create procedure storedListar  as 
 SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl,
 A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo 
@@ -17,6 +19,7 @@ Create table Usuarios
 	Contraseña varbinary(500) not null,
 	IdRol int foreign key references Roles(IdRol) not null
 )
+Go
 
 Create table Roles
 (
@@ -72,3 +75,24 @@ SP_AgregarUsuario 'Administrador', '1234A', 1000 , 'Programacion3'
 -- Validaciones SP
 exec SP_ValidarUsuario 'Encargado', '1234A', 'Programacion3'
 exec SP_ValidarUsuario 'Administrador', '1234A', 1000, 'Programacion3'
+
+-- Agregar roles
+
+insert into Roles(Rol) values ('Administrador')
+insert into Roles (Rol) values ('Encargado')
+
+SELECT * FROM Usuarios
+
+-- Agregar columna Estado a tablas
+
+ALTER TABLE CATEGORIAS ADD Estado bit
+ALTER TABLE MARCAS ADD Estado bit
+ALTER TABLE ARTICULOS ADD Estado bit
+
+-- Completar la columna Estado en las tablas recien modificadas
+
+UPDATE CATEGORIAS set Estado = 1  WHERE id<21
+UPDATE MARCAS set Estado = 1  WHERE id<21
+UPDATE ARTICULOS set Estado = 1  WHERE id<21
+ 
+
