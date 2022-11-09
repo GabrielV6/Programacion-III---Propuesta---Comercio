@@ -7,6 +7,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Dominio;
+using Negocio;
 
 namespace tp_comercio_Vargas_Delgado
 {
@@ -22,32 +24,63 @@ namespace tp_comercio_Vargas_Delgado
         
         protected void BtnIngresar_Click(object sender, EventArgs e)
         {
-            string conectar = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
+            Usuario usuario;
+            UsuarioNegocio negocio = new UsuarioNegocio();
+            
+            try
+            {
+                usuario = new Usuario(tbxUsuario.Text, tbxContraseña.Text, false, patron);
+                if (negocio.Loguear(usuario))
+                {
+                    Session["Usuariologueado"] = tbxUsuario;
+                    Session["usuariologueado"] = tbxUsuario.Text;
+                    Response.Redirect("Default.aspx",false);
+                }
+                else
+                {
+                    Session.Add("Error", "Usuario o contraseña incorrectos");
+                    lblError.Text = "Error de Usuario o Contraseña";
+                    
+                }
 
-            SqlConnection sqlConectar = new SqlConnection(conectar);
-            SqlCommand cmd = new SqlCommand("SP_ValidarUsuario", sqlConectar)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-            cmd.Connection.Open();
-            cmd.Parameters.Add("@Usuario", SqlDbType.VarChar, 50).Value = tbxUsuario.Text;
-            cmd.Parameters.Add("@Contraseña", SqlDbType.VarChar, 50).Value = tbxContraseña.Text;
-            cmd.Parameters.Add("@Patron", SqlDbType.VarChar, 50).Value = patron;
-            SqlDataReader dr = cmd.ExecuteReader();
-            if (dr.Read())
-            {
-                //Agregamos una sesion de usuario
-                Session["Usuariologueado"] = tbxUsuario;
-                Session["usuariologueado"] = tbxUsuario.Text;
-                Response.Redirect("Default.aspx");
             }
-            else
+            catch (Exception ex)
             {
-                lblError.Text = "Error de Usuario o Contraseña";
+
+                lblError.Text = "Error inesperado, intente de nuevo";
+                
+                
             }
 
-            cmd.Connection.Close();
+ // Se comenta codigo de alternativa 2 
+            
+            /* string conectar = ConfigurationManager.ConnectionStrings["conexion"].ConnectionString;
 
+
+             SqlConnection sqlConectar = new SqlConnection(conectar);
+             SqlCommand cmd = new SqlCommand("SP_ValidarUsuario", sqlConectar)
+             {
+                 CommandType = CommandType.StoredProcedure
+             };
+             cmd.Connection.Open();
+             cmd.Parameters.Add("@Usuario", SqlDbType.VarChar, 50).Value = tbxUsuario.Text;
+             cmd.Parameters.Add("@Contraseña", SqlDbType.VarChar, 50).Value = tbxContraseña.Text;
+             cmd.Parameters.Add("@Patron", SqlDbType.VarChar, 50).Value = patron;
+             SqlDataReader dr = cmd.ExecuteReader();
+             if (dr.Read())
+             {
+                 //Agregamos una sesion de usuario
+                 Session["Usuariologueado"] = tbxUsuario;
+                 Session["usuariologueado"] = tbxUsuario.Text;
+                 Response.Redirect("Default.aspx");
+             }
+             else
+             {
+                 lblError.Text = "Error de Usuario o Contraseña";
+             }
+
+             cmd.Connection.Close();
+            */
         }
     }
 }
