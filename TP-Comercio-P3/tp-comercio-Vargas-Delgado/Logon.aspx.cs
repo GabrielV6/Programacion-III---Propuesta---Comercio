@@ -32,8 +32,11 @@ namespace tp_comercio_Vargas_Delgado
                 usuario = new Usuario(tbxUsuario.Text, tbxContraseña.Text, false, patron);
                 if (negocio.Loguear(usuario))
                 {
-                    Session["Usuariologueado"] = tbxUsuario;
+                    //Cargamos la sesion con el usuario logueado 
+                    
+                    Session["usuariologueado"] = tbxUsuario;
                     Session["usuariologueado"] = tbxUsuario.Text;
+                    Session["rolusuario"] = usuario.rolusuario;
                     Response.Redirect("Default.aspx",false);
                 }
                 else

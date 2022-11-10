@@ -11,7 +11,12 @@ namespace tp_comercio_Vargas_Delgado
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["usuariologueado"] == null)
+            {
 
+                Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
+                Response.Redirect("Logon.aspx");
+            }
         }
     }
 }

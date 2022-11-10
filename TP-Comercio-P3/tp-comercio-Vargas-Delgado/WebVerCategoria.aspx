@@ -16,8 +16,17 @@
                             <p class="card-text">Codigo:   <%#Eval("Id")%></p>
                          </div>
                          <div class="buttons">
+                             <%
+                                if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
+                                {
+                    
+                                       
+                             %>
                                <a class="btn btn-success">Editar</a>
                                <a class="btn btn-danger">Eliminar</a>
+                             <%
+                                }
+                             %>
                          </div>
                     </div>           
               </ItemTemplate>
