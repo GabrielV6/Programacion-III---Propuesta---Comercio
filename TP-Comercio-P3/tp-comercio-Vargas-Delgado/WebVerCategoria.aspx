@@ -14,15 +14,23 @@
                         <div class="card-body">
                             <p class="card-text">Nombre: <b><%#Eval("Descripcion")%></b></p>
                             <p class="card-text">Codigo:   <%#Eval("Id")%></p>
-                            <p class="card-text">Estado:  <%#Eval("Estado")%></p>
-                        </div>
-                        <div class="buttons">
-                            <a class="btn btn-success">Editar</a>
-                            <a class="btn btn-danger">Eliminar</a>
-                        </div>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
-        </div>
+                         </div>
+                         <div class="buttons">
+                             <%
+                                if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
+                                {
+                    
+                                       
+                             %>
+                               <a class="btn btn-success">Editar</a>
+                               <a class="btn btn-danger">Eliminar</a>
+                             <%
+                                }
+                             %>
+                         </div>
+                    </div>           
+              </ItemTemplate>
+           </asp:Repeater>
+       </div>
     </div>
 </asp:Content>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,7 @@ namespace Negocio
                   
                   usuario.user = (string)datos.Lector["Usuario"];
                   usuario.rolusuario = (int)(datos.Lector["IdRol"]) == 1000 ? RolUsuario.Administrador : RolUsuario.Encargado;
+                    
                     
                     return true;
                 }

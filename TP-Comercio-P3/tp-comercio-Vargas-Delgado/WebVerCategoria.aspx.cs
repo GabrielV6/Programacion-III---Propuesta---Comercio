@@ -22,6 +22,12 @@ namespace tp_comercio_Vargas_Delgado
                 Repeater1.DataSource = ListaCategoria;
                 Repeater1.DataBind();
             }
+
+            if (Session["usuariologueado"] == null)
+            {
+                Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
+                Response.Redirect("Logon.aspx");
+            }
         }
     }
 }

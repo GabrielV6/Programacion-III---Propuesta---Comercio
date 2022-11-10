@@ -85,14 +85,11 @@ SELECT * FROM Usuarios
 
 -- Agregar columna Estado a tablas
 
-ALTER TABLE CATEGORIAS ADD Estado bit
-ALTER TABLE MARCAS ADD Estado bit
-ALTER TABLE ARTICULOS ADD Estado bit
+ALTER TABLE CATEGORIAS ADD Estado bit not null default 0
+ALTER TABLE MARCAS ADD Estado bit not null default 0 
+ALTER TABLE ARTICULOS ADD Estado bit not null default 0
+Alter table Usuarios add Estado bit not null default 0
+Alter table Roles add Estado bit not null default 0 
 
--- Completar la columna Estado en las tablas recien modificadas
-
-UPDATE CATEGORIAS set Estado = 1  WHERE id<21
-UPDATE MARCAS set Estado = 1  WHERE id<21
-UPDATE ARTICULOS set Estado = 1  WHERE id<21
  
 
