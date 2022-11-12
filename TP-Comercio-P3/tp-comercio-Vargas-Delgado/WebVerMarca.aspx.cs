@@ -16,6 +16,7 @@ namespace tp_comercio_Vargas_Delgado
         {
             MarcaNegocio negocio = new MarcaNegocio();
             ListaMarca = negocio.listar();
+            Session.Add("ListaMarca", ListaMarca);
 
             if (!IsPostBack)
             {
@@ -31,5 +32,36 @@ namespace tp_comercio_Vargas_Delgado
             }
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int idMarca = Convert.ToInt32(((Button)sender).CommandArgument);
+            MarcaNegocio negocio = new MarcaNegocio();
+            negocio.eliminar(idMarca);
+            Response.Redirect("WebVerMarca.aspx");
+        }
+
+        protected void listaFiltrada()
+        {
+            string filtro = txtFiltro.Text;
+            ListaMarca = (List<Marca>)Session["ListaMarca"];
+            ListaMarca = ListaMarca.FindAll(x => x.DescripcionMarca.Contains(filtro));
+
+            Repeater1.DataSource = ListaMarca;
+            Repeater1.DataBind();
+        }
+
+        protected void btnFiltro_Click(object sender, EventArgs e)
+        {
+            if (txtFiltro.Text != "")
+            {
+                listaFiltrada();
+            }
+            else
+            {
+                ListaMarca = (List<Marca>)Session["ListaMarca"];
+                Repeater1.DataSource = ListaMarca;
+                Repeater1.DataBind();
+            }
+        }
     }
 }

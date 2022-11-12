@@ -40,7 +40,7 @@
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li><a class="dropdown-item" href="WebVerProveedor.aspx">Ver</a></li>
                                     </ul>
-                                </li>   
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias
                                     </a>
@@ -48,19 +48,20 @@
                                         <li><a class="dropdown-item" href="WebVerCategoria.aspx">Ver</a></li>
                                         <li><a class="dropdown-item" href="FormularioCategoria.aspx">Agregar</a></li>
                                     </ul>
-                                </li>                                
+                                </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Marcas
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li><a class="dropdown-item" href="WebVerMarca.aspx">Ver</a></li>
+                                        <li><a class="dropdown-item" href="FormularioMarca.aspx">Agregar</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Articulos
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
-                                          <li><a class="dropdown-item" href="WebVerArticulo.aspx">Ver</a></li>
+                                        <li><a class="dropdown-item" href="WebVerArticulo.aspx">Ver</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">

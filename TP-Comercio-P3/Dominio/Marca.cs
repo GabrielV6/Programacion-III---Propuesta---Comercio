@@ -10,6 +10,7 @@ namespace Dominio
     public class Marca
     {
         public int Id { get; set; }
+        public int Estado { get; set; }
 
         [DisplayName("Marcas")]
         public string DescripcionMarca { get; set; }

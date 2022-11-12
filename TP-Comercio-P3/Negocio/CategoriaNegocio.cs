@@ -48,14 +48,10 @@ namespace Negocio
             {
                 string valores = "values('" + categoria.Descripcion + "',1)";
                 datos.setearConsulta("INSERT INTO CATEGORIAS (Descripcion, Estado) " + valores);
-
-
                 datos.ejecutarAccion();
-
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -73,13 +69,10 @@ namespace Negocio
                 datos.setearConsulta("UPDATE CATEGORIAS SET Descripcion = @Descripcion WHERE Id = @Id");
                 datos.setearParametro("@Descripcion", categoria.Descripcion);
                 datos.setearParametro("@Id", categoria.Id);
-
                 datos.ejecutarAccion();
-
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -96,7 +89,6 @@ namespace Negocio
             {
                 datos.setearConsulta("UPDATE CATEGORIAS SET Estado = 0 WHERE Id = @Id");
                 datos.setearParametro("@Id", id);
-
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

@@ -9,6 +9,15 @@
     </div>
 
     <div class="container">
+        <div class="row">
+            <div class="col">
+                <asp:TextBox ID="txtFiltro" runat="server" />
+                <asp:Button Text="Filtrar" ID="btnFiltro" class="btn btn-outline-warning" OnClick="btnFiltro_Click" runat="server" />
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
         <div class="row justify-content-md-center">
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
@@ -22,8 +31,8 @@
                                 if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
                                 {
                             %>
-                            <a href="DetalleMarca.aspx?id=<%#Eval("Id")%>" class="btn btn-success">Editar</a>
-                            <a class="btn btn-danger">Eliminar</a>
+                            <a class="btn btn-outline-success">Editar</a>
+                            <asp:Button Text="Eliminar" ID="btnEliminar" CommandArgument='<%#Eval("Id")%>' class="btn btn-outline-danger" OnClick="btnEliminar_Click" runat="server" />
                             <%
                                 }
                             %>

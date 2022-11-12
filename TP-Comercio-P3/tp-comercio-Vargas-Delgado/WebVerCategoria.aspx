@@ -24,10 +24,7 @@
                     <div class="col-md-auto">
                         <div class="card-body">
                             <p class="card-text">Nombre: <b><%#Eval("Descripcion")%></b></p>
-                            <p class="card-text">
-                                Codigo: 
-                            <asp:Label ID="lblId" Text='<%#Eval("Id")%>' runat="server" />
-                            </p>
+                            <p class="card-text">Codigo:   <%#Eval("Id")%></p>
                         </div>
                         <div class="buttons">
                             <%
