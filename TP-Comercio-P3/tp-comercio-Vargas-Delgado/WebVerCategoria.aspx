@@ -10,8 +10,10 @@
 
     <div class="container">
         <div class="row">
-            <asp:TextBox ID="txtFiltro" runat="server" />
-            <asp:Button Text="Filtrar" ID="btnFiltro" class="btn btn-warning" OnClick="btnFiltro_Click" runat="server" />
+            <div class="col">
+                <asp:TextBox ID="txtFiltro" runat="server" />
+                <asp:Button Text="Filtrar" ID="btnFiltro" class="btn btn-outline-warning" OnClick="btnFiltro_Click" runat="server" />
+            </div>
         </div>
     </div>
 
@@ -32,8 +34,8 @@
                                 if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
                                 {
                             %>
-                            <a class="btn btn-success">Editar</a>
-                            <asp:Button Text="Eliminar" ID="btnEliminar" CommandArgument='<%#Eval("Id")%>' class="btn btn-danger" OnClick="btnEliminar_Click" runat="server" />
+                            <a class="btn btn-outline-success">Editar</a>
+                            <asp:Button Text="Eliminar" ID="btnEliminar" CommandArgument='<%#Eval("Id")%>' class="btn btn-outline-danger" OnClick="btnEliminar_Click" runat="server" />
                             <%
                                 }
                             %>
