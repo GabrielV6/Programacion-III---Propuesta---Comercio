@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.EnterpriseServices;
 
 namespace tp_comercio_Vargas_Delgado
 {
@@ -16,6 +17,7 @@ namespace tp_comercio_Vargas_Delgado
         {
             CategoriaNegocio negocio = new CategoriaNegocio();
             ListaCategoria = negocio.listar();
+            Session.Add("ListaCategoria", ListaCategoria);
 
             if (!IsPostBack)
             {
@@ -32,9 +34,34 @@ namespace tp_comercio_Vargas_Delgado
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            int idCategoria = Convert.ToInt32(((Button)sender).CommandArgument);
             CategoriaNegocio negocio = new CategoriaNegocio();
-         // negocio.eliminar(int.Parse(txtId.Text)); modificar esta linea con el id del registro 
+            negocio.eliminar(idCategoria);
             Response.Redirect("WebVerCategoria.aspx");
+        }
+
+        protected void listaFiltrada()
+        {
+            string filtro = txtFiltro.Text;
+            ListaCategoria = (List<Categoria>)Session["ListaCategoria"];
+            ListaCategoria = ListaCategoria.FindAll(x => x.Descripcion.Contains(filtro));
+
+            Repeater1.DataSource = ListaCategoria;
+            Repeater1.DataBind();
+        }
+
+        protected void btnFiltro_Click(object sender, EventArgs e)
+        {
+            if (txtFiltro.Text != "")
+            {
+                listaFiltrada();
+            }
+            else
+            {
+                ListaCategoria = (List<Categoria>)Session["ListaCategoria"];
+                Repeater1.DataSource = ListaCategoria;
+                Repeater1.DataBind();
+            }
         }
     }
 }
