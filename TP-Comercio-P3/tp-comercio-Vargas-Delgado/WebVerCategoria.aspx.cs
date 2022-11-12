@@ -29,5 +29,12 @@ namespace tp_comercio_Vargas_Delgado
                 Response.Redirect("Logon.aspx");
             }
         }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            CategoriaNegocio negocio = new CategoriaNegocio();
+         // negocio.eliminar(int.Parse(txtId.Text)); modificar esta linea con el id del registro 
+            Response.Redirect("WebVerCategoria.aspx");
+        }
     }
 }

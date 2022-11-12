@@ -21,10 +21,10 @@ namespace tp_comercio_Vargas_Delgado
             Categoria categoria = new Categoria();
             categoria.Descripcion = txtDescripcion.Text;
 
-           CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-           categoriaNegocio.agregar(categoria);
+            CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+            categoriaNegocio.agregar(categoria);
 
-           Response.Redirect("WebVerCategoria.aspx", false);
+            Response.Redirect("WebVerCategoria.aspx", false);
         }
     }
 }

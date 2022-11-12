@@ -16,7 +16,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT * FROM CATEGORIAS");
+                datos.setearConsulta("SELECT * FROM CATEGORIAS WHERE Estado=1");
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -80,6 +80,27 @@ namespace Negocio
             catch (Exception ex)
             {
 
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("UPDATE CATEGORIAS SET Estado = 0 WHERE Id = @Id");
+                datos.setearParametro("@Id", id);
+
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
                 throw ex;
             }
             finally
