@@ -8,8 +8,8 @@
         <h2 class="text-center">Articulos disponibles</h2>
     </div>
 
-      <div class="container ">
-        <div class="row row-cols-1 row-cols-sm-4 g-5">
+      <div class="container">
+        <div class="row row-cols-1 row-cols-sm-5 g-5 justify-content-md-center">
 >
             <asp:Repeater ID="Repeater1" runat="server">
             <ItemTemplate>
