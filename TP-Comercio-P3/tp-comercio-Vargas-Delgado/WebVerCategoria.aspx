@@ -3,11 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
     <div class="mx-auto p-5" style="width: 400px;">
         <h2 class="text-center">Listado de Categorias</h2>
     </div>
-    <div class="container justify-content-md-center">
-        <div class="row  ">
+    
+    <div class="container">
+        <div class="row justify-content-md-center">
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
                     <div class="col-md-auto">
@@ -18,9 +20,7 @@
                          <div class="buttons">
                              <%
                                 if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
-                                {
-                    
-                                       
+                                {                   
                              %>
                                <a class="btn btn-success">Editar</a>
                                <a class="btn btn-danger">Eliminar</a>
@@ -33,4 +33,5 @@
            </asp:Repeater>
        </div>
     </div>
+
 </asp:Content>

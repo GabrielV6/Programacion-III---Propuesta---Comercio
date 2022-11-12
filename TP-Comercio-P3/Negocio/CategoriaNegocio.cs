@@ -46,8 +46,8 @@ namespace Negocio
 
             try
             {
-                string valores = "values('" + categoria.Descripcion + "')";
-                datos.setearConsulta("INSERT INTO CATEGORIAS (Descripcion) " + valores);
+                string valores = "values('" + categoria.Descripcion + "',1)";
+                datos.setearConsulta("INSERT INTO CATEGORIAS (Descripcion, Estado) " + valores);
 
 
                 datos.ejecutarAccion();

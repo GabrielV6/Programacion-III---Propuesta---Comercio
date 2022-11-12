@@ -8,31 +8,30 @@
         <h2 class="text-center">Listado de Marcas</h2>
     </div>
 
-   <div class="container justify-content-md-center">
-        <div class="row  ">
+    <div class="container">
+        <div class="row justify-content-md-center">
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
                     <div class="col-md-auto">
                         <div class="card-body">
                             <p class="card-text">Nombre: <b><%#Eval("DescripcionMarca")%></b></p>
                             <p class="card-text">Codigo:   <%#Eval("Id")%></p>
-                         </div>
-                         <div class="buttons">
-                             <%
+                        </div>
+                        <div class="buttons">
+                            <%
                                 if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
                                 {
-                    
-                                       
-                             %>
-                               <a class="btn btn-success">Editar</a>
-                               <a class="btn btn-danger">Eliminar</a>
-                             <%
+                            %>
+                            <a href="DetalleMarca.aspx?id=<%#Eval("Id")%>" class="btn btn-success">Editar</a>
+                            <a class="btn btn-danger">Eliminar</a>
+                            <%
                                 }
-                             %>
-                         </div>
-                    </div>           
-              </ItemTemplate>
-           </asp:Repeater>
-       </div>
+                            %>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
     </div>
+
 </asp:Content>

@@ -46,6 +46,7 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li><a class="dropdown-item" href="WebVerCategoria.aspx">Ver</a></li>
+                                        <li><a class="dropdown-item" href="FormularioCategoria.aspx">Agregar</a></li>
                                     </ul>
                                 </li>                                
                                 <li class="nav-item dropdown">

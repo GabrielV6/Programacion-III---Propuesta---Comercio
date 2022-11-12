@@ -8,14 +8,14 @@
         <h2 class="text-center">Articulos disponibles</h2>
     </div>
 
-      <div class="container">
+    <div class="container">
         <div class="row row-cols-1 row-cols-sm-5 g-5 justify-content-md-center">
->
+            >
             <asp:Repeater ID="Repeater1" runat="server">
-            <ItemTemplate>
+                <ItemTemplate>
 
-                <div class="col">
-                        
+                    <div class="col">
+
                         <div class="card h-100">
                             <img src="<%#Eval("ImagenUrl")%>" class="card-image h-50" alt="image" />
 
@@ -35,10 +35,10 @@
                                 %>
                             </div>
 
-                       </div>
-                </div>
-            </ItemTemplate>             
-        </asp:Repeater>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </div>
 </asp:Content>
