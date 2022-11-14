@@ -17,14 +17,16 @@ Create table Usuarios
 	IdUsuario int identity(1000,1) primary key,
 	Usuario varchar(50) unique not null,
 	Contraseña varbinary(500) not null,
-	IdRol int foreign key references Roles(IdRol) not null
+	IdRol int foreign key references Roles(IdRol) not null,
+	Estado bit not null default 1
 )
 Go
 
 Create table Roles
 (
 	IdRol int identity(1000,1) primary key,
-	Rol varchar(50) unique not null 
+	Rol varchar(50) unique not null,
+	Estado bit not null default 1
 )
 
 
@@ -65,31 +67,42 @@ End
 
 
 
-
 -- Datos.
+
+
+--Go Agregar roles
 Go
-SP_AgregarUsuario 'Encargado', '1234A', 1001, 'Programacion3'
+
+insert into Roles(Rol) values ('Administrador')
+insert into Roles (Rol) values ('Usuario')
+
+SELECT * FROM Usuarios
+SELECT * FROM Roles
+
+Go
+SP_AgregarUsuario 'Usuario', '1234A', 1001, 'Programacion3'
 Go
 SP_AgregarUsuario 'Administrador', '1234A', 1000 , 'Programacion3'
 
 -- Validaciones SP
-exec SP_ValidarUsuario 'Encargado', '1234A', 'Programacion3'
+exec SP_ValidarUsuario 'Usuario', '1234A', 'Programacion3'
 exec SP_ValidarUsuario 'Administrador', '1234A', 1000, 'Programacion3'
 
--- Agregar roles
-
-insert into Roles(Rol) values ('Administrador')
-insert into Roles (Rol) values ('Encargado')
-
-SELECT * FROM Usuarios
 
 -- Agregar columna Estado a tablas
 
-ALTER TABLE CATEGORIAS ADD Estado bit not null default 0
-ALTER TABLE MARCAS ADD Estado bit not null default 0 
-ALTER TABLE ARTICULOS ADD Estado bit not null default 0
-Alter table Usuarios add Estado bit not null default 0
-Alter table Roles add Estado bit not null default 0 
+ALTER TABLE CATEGORIAS ADD Estado bit not null default 1
+ALTER TABLE MARCAS ADD Estado bit not null default 1 
+ALTER TABLE ARTICULOS ADD Estado bit not null default 1
+
 
  
+
+Select * From MARCAS 
+Select * From Categorias
+Select * From Articulos
+Select * From Usuarios
+Select * From Roles
+
+
 

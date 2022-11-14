@@ -1,6 +1,6 @@
 use master
 go
-create database CATALOGO_DB
+
 go
 use CATALOGO_DB
 go
@@ -99,3 +99,25 @@ insert into ARTICULOS values ('S01', 'Galaxy S10', 'Una canoa cara', 1, 1, 'http
 ('A23', 'Apple TV', 'lindo loro', 2, 3, 'https://cnnespanol2.files.wordpress.com/2015/12/gadgets-mc3a1s-populares-apple-tv-2015-18.jpg?quality=100&strip=info&w=460&h=260&crop=1', 7850)
 
 select * from ARTICULOS
+
+-- Crear tabla de Provedores
+
+USE [CATALOGO_DB]
+GO
+
+Create table PROVEEDORES
+(
+	Id int primary key identity(1000,1) not null,
+	RazonSocial varchar(50) not null,
+	Cuit varchar(50) not null,
+	Telefono varchar(50),
+	Email varchar(50),
+	Estado bit not null default 1
+	
+)
+
+-- insertar provedor
+
+insert into PROVEEDORES(RazonSocial,Cuit,Telefono,Email) values ('Tienda De Cafe','30-12345678-9','123456789','tiendacafe@gmailcom')
+
+
