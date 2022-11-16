@@ -18,7 +18,7 @@ namespace tp_comercio_Vargas_Delgado
 
             ProveedorNegocio negocio = new ProveedorNegocio();
             ListaProveedor = negocio.listar();
-            Session.Add("ListaProvedor", ListaProveedor);
+            Session.Add("ListaProveedor", ListaProveedor);
 
             if (!IsPostBack)
             {
