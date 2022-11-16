@@ -16,7 +16,8 @@
         <div class="mb-3">
             <h7>El codigo se agregara de manera automatica</h7>
         </div>
-        <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />     
+        <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />
+        <a href="./WebVerCategoria.aspx">Volver</a>
     </div>
 
 </asp:Content>

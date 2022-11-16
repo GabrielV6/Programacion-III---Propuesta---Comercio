@@ -34,7 +34,7 @@
                             <p class="card-marca"><b>Marca: </b><%#Eval("Marca.DescripcionMarca")%></p>
 
                             <div class="vstack">
-                                <a href="DetalleArticulo.aspx?id=<%#Eval("Id")%>" class="btn btn-outline-primary">Ver detalle</a>
+                                <asp:Button ID="btnVerDetalle" runat="server" Text="Ver detalle" class="btn btn-outline-primary" OnClick="btnEditar_Click" CommandArgument='<%#Eval("Id") %>' />
                                 <%
                                     if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
                                     {

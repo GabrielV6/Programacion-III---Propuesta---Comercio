@@ -14,7 +14,7 @@ namespace tp_comercio_Vargas_Delgado
         public List<Articulo> ListaArticulo { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
-        {   
+        {
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulo = negocio.listarConSP();
             Session.Add("ListaArticulo", ListaArticulo);
@@ -67,5 +67,6 @@ namespace tp_comercio_Vargas_Delgado
             Session.Add("ArticuloSeleccionado", selecionado);
             Response.Redirect("FormularioArticulo.aspx");
         }
+
     }
 }

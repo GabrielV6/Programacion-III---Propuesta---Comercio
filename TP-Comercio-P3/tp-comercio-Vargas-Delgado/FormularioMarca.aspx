@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FormularioMarca.aspx.cs" Inherits="tp_comercio_Vargas_Delgado.FormularioMarca" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -15,7 +16,8 @@
         <div class="mb-3">
             <h7>El codigo se agregara de manera automatica</h7>
         </div>
-        <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />     
+        <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />
+        <a href="./WebVerMarca.aspx">Volver</a>
     </div>
 
 </asp:Content>

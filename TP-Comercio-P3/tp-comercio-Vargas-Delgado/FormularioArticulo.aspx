@@ -55,7 +55,8 @@
         <div class="row">
             <div class="col">
                 <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />
-            </div>
+                <a href="./WebVerArticulo.aspx">Volver</a>
+             </div>
         </div>
     </div>
 
