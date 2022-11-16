@@ -70,7 +70,6 @@ namespace tp_comercio_Vargas_Delgado
             MarcaNegocio negocio = new MarcaNegocio();
 
             Marca selecionada = (negocio.listaParaEditar(IdMarca))[0];
-            //enviar datos selecionado al formulario de proveedores
 
             Session.Add("MarcaSeleccionada", selecionada);
             Response.Redirect("FormularioMarca.aspx");

@@ -63,5 +63,16 @@ namespace tp_comercio_Vargas_Delgado
                 Repeater1.DataBind();
             }
         }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            int IdCategoria = Convert.ToInt32(((Button)sender).CommandArgument);
+            CategoriaNegocio negocio = new CategoriaNegocio();
+
+            Categoria selecionada = (negocio.listaParaEditar(IdCategoria))[0];
+
+            Session.Add("CategoriaSeleccionada", selecionada);
+            Response.Redirect("FormularioCategoria.aspx");
+        }
     }
 }
