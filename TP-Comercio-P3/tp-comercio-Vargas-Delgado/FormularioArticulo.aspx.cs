@@ -13,44 +13,59 @@ namespace tp_comercio_Vargas_Delgado
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-            { 
-                MarcaNegocio marcaNegocio = new MarcaNegocio();
-                List<Marca> listaMarca = marcaNegocio.listar();
+            try
+            {
+                if (!IsPostBack)
+                {
+                    MarcaNegocio marcaNegocio = new MarcaNegocio();
+                    List<Marca> listaMarca = marcaNegocio.listar();
 
-                ddlMarca.DataSource = listaMarca;
-                ddlMarca.DataValueField = "Id";
-                ddlMarca.DataTextField = "DescripcionMarca";
-                ddlMarca.DataBind();
+                    ddlMarca.DataSource = listaMarca;
+                    ddlMarca.DataValueField = "Id";
+                    ddlMarca.DataTextField = "DescripcionMarca";
+                    ddlMarca.DataBind();
 
-                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
-                List<Categoria> listaCategoria = categoriaNegocio.listar();
+                    CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                    List<Categoria> listaCategoria = categoriaNegocio.listar();
 
-                ddlCategoria.DataSource = listaCategoria;
-                ddlCategoria.DataValueField = "Id";
-                ddlCategoria.DataTextField = "Descripcion";
-                ddlCategoria.DataBind();
+                    ddlCategoria.DataSource = listaCategoria;
+                    ddlCategoria.DataValueField = "Id";
+                    ddlCategoria.DataTextField = "Descripcion";
+                    ddlCategoria.DataBind();
+                }
             }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                throw;
+            }
+
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo articulo = new Articulo();
-            articulo.Codigo = txtCodigo.Text;
-            articulo.Nombre = txtNombre.Text;
-            articulo.Descripcion = txtDescripcion.Text;
-            articulo.Precio = 10;
-            articulo.ImagenUrl = txtImagenUrl.Text;
-            Marca marca = new Marca();
-            marca.Id = 1;
-            articulo.marca = marca;
-            Categoria categoria = new Categoria();
-            categoria.Id = 1;
-            articulo.categoria= categoria;
+            try
+            {
+                Articulo articulo = new Articulo();
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Precio = int.Parse(txtPrecio.Text);
+                articulo.ImagenUrl = txtImagenUrl.Text;
+                articulo.marca = new Marca();
+                articulo.marca.Id = int.Parse(ddlMarca.SelectedValue);
+                articulo.categoria = new Categoria();
+                articulo.categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
-            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-            articuloNegocio.agregar(articulo);
+                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+                articuloNegocio.agregar(articulo);
 
-            Response.Redirect("WebVerArticulo.aspx", false);
+                Response.Redirect("WebVerArticulo.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Session.Add("Error", ex);
+                throw;
+            }
         }
     }
 }
