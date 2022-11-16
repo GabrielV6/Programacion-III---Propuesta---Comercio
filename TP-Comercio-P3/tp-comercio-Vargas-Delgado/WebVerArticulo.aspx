@@ -26,10 +26,12 @@
                     <div class="col">
 
                         <div class="card h-100">
-                            <img src="<%#Eval("ImagenUrl")%>" class="card-image h-50" alt="image" />
 
+                            <img src="<%#Eval("ImagenUrl")%>" class="card-image h-50" alt="image" />
                             <h5 class="card-title h-30"><%#Eval("Nombre")%></h5>
                             <p class="card-price"><%#Eval("Precio")%></p>
+                            <p class="card-categoria"><b>Categoria:</b> <%#Eval("Categoria.Descripcion")%></p>
+                            <p class="card-marca"><b>Marca: </b><%#Eval("Marca.DescripcionMarca")%></p>
 
                             <div class="vstack">
                                 <a href="DetalleArticulo.aspx?id=<%#Eval("Id")%>" class="btn btn-outline-primary">Ver detalle</a>
