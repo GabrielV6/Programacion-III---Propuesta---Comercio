@@ -57,7 +57,7 @@ namespace tp_comercio_Vargas_Delgado
             
 
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            if (Session["ProveedorSelecionado"] != null)
+            if (IdProveedor ==0)
             {
                 proveedorNegocio.agregar(proveedor);
             }
@@ -65,7 +65,8 @@ namespace tp_comercio_Vargas_Delgado
                 {
             
                 proveedorNegocio.modificar(proveedor);
-                }
+                Session.Remove("ProveedorSeleccionado");
+            }
             
 
             Response.Redirect("WebVerProveedor.aspx", false);
