@@ -66,5 +66,20 @@ namespace tp_comercio_Vargas_Delgado
                 Repeater1.DataBind();
             }
         }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            int IdProveedor = Convert.ToInt32(((Button)sender).CommandArgument);
+            ProveedorNegocio negocio = new ProveedorNegocio();
+            //List<Proveedor> lista = negocio.ListaParaEditar(IdProveedor);
+            
+            Proveedor selecionado = (negocio.ListaParaEditar(IdProveedor))[0];
+            //enviar datos selecionado al formulario de proveedores
+
+            Session.Add("ProveedorSeleccionado", selecionado);
+            Response.Redirect("FormularioProveedores.aspx");
+
+        }
+
     }
 }

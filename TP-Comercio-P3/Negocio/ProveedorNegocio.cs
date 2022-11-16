@@ -15,7 +15,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
 
             try
-            {
+            {   
                 datos.setearConsulta("SELECT * FROM PROVEEDORES  WHERE Estado=1");
                 datos.ejecutarLectura();
 
@@ -28,7 +28,7 @@ namespace Negocio
                     aux.Telefono = (string)datos.Lector["Telefono"];
                     aux.Email = (string)datos.Lector["Email"];
                     aux.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
-              
+
                     lista.Add(aux);
                 }
                 return lista;
@@ -46,6 +46,42 @@ namespace Negocio
 
         }
 
+        public List<Proveedor> ListaParaEditar(int Id)
+        {
+            List<Proveedor> lista = new List<Proveedor>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT * FROM PROVEEDORES  WHERE Estado=1 AND Id=" + Id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Proveedor aux = new Proveedor();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.RazonSocial = (string)datos.Lector["RazonSocial"];
+                    aux.Cuit = (string)datos.Lector["Cuit"];
+                    aux.Telefono = (string)datos.Lector["Telefono"];
+                    aux.Email = (string)datos.Lector["Email"];
+                    aux.Estado = Convert.ToBoolean(datos.Lector["Estado"]);
+
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
+        
         public void agregar(Proveedor proveedor)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -73,7 +109,10 @@ namespace Negocio
 
             try
             {
-               // TODO: Falta addd la Query
+
+                datos.setearConsulta("UPDATE PROVEEDORES SET RazonSocial='" + proveedor.RazonSocial + "', Cuit='" + proveedor.Cuit + "', Telefono='" + proveedor.Telefono + "', Email='" + proveedor.Email + "' WHERE Id=" + proveedor.Id);
+                
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

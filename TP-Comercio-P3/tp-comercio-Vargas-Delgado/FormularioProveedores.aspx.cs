@@ -12,6 +12,8 @@ namespace tp_comercio_Vargas_Delgado
 {
     public partial class FormularioProveedores : System.Web.UI.Page
     {
+        
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuariologueado"] == null)
@@ -20,13 +22,34 @@ namespace tp_comercio_Vargas_Delgado
                 Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
                 Response.Redirect("Logon.aspx");
             }
+            else
+            {
+
+         
+                if (Session["ProveedorSeleccionado"] != null && !IsPostBack)
+                {
+                    Proveedor proveedor = (Proveedor)Session["ProveedorSeleccionado"];
+                    
+                    txtRazonSocial.Text = proveedor.RazonSocial;
+                    txtCuit.Text = proveedor.Cuit;
+                    txtEmail.Text = proveedor.Email;
+                    txtTelefono.Text = proveedor.Telefono;
+                }
+            }
+
+            
 
 
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
-        {
+        {   
+            //Guardo el ID de la session para pasarlo al nuevo objeto
+            int IdProveedor = Session["ProveedorSeleccionado"] != null ? ((Proveedor)Session["ProveedorSeleccionado"]).Id : 0;
+            
             Proveedor proveedor = new Proveedor();
+            
+            proveedor.Id = IdProveedor;
             proveedor.RazonSocial = txtRazonSocial.Text;
             proveedor.Cuit = txtCuit.Text;
             proveedor.Email = txtEmail.Text;
@@ -34,9 +57,20 @@ namespace tp_comercio_Vargas_Delgado
             
 
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
-            proveedorNegocio.agregar(proveedor);
+            if (Session["ProveedorSelecionado"] != null)
+            {
+                proveedorNegocio.agregar(proveedor);
+            }
+            else
+                {
+            
+                proveedorNegocio.modificar(proveedor);
+                }
+            
 
             Response.Redirect("WebVerProveedor.aspx", false);
         }
+
+
     }
 }
