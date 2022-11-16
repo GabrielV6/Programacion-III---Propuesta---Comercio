@@ -78,7 +78,6 @@ namespace tp_comercio_Vargas_Delgado
 
             Session.Add("ProveedorSeleccionado", selecionado);
             Response.Redirect("FormularioProveedores.aspx");
-
         }
 
     }

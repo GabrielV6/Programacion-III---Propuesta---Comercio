@@ -63,5 +63,17 @@ namespace tp_comercio_Vargas_Delgado
                 Repeater1.DataBind();
             }
         }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            int IdMarca = Convert.ToInt32(((Button)sender).CommandArgument);
+            MarcaNegocio negocio = new MarcaNegocio();
+
+            Marca selecionada = (negocio.listaParaEditar(IdMarca))[0];
+            //enviar datos selecionado al formulario de proveedores
+
+            Session.Add("MarcaSeleccionada", selecionada);
+            Response.Redirect("FormularioMarca.aspx");
+        }
     }
 }

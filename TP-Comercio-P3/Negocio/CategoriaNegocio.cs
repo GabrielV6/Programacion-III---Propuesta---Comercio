@@ -40,6 +40,37 @@ namespace Negocio
             }
         }
 
+        public List<Categoria> listaParaEditar(int Id)
+        {
+            List<Categoria> lista = new List<Categoria>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT * FROM CATEGORIAS WHERE Estado=1 AND Id=" + Id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Categoria aux = new Categoria();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Estado = Convert.ToInt16(datos.Lector["Estado"]);
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         public void agregar(Categoria categoria)
         {
             AccesoDatos datos = new AccesoDatos();

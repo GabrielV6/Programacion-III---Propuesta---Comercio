@@ -42,6 +42,38 @@ namespace Negocio
 
         }
 
+        public List<Marca> listaParaEditar( int Id)
+        {
+            List<Marca> lista = new List<Marca>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearConsulta("SELECT * FROM MARCAS  WHERE Estado=1 AND Id=" + Id);
+                datos.ejecutarLectura();
+
+                while (datos.Lector.Read())
+                {
+                    Marca aux = new Marca();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.DescripcionMarca = (string)datos.Lector["Descripcion"];
+                    aux.Estado = Convert.ToInt16(datos.Lector["Estado"]);
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+
+        }
 
         public void agregar(Marca marca)
         {
