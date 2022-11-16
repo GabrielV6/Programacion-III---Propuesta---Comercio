@@ -67,5 +67,10 @@ namespace tp_comercio_Vargas_Delgado
                 throw;
             }
         }
+
+        protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
+        {
+            imgArticulo.ImageUrl = txtImagenUrl.Text;
+        }
     }
 }
