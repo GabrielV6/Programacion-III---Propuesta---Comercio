@@ -26,12 +26,12 @@
             <asp:TextBox runat="server" ID="txtPrecio" CssClass="form-control" />
         </div>
         <div class="mb-3">
-            <label for="txtCategoria" class="form-label">Categoria</label>
-            <asp:TextBox runat="server" ID="txtCategoria" CssClass="form-control" />
+            <label for="ddlCategoria" class="form-label">Categoria</label>
+            <asp:DropDownList ID="ddlCategoria" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
         <div class="mb-3">
-            <label for="txtMarca" class="form-label">Marca</label>
-            <asp:TextBox runat="server" ID="txtMarca" CssClass="form-control" />
+            <label for="ddlMarca" class="form-label">Marca</label>
+            <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server"></asp:DropDownList>
         </div>
         <div class="mb-3">
             <label for="txtImagenUrl" class="form-label">Imagen</label>

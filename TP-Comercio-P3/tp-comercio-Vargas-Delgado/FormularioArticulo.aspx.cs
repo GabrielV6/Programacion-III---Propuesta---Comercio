@@ -13,7 +13,24 @@ namespace tp_comercio_Vargas_Delgado
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            { 
+                MarcaNegocio marcaNegocio = new MarcaNegocio();
+                List<Marca> listaMarca = marcaNegocio.listar();
 
+                ddlMarca.DataSource = listaMarca;
+                ddlMarca.DataValueField = "Id";
+                ddlMarca.DataTextField = "DescripcionMarca";
+                ddlMarca.DataBind();
+
+                CategoriaNegocio categoriaNegocio = new CategoriaNegocio();
+                List<Categoria> listaCategoria = categoriaNegocio.listar();
+
+                ddlCategoria.DataSource = listaCategoria;
+                ddlCategoria.DataValueField = "Id";
+                ddlCategoria.DataTextField = "Descripcion";
+                ddlCategoria.DataBind();
+            }
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
