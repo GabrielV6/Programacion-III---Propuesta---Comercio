@@ -60,6 +60,7 @@ namespace tp_comercio_Vargas_Delgado
                 int IdArticulo = Session["ArticuloSeleccionado"] != null ? ((Articulo)Session["ArticuloSeleccionado"]).Id : 0;
 
                 Articulo articulo = new Articulo();
+                articulo.Id = IdArticulo;
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
