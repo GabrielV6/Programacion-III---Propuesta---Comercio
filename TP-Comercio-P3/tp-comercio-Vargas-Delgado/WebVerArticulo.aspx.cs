@@ -17,19 +17,18 @@ namespace tp_comercio_Vargas_Delgado
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulo = negocio.listarConSP();
+            Session.Add("ListaArticulo", ListaArticulo);
 
             if (!IsPostBack)
             {
                 Repeater1.DataSource = ListaArticulo;
                 Repeater1.DataBind();
             }
-
             if (Session["usuariologueado"] == null)
             {
                 Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
                 Response.Redirect("Logon.aspx");
             }
-           
         }
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
@@ -47,7 +46,6 @@ namespace tp_comercio_Vargas_Delgado
             Repeater1.DataSource = ListaArticulo;
             Repeater1.DataBind();
         }
-
         protected void btnFiltro_Click(object sender, EventArgs e)
         {
             if (txtFiltro.Text != "")
@@ -61,6 +59,13 @@ namespace tp_comercio_Vargas_Delgado
                 Repeater1.DataBind();
             }
         }
-    
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            int IdArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
+            Session.Add("ArticuloSeleccionado", selecionado);
+            Response.Redirect("FormularioArticulo.aspx");
+        }
     }
 }

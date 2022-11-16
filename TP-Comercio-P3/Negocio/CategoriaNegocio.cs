@@ -31,7 +31,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
@@ -74,7 +73,6 @@ namespace Negocio
         public void agregar(Categoria categoria)
         {
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
                 string valores = "values('" + categoria.Descripcion + "',1)";
@@ -94,7 +92,6 @@ namespace Negocio
         public void modificar(Categoria categoria)
         {
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
                 datos.setearConsulta("UPDATE CATEGORIAS SET Descripcion = @Descripcion WHERE Id = @Id");
@@ -115,7 +112,6 @@ namespace Negocio
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
-
             try
             {
                 datos.setearConsulta("UPDATE CATEGORIAS SET Estado = 0 WHERE Id = @Id");

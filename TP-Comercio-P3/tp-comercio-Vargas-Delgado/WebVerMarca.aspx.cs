@@ -68,9 +68,7 @@ namespace tp_comercio_Vargas_Delgado
         {
             int IdMarca = Convert.ToInt32(((Button)sender).CommandArgument);
             MarcaNegocio negocio = new MarcaNegocio();
-
             Marca selecionada = (negocio.listaParaEditar(IdMarca))[0];
-
             Session.Add("MarcaSeleccionada", selecionada);
             Response.Redirect("FormularioMarca.aspx");
         }

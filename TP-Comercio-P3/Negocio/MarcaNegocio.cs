@@ -42,7 +42,7 @@ namespace Negocio
 
         }
 
-        public List<Marca> listaParaEditar( int Id)
+        public List<Marca> listaParaEditar(int Id)
         {
             List<Marca> lista = new List<Marca>();
             AccesoDatos datos = new AccesoDatos();

@@ -28,7 +28,7 @@ namespace Negocio
                     aux.Nombre = (string)datos.Lector["Telefono"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];              
                     aux.Precio = (decimal)datos.Lector["Precio"];
-                    // agrego esta validacion solo aca porque me parece que deberia ser el unico campo de tendria que aceptar NULL
+
                     if(!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
 
@@ -49,9 +49,47 @@ namespace Negocio
             finally
             {
                 datos.cerrarConexion();
-            } 
+            }
         }
+        public List<Articulo> listaParaEditar(int Id)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id" + Id);
+                datos.ejecutarLectura();
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Telefono"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
 
+                    if (!(datos.Lector["ImagenURL"] is DBNull))
+                        aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
+
+                    aux.marca = new Marca();
+                    aux.marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.marca.DescripcionMarca = (string)datos.Lector["Modelo"];
+                    aux.categoria = new Categoria();
+                    aux.categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.categoria.Descripcion = (string)datos.Lector["Tipo"];
+                    lista.Add(aux);
+                }
+                return lista;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public List<Articulo> listarConSP()
         {
 
@@ -89,8 +127,6 @@ namespace Negocio
             }
 
         }
-
-        // Posee la sentencia SQL para generar el INSERT desde el metodo alojado en la clase AccesoDatos
         public void agregar(Articulo articulo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -110,7 +146,6 @@ namespace Negocio
                 datos.cerrarConexion();
             }  
         }
-
         public void modificar(Articulo articulo)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -137,7 +172,6 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -158,7 +192,6 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-
         public List<Articulo> filtrar(string campo, string criterio, string filtro)
         {
             List<Articulo> lista = new List<Articulo>();

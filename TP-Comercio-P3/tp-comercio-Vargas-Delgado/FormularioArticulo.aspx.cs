@@ -33,6 +33,18 @@ namespace tp_comercio_Vargas_Delgado
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataBind();
                 }
+                if (Session["ArticuloSeleccionado"] != null && !IsPostBack)
+                {
+                    Articulo articulo = (Articulo)Session["ArticuloSeleccionado"];
+                    txtCodigo.Text = articulo.Codigo;
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    ddlMarca.SelectedValue = articulo.marca.Id.ToString();
+                    ddlCategoria.SelectedValue = articulo.categoria.Id.ToString();
+                    txtImagenUrl.Text = articulo.ImagenUrl;
+                    txtImagenUrl_TextChanged(sender, e);
+                }
             }
             catch (Exception ex)
             {
@@ -45,6 +57,8 @@ namespace tp_comercio_Vargas_Delgado
         {
             try
             {
+                int IdArticulo = Session["ArticuloSeleccionado"] != null ? ((Articulo)Session["ArticuloSeleccionado"]).Id : 0;
+
                 Articulo articulo = new Articulo();
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
@@ -57,8 +71,15 @@ namespace tp_comercio_Vargas_Delgado
                 articulo.categoria.Id = int.Parse(ddlCategoria.SelectedValue);
 
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-                articuloNegocio.agregar(articulo);
-
+                if (IdArticulo == 0)
+                {
+                    articuloNegocio.agregar(articulo);
+                }
+                else
+                {
+                    articuloNegocio.modificar(articulo);
+                    Session.Remove("ArticuloSeleccionado");
+                }
                 Response.Redirect("WebVerArticulo.aspx", false);
             }
             catch (Exception ex)
@@ -67,7 +88,6 @@ namespace tp_comercio_Vargas_Delgado
                 throw;
             }
         }
-
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
         {
             imgArticulo.ImageUrl = txtImagenUrl.Text;
