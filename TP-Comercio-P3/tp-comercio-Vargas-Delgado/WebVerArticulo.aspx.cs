@@ -31,5 +31,35 @@ namespace tp_comercio_Vargas_Delgado
             }
            
         }
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            int idArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            negocio.eliminar(idArticulo);
+            Response.Redirect("WebVerArticulo.aspx");
+        }
+        protected void listaFiltrada()
+        {
+            string filtro = txtFiltro.Text;
+            ListaArticulo = (List<Articulo>)Session["ListaArticulo"];
+            ListaArticulo = ListaArticulo.FindAll(x => x.Nombre.Contains(filtro));
+
+            Repeater1.DataSource = ListaArticulo;
+            Repeater1.DataBind();
+        }
+
+        protected void btnFiltro_Click(object sender, EventArgs e)
+        {
+            if (txtFiltro.Text != "")
+            {
+                listaFiltrada();
+            }
+            else
+            {
+                ListaArticulo = (List<Articulo>)Session["ListaArticulo"];
+                Repeater1.DataSource = ListaArticulo;
+                Repeater1.DataBind();
+            }
+        }
     }
 }

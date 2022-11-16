@@ -96,8 +96,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ")";
-                datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio,ImagenURL, IdMarca, IdCategoria) " + valores);
+                string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ",1)";
+                datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio,ImagenURL, IdMarca, IdCategoria, Estado) " + valores);
                 datos.ejecutarAccion();
 
             }

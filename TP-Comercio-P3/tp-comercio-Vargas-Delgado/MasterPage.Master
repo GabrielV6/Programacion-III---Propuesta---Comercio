@@ -63,6 +63,7 @@
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-dark">
                                         <li><a class="dropdown-item" href="WebVerArticulo.aspx">Ver</a></li>
+                                        <li><a class="dropdown-item" href="FormularioArticulo.aspx">Agregar</a></li>
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">

@@ -9,8 +9,17 @@
     </div>
 
     <div class="container">
-        <div class="row row-cols-1 row-cols-sm-5 g-5 justify-content-md-center">
-            >
+        <div class="row">
+            <div class="col">
+                <asp:TextBox ID="txtFiltro" runat="server" />
+                <asp:Button Text="Filtrar" ID="btnFiltro" class="btn btn-outline-warning" OnClick="btnFiltro_Click" runat="server" />
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-5 g-3 justify-content-md-center">
+
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
 
@@ -22,14 +31,14 @@
                             <h5 class="card-title h-30"><%#Eval("Nombre")%></h5>
                             <p class="card-price"><%#Eval("Precio")%></p>
 
-                            <div class="buttons">
-                                <a href="DetalleArticulo.aspx?id=<%#Eval("Id")%>" class="btn btn-primary">Ver detalle</a>
+                            <div class="vstack">
+                                <a href="DetalleArticulo.aspx?id=<%#Eval("Id")%>" class="btn btn-outline-primary">Ver detalle</a>
                                 <%
                                     if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
                                     {
                                 %>
-                                <a class="btn btn-success">Editar</a>
-                                <a class="btn btn-danger">Eliminar</a>
+                                <a class="btn btn-outline-success">Editar</a>
+                                <asp:Button Text="Eliminar" ID="btnEliminar" CommandArgument='<%#Eval("Id")%>' class="btn btn-outline-danger" OnClick="btnEliminar_Click" runat="server" />
                                 <%
                                     }
                                 %>

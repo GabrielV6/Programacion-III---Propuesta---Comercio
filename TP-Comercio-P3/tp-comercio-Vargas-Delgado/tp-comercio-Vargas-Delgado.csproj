@@ -69,6 +69,7 @@
   <ItemGroup>
     <Content Include="Content\CCS\Estilo.css" />
     <Content Include="Default.aspx" />
+    <Content Include="FormularioArticulo.aspx" />
     <Content Include="FormularioCategoria.aspx" />
     <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProveedores.aspx" />
@@ -88,6 +89,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioArticulo.aspx.cs">
+      <DependentUpon>FormularioArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioArticulo.aspx.designer.cs">
+      <DependentUpon>FormularioArticulo.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioCategoria.aspx.cs">
       <DependentUpon>FormularioCategoria.aspx</DependentUpon>
