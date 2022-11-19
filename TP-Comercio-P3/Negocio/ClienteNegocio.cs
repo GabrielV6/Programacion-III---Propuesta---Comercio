@@ -54,7 +54,7 @@ namespace Negocio
 
             try
             {
-                //TO DO: Completar
+                
                 datos.setearConsulta("SELECT * FROM CLIENTES  WHERE Estado=1 AND Id=" + Id);
                 datos.ejecutarLectura();
 
@@ -91,9 +91,9 @@ namespace Negocio
 
             try
             {
-                //TO DO: Completar
-                string valores = "values()";
-                datos.setearConsulta("INSERT INTO CLIENTES () " + valores);
+                
+                string valores = "values('" + cliente.Nombre + "','" + cliente.Apellido + "','" + cliente.Dni + "','" + cliente.Telefono + "','" + cliente.Email + "')";
+                datos.setearConsulta("INSERT INTO CLIENTES (Nombre,Apellido,Dni,Telefono,Email)" + valores);
 
                 datos.ejecutarAccion();
             }
@@ -113,8 +113,8 @@ namespace Negocio
 
             try
             {
-                //TO DO: Completar
-                //datos.setearConsulta("UPDATE CLIENTE SET );
+                
+                datos.setearConsulta("UPDATE CLIENTES SET Nombre='" + cliente.Nombre + "',Apellido='" + cliente.Apellido + "',Dni='" + cliente.Dni + "',Telefono='" + cliente.Telefono + "',Email='" + cliente.Email + "' WHERE Id=" + cliente.Id);
 
 
                 datos.ejecutarAccion();
@@ -135,7 +135,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("UPDATE CLIENTE SET Estado=0 WHERE Id=" + id);
+                datos.setearConsulta("UPDATE CLIENTES SET Estado=0 WHERE Id=" + id);
                 datos.setearParametro("@Id", id);
                 datos.ejecutarAccion();
             }

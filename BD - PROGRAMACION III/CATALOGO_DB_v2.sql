@@ -121,3 +121,24 @@ Create table PROVEEDORES
 insert into PROVEEDORES(RazonSocial,Cuit,Telefono,Email) values ('Tienda De Cafe','30-12345678-9','123456789','tiendacafe@gmailcom')
 
 
+-- Crear tabla de clientes
+
+USE [CATALOGO_DB]
+Go 
+
+Create table CLIENTES
+(
+	Id int primary key identity(1000,1) not null,
+	Nombre varchar(50) not null,
+	Apellido varchar(50) not null,
+	Dni varchar(50) unique not null,
+	Telefono varchar(50),
+	Email varchar(50),
+	Estado bit not null default 1
+	
+)
+
+-- insertar Cliente
+
+insert into CLIENTES (Nombre,Apellido,Dni,Telefono,Email) values ('Juan','Perez','12345678','123456789','juanperez@gmailcom')
+insert into CLIENTES (Nombre,Apellido,Dni,Telefono,Email) values ('Medina','Perez','2341','2134','medina@gmailcom')
