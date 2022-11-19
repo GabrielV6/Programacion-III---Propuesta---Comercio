@@ -64,7 +64,7 @@ namespace tp_comercio_Vargas_Delgado
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
-                articulo.Precio = int.Parse(txtPrecio.Text);
+                articulo.Precio = Convert.ToDecimal(txtPrecio.Text);
                 articulo.ImagenUrl = txtImagenUrl.Text;
                 articulo.marca = new Marca();
                 articulo.marca.Id = int.Parse(ddlMarca.SelectedValue);
