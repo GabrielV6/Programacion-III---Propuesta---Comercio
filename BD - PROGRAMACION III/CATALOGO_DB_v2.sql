@@ -120,4 +120,10 @@ Create table PROVEEDORES
 
 insert into PROVEEDORES(RazonSocial,Cuit,Telefono,Email) values ('Tienda De Cafe','30-12345678-9','123456789','tiendacafe@gmailcom')
 
+-- modificar SP storedListar (para que solo muestre los articulos activos)
 
+ALTER procedure [dbo].[storedListar] as 
+SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl,
+A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo 
+FROM ARTICULOS A, MARCAS M , CATEGORIAS C 
+WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Estado = 1
