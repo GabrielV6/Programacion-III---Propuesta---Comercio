@@ -16,7 +16,7 @@ namespace tp_comercio_Vargas_Delgado
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            ListaArticulo = negocio.listarConSP();
+            ListaArticulo = negocio.listar();
             Session.Add("ListaArticulo", ListaArticulo);
 
             if (!IsPostBack)

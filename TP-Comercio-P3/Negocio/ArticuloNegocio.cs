@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-
-using Dominio; //se referencia el proyecto
 using System.Linq.Expressions;
+using Dominio;
 
 namespace Negocio
 {
@@ -18,7 +17,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id");
+                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -28,8 +27,9 @@ namespace Negocio
                     aux.Nombre = (string)datos.Lector["Telefono"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];              
                     aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Stock = (int)datos.Lector["Stock"];
 
-                    if(!(datos.Lector["ImagenURL"] is DBNull))
+                    if (!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
 
                     aux.marca = new Marca();
@@ -57,7 +57,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Id=" + Id);
+                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Id=" + Id);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -77,6 +77,9 @@ namespace Negocio
                     aux.categoria = new Categoria();
                     aux.categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.categoria.Descripcion = (string)datos.Lector["Tipo"];
+
+                    aux.Stock = (int)datos.Lector["Stock"];
+
                     lista.Add(aux);
                 }
                 return lista;
@@ -107,7 +110,7 @@ namespace Negocio
                     aux.Nombre = (string)datos.Lector["Telefono"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
                     aux.Precio = (decimal)datos.Lector["Precio"];
-                    // agrego esta validacion solo aca porque me parece que deberia ser el unico campo de tendria que aceptar NULL
+
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
 
@@ -117,6 +120,9 @@ namespace Negocio
                     aux.categoria = new Categoria();
                     aux.categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.categoria.Descripcion = (string)datos.Lector["Tipo"];
+
+                    aux.Stock = (int)datos.Lector["Stock"];
+
                     lista.Add(aux);
                 }
                 return lista;
@@ -132,8 +138,8 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ",1)";
-                datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio,ImagenURL, IdMarca, IdCategoria, Estado) " + valores);
+                string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ", " + articulo.Stock + ",1)";
+                datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio,ImagenURL, IdMarca, IdCategoria, Stock, Estado) " + valores);
                 datos.ejecutarAccion();
 
             }
@@ -151,7 +157,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, Precio = @precio, ImagenURL = @img, IdMarca = @idMarca, IdCategoria = @idCategoria Where Id = @id");
+                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, Precio = @precio, ImagenURL = @img, IdMarca = @idMarca, IdCategoria = @idCategoria, Stock = @stock Where Id = @id");
                 datos.setearParametro("@codigo", articulo.Codigo);
                 datos.setearParametro("@nombre", articulo.Nombre);
                 datos.setearParametro("@desc", articulo.Descripcion);
@@ -160,6 +166,8 @@ namespace Negocio
                 datos.setearParametro("@idMarca", articulo.marca.Id);
                 datos.setearParametro("@idCategoria", articulo.categoria.Id);
                 datos.setearParametro("@id", articulo.Id);
+                datos.setearParametro("@stock", articulo.Stock);
+
 
                 datos.ejecutarAccion();
             }
@@ -198,7 +206,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id And ";
+                string consulta = "SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion, A.Stock Tipo FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id And ";
                 switch (campo)
                 {
                     case "Precio":

@@ -32,7 +32,12 @@
                     <label for="ddlMarca" class="form-label">Marca</label>
                     <asp:DropDownList ID="ddlMarca" CssClass="form-select" runat="server"></asp:DropDownList>
                 </div>
+                <div class="mb-3">
+                    <label for="txtStock" class="form-label">Stock</label>
+                    <asp:TextBox runat="server" ID="txtStock" CssClass="form-control" />
+                </div>
             </div>
+
 
             <div class="col">
                 <div class="mb-3">
@@ -56,7 +61,7 @@
             <div class="col">
                 <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />
                 <a href="./WebVerArticulo.aspx">Volver</a>
-             </div>
+            </div>
         </div>
     </div>
 

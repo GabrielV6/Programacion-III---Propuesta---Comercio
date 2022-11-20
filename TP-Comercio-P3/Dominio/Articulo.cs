@@ -9,7 +9,6 @@ namespace Dominio
 {
     public class Articulo
     {
-        
         public int Id { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
@@ -23,8 +22,11 @@ namespace Dominio
 
         [DisplayName("Marca")]
         public Marca marca { get; set; }
+
         [DisplayName("Categoria")]
         public Categoria categoria { get; set; }
+
+        public int Stock { get; set; }
 
     }
 }

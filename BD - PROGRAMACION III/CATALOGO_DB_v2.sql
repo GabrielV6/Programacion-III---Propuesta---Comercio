@@ -122,13 +122,12 @@ insert into PROVEEDORES(RazonSocial,Cuit,Telefono,Email) values ('Tienda De Cafe
 
 -- modificar SP storedListar (para que solo muestre los articulos activos)
 
-<<<<<<< HEAD
 ALTER procedure [dbo].[storedListar] as 
 SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl,
 A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo 
 FROM ARTICULOS A, MARCAS M , CATEGORIAS C 
 WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Estado = 1
-=======
+
 -- Crear tabla de clientes
 
 USE [CATALOGO_DB]
@@ -150,4 +149,25 @@ Create table CLIENTES
 
 insert into CLIENTES (Nombre,Apellido,Dni,Telefono,Email) values ('Juan','Perez','12345678','123456789','juanperez@gmailcom')
 insert into CLIENTES (Nombre,Apellido,Dni,Telefono,Email) values ('Medina','Perez','2341','2134','medina@gmailcom')
->>>>>>> 446a169d0de3cbd6982de35e9ea32086f1404f81
+
+-- agregar columna Stock en tabla Articulos
+
+ALTER TABLE Articulos
+ADD Stock int
+
+-- completar la columna Stock de los articulos existentes con un valor numerico
+
+update ARTICULOS set Stock=100 where id<100
+
+-- Modificar SP para que muestre el Stock de cada articulo
+
+ALTER procedure [dbo].[storedListar] as 
+SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl,
+A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion, A.Stock Tipo 
+FROM ARTICULOS A, MARCAS M , CATEGORIAS C 
+WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Estado = 1
+
+
+Select Nombre from ARTICULOS where Stock=100
+
+SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion, A.Stock Tipo FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.Id>1;
