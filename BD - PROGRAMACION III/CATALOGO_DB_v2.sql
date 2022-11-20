@@ -122,8 +122,32 @@ insert into PROVEEDORES(RazonSocial,Cuit,Telefono,Email) values ('Tienda De Cafe
 
 -- modificar SP storedListar (para que solo muestre los articulos activos)
 
+<<<<<<< HEAD
 ALTER procedure [dbo].[storedListar] as 
 SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl,
 A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo 
 FROM ARTICULOS A, MARCAS M , CATEGORIAS C 
 WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Estado = 1
+=======
+-- Crear tabla de clientes
+
+USE [CATALOGO_DB]
+Go 
+
+Create table CLIENTES
+(
+	Id int primary key identity(1000,1) not null,
+	Nombre varchar(50) not null,
+	Apellido varchar(50) not null,
+	Dni varchar(50) unique not null,
+	Telefono varchar(50),
+	Email varchar(50),
+	Estado bit not null default 1
+	
+)
+
+-- insertar Cliente
+
+insert into CLIENTES (Nombre,Apellido,Dni,Telefono,Email) values ('Juan','Perez','12345678','123456789','juanperez@gmailcom')
+insert into CLIENTES (Nombre,Apellido,Dni,Telefono,Email) values ('Medina','Perez','2341','2134','medina@gmailcom')
+>>>>>>> 446a169d0de3cbd6982de35e9ea32086f1404f81
