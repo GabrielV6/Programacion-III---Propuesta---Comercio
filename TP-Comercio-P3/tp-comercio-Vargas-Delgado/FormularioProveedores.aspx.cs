@@ -29,11 +29,32 @@ namespace tp_comercio_Vargas_Delgado
                 if (Session["ProveedorSeleccionado"] != null && !IsPostBack)
                 {
                     Proveedor proveedor = (Proveedor)Session["ProveedorSeleccionado"];
-                    
-                    txtRazonSocial.Text = proveedor.RazonSocial;
-                    txtCuit.Text = proveedor.Cuit;
-                    txtEmail.Text = proveedor.Email;
-                    txtTelefono.Text = proveedor.Telefono;
+                   
+                    if((Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador))
+                    {
+                        txtRazonSocial.Text = proveedor.RazonSocial;
+                        txtCuit.Text = proveedor.Cuit;
+                        txtEmail.Text = proveedor.Email;
+                        txtTelefono.Text = proveedor.Telefono;
+                    }
+                    else
+                    {
+
+                        txtRazonSocial.Text = proveedor.RazonSocial;
+                        txtRazonSocial.ReadOnly = true;
+                        
+                        txtCuit.Text = proveedor.Cuit;
+                        txtCuit.ReadOnly = true;
+                        
+                        txtEmail.Text = proveedor.Email;
+                        txtEmail.ReadOnly = true;
+                        
+                        txtTelefono.Text = proveedor.Telefono;
+                        txtTelefono.ReadOnly = true;
+                        
+
+                    }
+                  
                 }
             }
 
@@ -72,6 +93,29 @@ namespace tp_comercio_Vargas_Delgado
             Response.Redirect("WebVerProveedor.aspx", false);
         }
 
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            //int IdProveedor = Convert.ToInt32(((Button)sender).CommandArgument);
+
+            if (Session["ProveedorSeleccionado"] != null)
+            {
+                int IdProveedor = Session["ProveedorSeleccionado"] != null ? ((Proveedor)Session["ProveedorSeleccionado"]).Id : 0;
+                ProveedorNegocio negocio = new ProveedorNegocio();
+                negocio.eliminar(IdProveedor);
+                
+                //remover proveedor de la session
+                Session.Remove("ProveedorSeleccionado");
+
+                //redirecciona a la vista
+                Response.Redirect("WebVerProveedor.aspx");
+            }
+            else
+            {
+                lblMensaje.Text = "Debe seleccionar un proveedor para eliminarlo";
+                
+            }
+
+        }
 
     }
 }

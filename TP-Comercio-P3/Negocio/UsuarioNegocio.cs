@@ -33,7 +33,7 @@ namespace Negocio
                 {
                   
                   usuario.user = (string)datos.Lector["Usuario"];
-                  usuario.rolusuario = (int)(datos.Lector["IdRol"]) == 1000 ? RolUsuario.Administrador : RolUsuario.Encargado;
+                  usuario.rolusuario = (int)(datos.Lector["IdRol"]) == 1000 ? RolUsuario.Administrador : RolUsuario.Usuario;
                     
                     
                     return true;

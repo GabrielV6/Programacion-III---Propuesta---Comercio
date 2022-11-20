@@ -1,9 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="WebVerProveedor.aspx.cs" Inherits="tp_comercio_Vargas_Delgado.WebForm2" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-     <div class="mx-auto p-5" style="width: 400px;">
+    <div class="mx-auto p-5" style="width: 400px;">
         <h2 class="text-center">Listado de Provedores</h2>
     </div>
 
@@ -18,6 +19,7 @@
 
     <div class="container">
         <div class="row justify-content-md-center">
+            <%-- 
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
                     <div class="col-md-auto">
@@ -43,10 +45,26 @@
                         </div>
                     </div>
                 </ItemTemplate>
-            </asp:Repeater>
+            </asp:Repeater>--%>
+
+            <asp:GridView ID="dgvProveedor" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+
+                <Columns>
+
+                    <asp:BoundField HeaderText="ID Proveedor" DataField ="Id" />
+                    <asp:BoundField HeaderText="Razon Social" DataField="RazonSocial" />
+                    <asp:BoundField HeaderText="Cuit" DataField="Cuit" />
+                    <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
+                    <asp:BoundField HeaderText="Email" DataField="Email" />
+
+                    <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Accion" />
+                </Columns>
+
+            </asp:GridView>
+
+
         </div>
     </div>
-
 
 
 

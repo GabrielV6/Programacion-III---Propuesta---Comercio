@@ -42,10 +42,10 @@ namespace Negocio
             {
                 datos.cerrarConexion();
             }
-
+            
 
         }
-
+        
         public List<Proveedor> ListaParaEditar(int Id)
         {
             List<Proveedor> lista = new List<Proveedor>();

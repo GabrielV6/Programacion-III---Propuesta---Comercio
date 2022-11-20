@@ -9,7 +9,7 @@ namespace Dominio
     public enum RolUsuario
     {
         Administrador = 1000,
-        Encargado = 1001
+        Usuario = 1001
     }
     public class Usuario
     {
@@ -18,12 +18,12 @@ namespace Dominio
         public string pass { get; set; }
         public RolUsuario rolusuario { get; set; }
         public string patron { get; set; }
-
+        
         public Usuario(string user, string pass, bool Administrador, string patron)
         {
             this.user = user;
             this.pass = pass;
-            this.rolusuario = Administrador ? RolUsuario.Administrador : RolUsuario.Encargado;
+            this.rolusuario = Administrador ? RolUsuario.Administrador : RolUsuario.Usuario;
             this.patron = patron;
         }
 
