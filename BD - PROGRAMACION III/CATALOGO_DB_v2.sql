@@ -179,21 +179,38 @@ ADD CONSTRAINT fk_proveeder FOREIGN KEY (Proveedor) REFERENCES PROVEEDORES(id);
 
 -- completar la columna Proveedor de los articulos existentes con un valor numerico
 
-update ARTICULOS set Proveedor=1000 where id<100
+update PROVEEDORES set Proveedor=1000 where id<100
 
-select * from ARTICULOS 
-select * from PROVEEDORES
+
+-- agregar proveedor generico 
 
 insert into PROVEEDORES
 ( RazonSocial, Cuit, Telefono)
 values( 'Sin proveedor', 0000000, 000000)
 
-SELECT 
- P.RazonSocial as 'Proveedor' 
-FROM ARTICULOS A
-JOIN PROVEEDORES P
-ON A.Proveedor = P.Id 
 
+-- crear tabla para relacionar todos los articulos con todos los proveedores
 
+CREATE TABLE ARTICULOSxPROVEEDORES(
+	idArticulo int not null,
+	idProveedor int not null,
+	primary key (idArticulo, idProveedor)
+)
 
+-- agregar las claves foraneas para ambos casos
+
+ALTER TABLE ARTICULOSxPROVEEDORES
+ADD CONSTRAINT fk_articulo
+FOREIGN KEY(idArticulo)REFERENCES
+ARTICULOS(id)
+
+ALTER TABLE ARTICULOSxPROVEEDORES
+ADD CONSTRAINT fk_proveedor
+FOREIGN KEY(idProveedor)REFERENCES
+PROVEEDORES(id)
+
+--  cargar tabla ARTICULOSxPROVEEDORES
+
+ INSERT INTO ARTICULOSxPROVEEDORES values (1,1000)
+ INSERT INTO ARTICULOSxPROVEEDORES values (2,1000)
 
