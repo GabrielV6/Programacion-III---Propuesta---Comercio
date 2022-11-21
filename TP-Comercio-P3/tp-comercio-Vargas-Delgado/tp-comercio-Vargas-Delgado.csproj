@@ -83,6 +83,7 @@
     <Content Include="WebVerCliente.aspx" />
     <Content Include="WebVerArticulo.aspx" />
     <Content Include="WebVerMarca.aspx" />
+    <Content Include="WebVerRegistro.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -186,6 +187,13 @@
     </Compile>
     <Compile Include="WebVerMarca.aspx.designer.cs">
       <DependentUpon>WebVerMarca.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebVerRegistro.aspx.cs">
+      <DependentUpon>WebVerRegistro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebVerRegistro.aspx.designer.cs">
+      <DependentUpon>WebVerRegistro.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

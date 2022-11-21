@@ -226,3 +226,16 @@ Create table REGISTROS
 	Monto money not null,
 	Estado bit not null default 1
 )
+--Tipo: compra 1, venta 0
+-- Destinaratio: IdProveedor o IdCliente 
+
+-- cargar tabla REGISTROS
+
+INSERT INTO REGISTROS(Tipo, Destinatario, idArticulo, Cantidad, Monto) values (1,1000, 1, 10, 99.0 )
+INSERT INTO REGISTROS(Tipo, Destinatario, idArticulo, Cantidad, Monto) values (0,1000, 1, 10, 1199.0 )
+
+select * from REGISTROS
+select * from ARTICULOS
+select * from PROVEEDORES
+select * from CLIENTES
+
