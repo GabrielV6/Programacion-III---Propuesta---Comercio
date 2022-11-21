@@ -167,7 +167,33 @@ A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion, A.Stock Ti
 FROM ARTICULOS A, MARCAS M , CATEGORIAS C 
 WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Estado = 1
 
+--agregar columna Proveedor a tabla Articulos
 
-Select Nombre from ARTICULOS where Stock=100
+ALTER TABLE Articulos
+ADD Proveedor int
 
-SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion, A.Stock Tipo FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.Id>1;
+-- settear columnar Proveedor como FK 
+
+ALTER TABLE Articulos 
+ADD CONSTRAINT fk_proveeder FOREIGN KEY (Proveedor) REFERENCES PROVEEDORES(id);
+
+-- completar la columna Proveedor de los articulos existentes con un valor numerico
+
+update ARTICULOS set Proveedor=1000 where id<100
+
+select * from ARTICULOS 
+select * from PROVEEDORES
+
+insert into PROVEEDORES
+( RazonSocial, Cuit, Telefono)
+values( 'Sin proveedor', 0000000, 000000)
+
+SELECT 
+ P.RazonSocial as 'Proveedor' 
+FROM ARTICULOS A
+JOIN PROVEEDORES P
+ON A.Proveedor = P.Id 
+
+
+
+
