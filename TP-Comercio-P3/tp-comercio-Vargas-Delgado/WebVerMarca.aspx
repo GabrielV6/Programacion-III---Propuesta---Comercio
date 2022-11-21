@@ -19,7 +19,7 @@
 
     <div class="container">
         <div class="row justify-content-md-center">
-            <asp:Repeater ID="Repeater1" runat="server">
+            <%--<asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
                     <div class="col-md-auto">
                         <div class="card-body">
@@ -39,7 +39,21 @@
                         </div>
                     </div>
                 </ItemTemplate>
-            </asp:Repeater>
+            </asp:Repeater>--%>
+            <asp:GridView ID="dgvMarca" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+
+                <Columns>
+
+                    <asp:BoundField HeaderText="Codigo Marca" DataField="Id" />
+                    <asp:BoundField HeaderText="Descripcion " DataField="DescripcionMarca" />
+
+
+                    <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Accion" />
+                </Columns>
+
+            </asp:GridView>
+
+
         </div>
     </div>
 

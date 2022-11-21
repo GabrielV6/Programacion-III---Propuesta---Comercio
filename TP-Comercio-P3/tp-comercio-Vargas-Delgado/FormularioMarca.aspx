@@ -17,7 +17,20 @@
             <h7>El codigo se agregara de manera automatica</h7>
         </div>
         <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />
+         <%
+            if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
+            {
+        %>
+        <asp:Button ID="btnEliminarMarca" runat="server" Text="Eliminar" CssClass="btn btn-warning" BackColor="Red" OnClick="btnEliminar_Click" />
+        <%
+            }
+        %>
+        <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
+        
+    </div>
+    <div class="container justify-content-sm-center">
         <a href="./WebVerMarca.aspx">Volver</a>
     </div>
+    
 
 </asp:Content>

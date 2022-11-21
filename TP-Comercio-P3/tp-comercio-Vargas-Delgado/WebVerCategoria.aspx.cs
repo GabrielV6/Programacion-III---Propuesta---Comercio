@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
 using System.EnterpriseServices;
+using System.Collections;
 
 namespace tp_comercio_Vargas_Delgado
 {
@@ -21,8 +22,13 @@ namespace tp_comercio_Vargas_Delgado
 
             if (!IsPostBack)
             {
-                Repeater1.DataSource = ListaCategoria;
-                Repeater1.DataBind();
+                //Queda inactivado porque usamos GridView en vez de tarjetas
+    
+                //Repeater1.DataSource = ListaCategoria;
+                //Repeater1.DataBind();
+                
+                dgvCategoria.DataSource = ListaCategoria;
+                dgvCategoria.DataBind();
             }
 
             if (Session["usuariologueado"] == null)
@@ -32,13 +38,15 @@ namespace tp_comercio_Vargas_Delgado
             }
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            int idCategoria = Convert.ToInt32(((Button)sender).CommandArgument);
-            CategoriaNegocio negocio = new CategoriaNegocio();
-            negocio.eliminar(idCategoria);
-            Response.Redirect("WebVerCategoria.aspx");
-        }
+//Queda inactivado porque usamos GridView en vez de tarjetas
+
+        //protected void btnEliminar_Click(object sender, EventArgs e)
+        //{
+        //    int idCategoria = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    CategoriaNegocio negocio = new CategoriaNegocio();
+        //    negocio.eliminar(idCategoria);
+        //    Response.Redirect("WebVerCategoria.aspx");
+        //}
 
         protected void listaFiltrada()
         {
@@ -46,8 +54,13 @@ namespace tp_comercio_Vargas_Delgado
             ListaCategoria = (List<Categoria>)Session["ListaCategoria"];
             ListaCategoria = ListaCategoria.FindAll(x => x.Descripcion.Contains(filtro));
 
-            Repeater1.DataSource = ListaCategoria;
-            Repeater1.DataBind();
+            // Queda inactivado porque usamos GridView en vez de tarjetas
+
+            //Repeater1.DataSource = ListaCategoria;
+            //Repeater1.DataBind();
+
+            dgvCategoria.DataSource = ListaCategoria;
+            dgvCategoria.DataBind();
         }
 
         protected void btnFiltro_Click(object sender, EventArgs e)
@@ -59,20 +72,42 @@ namespace tp_comercio_Vargas_Delgado
             else
             {
                 ListaCategoria = (List<Categoria>)Session["ListaCategoria"];
-                Repeater1.DataSource = ListaCategoria;
-                Repeater1.DataBind();
+                
+                // Queda inactivado porque usamos GridView en vez de tarjetas
+                
+                //Repeater1.DataSource = ListaCategoria;
+                //Repeater1.DataBind();
+
+                dgvCategoria.DataSource = ListaCategoria;
+                dgvCategoria.DataBind();
             }
         }
 
-        protected void btnEditar_Click(object sender, EventArgs e)
+        //Queda inactivado porque usamos GridView en vez de tarjetas y se llama desde el formulario
+        //protected void btnEditar_Click(object sender, EventArgs e)
+        //{
+        //    int IdCategoria = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    CategoriaNegocio negocio = new CategoriaNegocio();
+
+        //    Categoria selecionada = (negocio.listaParaEditar(IdCategoria))[0];
+
+        //    Session.Add("CategoriaSeleccionada", selecionada);
+        //    Response.Redirect("FormularioCategoria.aspx");
+        //}
+
+        protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int IdCategoria = Convert.ToInt32(((Button)sender).CommandArgument);
+            // int IdProveedor = Convert.ToInt32(((Button)sender).CommandArgument);
+            //List<Proveedor> lista = negocio.ListaParaEditar(IdProveedor);
+
+            int IdCategoria = Convert.ToInt32(dgvCategoria.SelectedDataKey.Value.ToString());
             CategoriaNegocio negocio = new CategoriaNegocio();
+            Categoria selecionado = (negocio.listaParaEditar(IdCategoria))[0];
 
-            Categoria selecionada = (negocio.listaParaEditar(IdCategoria))[0];
-
-            Session.Add("CategoriaSeleccionada", selecionada);
+            //enviar datos selecionado al formulario de proveedores
+            Session.Add("CategoriaSeleccionada", selecionado);
             Response.Redirect("FormularioCategoria.aspx");
+
         }
     }
 }

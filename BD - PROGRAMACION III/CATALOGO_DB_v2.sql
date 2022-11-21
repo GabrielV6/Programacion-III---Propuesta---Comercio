@@ -157,7 +157,8 @@ ADD Stock int
 
 -- completar la columna Stock de los articulos existentes con un valor numerico
 
-update ARTICULOS set Stock=100 where id<100
+--Preguntar a stef porque proveedores y no articulos... porque me genero error en Proveedores.
+update PROVEEDORES set Stock=100 where id<100
 
 -- Modificar SP para que muestre el Stock de cada articulo
 
@@ -179,14 +180,13 @@ ADD CONSTRAINT fk_proveeder FOREIGN KEY (Proveedor) REFERENCES PROVEEDORES(id);
 
 -- completar la columna Proveedor de los articulos existentes con un valor numerico
 
-update PROVEEDORES set Proveedor=1000 where id<100
-
+update ARTICULOS set Proveedor=1000 where id<100
 
 -- agregar proveedor generico 
 
 insert into PROVEEDORES
-( RazonSocial, Cuit, Telefono)
-values( 'Sin proveedor', 0000000, 000000)
+( RazonSocial, Cuit, Telefono, Email)
+values( 'Sin proveedor', 0000000, 000000,' ')
 
 
 -- crear tabla para relacionar todos los articulos con todos los proveedores

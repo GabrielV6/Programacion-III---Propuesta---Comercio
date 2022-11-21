@@ -24,7 +24,7 @@ namespace tp_comercio_Vargas_Delgado
 
             if (!IsPostBack)
             {
-                dgvRegistro.DataSource = dgvRegistro;
+                dgvRegistro.DataSource = ListaRegistro;
                 dgvRegistro.DataBind();
             }
 

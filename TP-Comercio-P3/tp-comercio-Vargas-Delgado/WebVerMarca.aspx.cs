@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
 using Dominio;
+using System.Collections;
 
 namespace tp_comercio_Vargas_Delgado
 {
@@ -20,9 +21,14 @@ namespace tp_comercio_Vargas_Delgado
 
             if (!IsPostBack)
             {
-                Repeater1.DataSource = ListaMarca;
-                Repeater1.DataBind();
+                //Queda inactivado porque usamos GridView en vez de tarjetas
+                //Repeater1.DataSource = ListaMarca;
+                //Repeater1.DataBind();
+                
+                dgvMarca.DataSource = ListaMarca;
+                dgvMarca.DataBind();
             }
+            
 
             if (Session["usuariologueado"] == null)
             {
@@ -32,13 +38,14 @@ namespace tp_comercio_Vargas_Delgado
             }
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            int idMarca = Convert.ToInt32(((Button)sender).CommandArgument);
-            MarcaNegocio negocio = new MarcaNegocio();
-            negocio.eliminar(idMarca);
-            Response.Redirect("WebVerMarca.aspx");
-        }
+ //Queda inactivado porque usamos GridView en vez de tarjetas
+        //protected void btnEliminar_Click(object sender, EventArgs e)
+        //{
+        //    int idMarca = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    MarcaNegocio negocio = new MarcaNegocio();
+        //    negocio.eliminar(idMarca);
+        //    Response.Redirect("WebVerMarca.aspx");
+        //}
 
         protected void listaFiltrada()
         {
@@ -46,8 +53,13 @@ namespace tp_comercio_Vargas_Delgado
             ListaMarca = (List<Marca>)Session["ListaMarca"];
             ListaMarca = ListaMarca.FindAll(x => x.DescripcionMarca.Contains(filtro));
 
-            Repeater1.DataSource = ListaMarca;
-            Repeater1.DataBind();
+            // Queda inactivado porque usamos GridView en vez de tarjetas
+            
+            //Repeater1.DataSource = ListaMarca;
+            //Repeater1.DataBind();
+
+            dgvMarca.DataSource = ListaMarca;
+            dgvMarca.DataBind();
         }
 
         protected void btnFiltro_Click(object sender, EventArgs e)
@@ -59,18 +71,40 @@ namespace tp_comercio_Vargas_Delgado
             else
             {
                 ListaMarca = (List<Marca>)Session["ListaMarca"];
-                Repeater1.DataSource = ListaMarca;
-                Repeater1.DataBind();
+                
+                // Queda inactivado porque usamos GridView en vez de tarjetas
+                
+                //Repeater1.DataSource = ListaMarca;
+                //Repeater1.DataBind();
+
+                dgvMarca.DataSource = ListaMarca;
+                dgvMarca.DataBind();
             }
         }
 
-        protected void btnEditar_Click(object sender, EventArgs e)
+        //Queda inactivado porque usamos GridView en vez de tarjetas y se llama desde el formulario
+        //protected void btnEditar_Click(object sender, EventArgs e)
+        //{
+        //    int IdMarca = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    MarcaNegocio negocio = new MarcaNegocio();
+        //    Marca selecionada = (negocio.listaParaEditar(IdMarca))[0];
+        //    Session.Add("MarcaSeleccionada", selecionada);
+        //    Response.Redirect("FormularioMarca.aspx");
+        //}
+
+        protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int IdMarca = Convert.ToInt32(((Button)sender).CommandArgument);
+            // int IdProveedor = Convert.ToInt32(((Button)sender).CommandArgument);
+            //List<Proveedor> lista = negocio.ListaParaEditar(IdProveedor);
+
+            int IdMarca = Convert.ToInt32(dgvMarca.SelectedDataKey.Value.ToString());
             MarcaNegocio negocio = new MarcaNegocio();
-            Marca selecionada = (negocio.listaParaEditar(IdMarca))[0];
-            Session.Add("MarcaSeleccionada", selecionada);
+            Marca selecionado = (negocio.listaParaEditar(IdMarca))[0];
+
+            //enviar datos selecionado al formulario de proveedores
+            Session.Add("MarcaSeleccionada", selecionado);
             Response.Redirect("FormularioMarca.aspx");
+
         }
     }
 }

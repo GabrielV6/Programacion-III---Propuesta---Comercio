@@ -22,7 +22,7 @@
                     <asp:BoundField HeaderText="Articulo" DataField="Articulo" />
                     <asp:BoundField HeaderText="Estado" DataField="Estado" />
 
-                    <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Accion" />
+                    <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Accion" />
                 </Columns>
 
             </asp:GridView>

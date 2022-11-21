@@ -57,7 +57,7 @@
                     <asp:BoundField HeaderText="Telefono" DataField="Telefono" />
                     <asp:BoundField HeaderText="Email" DataField="Email" />
 
-                    <asp:CommandField ShowSelectButton="true" SelectText="Seleccionar" HeaderText="Accion" />
+                    <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Accion" />
                 </Columns>
 
             </asp:GridView>
