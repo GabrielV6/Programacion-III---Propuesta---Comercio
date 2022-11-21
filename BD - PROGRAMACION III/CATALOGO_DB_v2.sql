@@ -214,3 +214,15 @@ PROVEEDORES(id)
  INSERT INTO ARTICULOSxPROVEEDORES values (1,1000)
  INSERT INTO ARTICULOSxPROVEEDORES values (2,1000)
 
+-- crear tabla para los Registros contables
+
+Create table REGISTROS
+(
+	Id int primary key identity(1000,1) not null,
+	Tipo int not null,
+	Destinatario int not null,
+	idArticulo int not null,
+	Cantidad int not null,
+	Monto money not null,
+	Estado bit not null default 1
+)
