@@ -26,6 +26,9 @@ namespace Dominio
         [DisplayName("Categoria")]
         public Categoria categoria { get; set; }
 
+        [DisplayName("Proveedor")]
+        public Proveedor proveedor { get; set; }
+
         public int Stock { get; set; }
 
     }

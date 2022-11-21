@@ -33,6 +33,7 @@
                             <p class="card-categoria"><b>Categoria:</b> <%#Eval("Categoria.Descripcion")%></p>
                             <p class="card-marca"><b>Marca: </b><%#Eval("Marca.DescripcionMarca")%></p>
                             <p class="card-stock"><b>Stock: </b><%#Eval("Stock")%></p>
+                            <p class="card-proveedor"><b>Ultimo Proveedor: </b><%#Eval("Proveedor.RazonSocial")%></p>
 
                             <div class="vstack">
                                 <asp:Button ID="btnVerDetalle" runat="server" Text="Ver detalle" class="btn btn-outline-primary" OnClick="btnEditar_Click" CommandArgument='<%#Eval("Id") %>' />

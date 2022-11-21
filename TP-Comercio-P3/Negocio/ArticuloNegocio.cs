@@ -17,7 +17,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id");
+                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor , P.RazonSocial , A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -38,6 +38,9 @@ namespace Negocio
                     aux.categoria = new Categoria();
                     aux.categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.categoria.Descripcion = (string)datos.Lector["Tipo"];
+                    aux.proveedor = new Proveedor();
+                    aux.proveedor.Id = (int)datos.Lector["Proveedor"];
+                    aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
                     lista.Add(aux);
                 }
                 return lista;
