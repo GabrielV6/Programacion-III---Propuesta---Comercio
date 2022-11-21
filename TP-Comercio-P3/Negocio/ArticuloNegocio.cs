@@ -144,7 +144,6 @@ namespace Negocio
                 string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ", " + articulo.Stock + ",1, 1003)";
                 datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio,ImagenURL, IdMarca, IdCategoria, Stock, Estado, Proveedor) " + valores);
                 datos.ejecutarAccion();
-
             }
             catch (Exception ex)
             {
@@ -170,8 +169,6 @@ namespace Negocio
                 datos.setearParametro("@idCategoria", articulo.categoria.Id);
                 datos.setearParametro("@id", articulo.Id);
                 datos.setearParametro("@stock", articulo.Stock);
-
-
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -195,7 +192,6 @@ namespace Negocio
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
             finally
