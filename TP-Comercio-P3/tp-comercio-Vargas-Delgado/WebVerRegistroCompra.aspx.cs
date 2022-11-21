@@ -1,22 +1,22 @@
-﻿using System;
+﻿using Dominio;
+using Negocio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Dominio;
-using Negocio;
 
 namespace tp_comercio_Vargas_Delgado
 {
-    public partial class WebVerRegistro : System.Web.UI.Page
+    public partial class WebVerRegistroCompra : System.Web.UI.Page
     {
         public List<Registro> ListaRegistro { get; set; }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             RegistroNegocio negocio = new RegistroNegocio();
-            ListaRegistro = negocio.listar();
+            int compra = 1;
+            ListaRegistro = negocio.listarPorTipo(compra);
             Session.Add("ListaRegistro", ListaRegistro);
 
             dgvRegistro.DataSource = negocio.listar();
@@ -41,7 +41,7 @@ namespace tp_comercio_Vargas_Delgado
             Registro selecionado = (negocio.ListaParaEditar(IdRegistro))[0];
 
             Session.Add("RegistroSeleccionado", selecionado);
-            Response.Redirect("FormularioRegistro.aspx");
+            Response.Redirect("FormularioRegistroCompra.aspx");
         }
     }
 }

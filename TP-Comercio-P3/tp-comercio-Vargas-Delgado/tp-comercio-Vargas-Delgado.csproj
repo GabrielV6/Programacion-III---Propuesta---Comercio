@@ -76,6 +76,7 @@
     <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProveedores.aspx" />
     <Content Include="FormularioRegistro.aspx" />
+    <Content Include="FormularioRegistroVenta.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Logon.aspx" />
     <Content Include="Web.config" />
@@ -85,6 +86,8 @@
     <Content Include="WebVerArticulo.aspx" />
     <Content Include="WebVerMarca.aspx" />
     <Content Include="WebVerRegistro.aspx" />
+    <Content Include="WebVerRegistroCompra.aspx" />
+    <Content Include="WebVerRegistroVenta.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Default.aspx.cs">
@@ -142,6 +145,13 @@
     </Compile>
     <Compile Include="FormularioRegistro.aspx.designer.cs">
       <DependentUpon>FormularioRegistro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="FormularioRegistroVenta.aspx.cs">
+      <DependentUpon>FormularioRegistroVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FormularioRegistroVenta.aspx.designer.cs">
+      <DependentUpon>FormularioRegistroVenta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -202,6 +212,20 @@
     </Compile>
     <Compile Include="WebVerRegistro.aspx.designer.cs">
       <DependentUpon>WebVerRegistro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebVerRegistroCompra.aspx.cs">
+      <DependentUpon>WebVerRegistroCompra.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebVerRegistroCompra.aspx.designer.cs">
+      <DependentUpon>WebVerRegistroCompra.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebVerRegistroVenta.aspx.cs">
+      <DependentUpon>WebVerRegistroVenta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WebVerRegistroVenta.aspx.designer.cs">
+      <DependentUpon>WebVerRegistroVenta.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
