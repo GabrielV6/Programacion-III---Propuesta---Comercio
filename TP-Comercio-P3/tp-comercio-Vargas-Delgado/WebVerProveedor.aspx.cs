@@ -33,6 +33,8 @@ namespace tp_comercio_Vargas_Delgado
                 
                 dgvProveedor.DataSource = ListaProveedor;
                 dgvProveedor.DataBind();
+                Session.Remove("ProveedorSeleccionado");
+
             }
 
 

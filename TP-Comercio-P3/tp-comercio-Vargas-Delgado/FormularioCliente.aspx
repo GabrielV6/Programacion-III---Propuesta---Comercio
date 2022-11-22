@@ -31,7 +31,16 @@
         <div class="mb-3">
             <h7>El codigo se agregara de manera automatica</h7>
         </div>
-        <asp:Button ID="btnAceptarCliente" runat="server" Text="Aceptar" CssClass="btn btn-warning" Onclick="btnAceptar_Click" />
+        <asp:Button Text="Aceptar" ID="btnAceptarCliente" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />
+         <%
+            if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
+            {
+        %>
+        <asp:Button ID="btnEliminarCliente" runat="server" Text="Eliminar" CssClass="btn btn-warning" BackColor="Red" OnClick="btnEliminar_Click" />
+        <%
+            }
+        %>
+        <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
     </div>
 
 </asp:Content>

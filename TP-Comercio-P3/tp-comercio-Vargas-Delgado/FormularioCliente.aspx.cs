@@ -23,17 +23,52 @@ namespace tp_comercio_Vargas_Delgado
             {
 
 
+                //if (Session["ClienteSeleccionado"] != null && !IsPostBack)
+                //{
+                //    Cliente cliente = (Cliente)Session["ClienteSeleccionado"];
+
+                //    txtNombreCliente.Text = cliente.Nombre;
+                //    txtApellidoCliente.Text = cliente.Apellido;
+                //    txtDniCliente.Text = cliente.Dni;
+                //    txtTelefonoCliente.Text = cliente.Telefono;
+                //    txtEmailCliente.Text = cliente.Email;
+
+
+                //}
+
                 if (Session["ClienteSeleccionado"] != null && !IsPostBack)
                 {
                     Cliente cliente = (Cliente)Session["ClienteSeleccionado"];
 
-                    txtNombreCliente.Text = cliente.Nombre;
-                    txtApellidoCliente.Text = cliente.Apellido;
-                    txtDniCliente.Text = cliente.Dni;
-                    txtTelefonoCliente.Text = cliente.Telefono;
-                    txtEmailCliente.Text = cliente.Email;
-                    
-                   
+                    if ((Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador))
+                    {
+                           txtNombreCliente.Text = cliente.Nombre;
+                           txtApellidoCliente.Text = cliente.Apellido;
+                           txtDniCliente.Text = cliente.Dni;
+                           txtTelefonoCliente.Text = cliente.Telefono;
+                           txtEmailCliente.Text = cliente.Email;
+
+                    }
+                    else
+                    {
+
+                        txtNombreCliente.Text = cliente.Nombre;
+                        txtNombreCliente.ReadOnly = true;
+                        
+                        txtApellidoCliente.Text = cliente.Apellido;
+                        txtApellidoCliente.ReadOnly = true;
+                        
+                        txtDniCliente.Text = cliente.Dni;
+                        txtDniCliente.ReadOnly = true;
+                        
+                        txtTelefonoCliente.Text = cliente.Telefono;
+                        txtTelefonoCliente.ReadOnly = true;
+                        
+                        txtEmailCliente.Text = cliente.Email;
+                        txtEmailCliente.ReadOnly = true;
+
+                    }
+
                 }
             }
 
@@ -68,6 +103,30 @@ namespace tp_comercio_Vargas_Delgado
 
 
             Response.Redirect("WebVerCliente.aspx", false);
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+
+
+            if (Session["ClienteSeleccionado"] != null)
+            {
+                int IdCliente = Session["ClienteSeleccionado"] != null ? ((Cliente)Session["ClienteSeleccionado"]).Id : 0;
+                ClienteNegocio negocio = new ClienteNegocio();
+                negocio.eliminar(IdCliente);
+
+                //remover proveedor de la session
+                Session.Remove("ClienteSeleccionado");
+
+                //redirecciona a la vista
+                Response.Redirect("WebVerCliente.aspx");
+            }
+            else
+            {
+                lblMensaje.Text = "Debe seleccionar una Marca para eliminarlo";
+
+            }
+
         }
     }
 }

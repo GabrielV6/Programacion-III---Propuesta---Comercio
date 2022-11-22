@@ -20,8 +20,12 @@ namespace tp_comercio_Vargas_Delgado
 
             if (!IsPostBack)
             {
-                Repeater1.DataSource = ListaCliente;
-                Repeater1.DataBind();
+                //Queda inactivado porque usamos GridView en vez de tarjetas
+                //Repeater1.DataSource = ListaCliente;
+                //Repeater1.DataBind();
+
+                dgvCliente.DataSource = ListaCliente;
+                dgvCliente.DataBind();
             }
 
             if (Session["usuariologueado"] == null)
@@ -38,8 +42,11 @@ namespace tp_comercio_Vargas_Delgado
             ListaCliente = (List<Cliente>)Session["ListaCliente"];
             ListaCliente = ListaCliente.FindAll(x => x.Nombre.Contains(filtro));
 
-            Repeater1.DataSource = ListaCliente;
-            Repeater1.DataBind();
+            // Queda inactivado porque usamos GridView en vez de tarjetas
+            //Repeater1.DataSource = ListaCliente;
+            //Repeater1.DataBind();
+            dgvCliente.DataSource = ListaCliente;
+            dgvCliente.DataBind();
         }
 
         protected void btnFiltro_Click(object sender, EventArgs e)
@@ -51,32 +58,55 @@ namespace tp_comercio_Vargas_Delgado
             else
             {
                 ListaCliente = (List<Cliente>)Session["ListaCliente"];
-                Repeater1.DataSource = ListaCliente;
-                Repeater1.DataBind();
+                
+                // Queda inactivado porque usamos GridView en vez de tarjetas
+                //Repeater1.DataSource = ListaCliente;
+                //Repeater1.DataBind();
+
+                dgvCliente.DataSource = ListaCliente;
+                dgvCliente.DataBind();
             }
         }
 
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            int IdCliente = Convert.ToInt32(((Button)sender).CommandArgument);
-            ClienteNegocio negocio = new ClienteNegocio();
-            negocio.eliminar(IdCliente);
-            Response.Redirect("WebVerCliente.aspx");
-        }
+        //Queda inactivado porque usamos GridView en vez de tarjetas      
+        //protected void btnEliminar_Click(object sender, EventArgs e)
+        //{
+        //    int IdCliente = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    ClienteNegocio negocio = new ClienteNegocio();
+        //    negocio.eliminar(IdCliente);
+        //    Response.Redirect("WebVerCliente.aspx");
+        //}
 
-        protected void btnEditar_Click(object sender, EventArgs e)
-        {
-            int IdCliente = Convert.ToInt32(((Button)sender).CommandArgument);
-            ClienteNegocio negocio = new ClienteNegocio();
-     
+        //Queda inactivado porque usamos GridView en vez de tarjetas y se llama desde el formulario
+        //protected void btnEditar_Click(object sender, EventArgs e)
+        //{
+        //    int IdCliente = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    ClienteNegocio negocio = new ClienteNegocio();
 
+
+        //    Cliente selecionado = (negocio.ListaParaEditar(IdCliente))[0];
+
+
+        //    Session.Add("ClienteSeleccionado", selecionado);
+        //    Response.Redirect("FormularioCliente.aspx"); 
+        //}
+
+
+        protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // int IdProveedor = Convert.ToInt32(((Button)sender).CommandArgument);
+            //List<Proveedor> lista = negocio.ListaParaEditar(IdProveedor);
+            
+            int IdCliente = Convert.ToInt32(dgvCliente.SelectedDataKey.Value.ToString());
+            ClienteNegocio negocio = new ClienteNegocio();
             Cliente selecionado = (negocio.ListaParaEditar(IdCliente))[0];
 
-
+            //enviar datos selecionado al formulario de proveedores
             Session.Add("ClienteSeleccionado", selecionado);
-            Response.Redirect("FormularioCliente.aspx"); 
+            Response.Redirect("FormularioCliente.aspx");
+
         }
 
-        
+
     }
 }

@@ -76,7 +76,7 @@ namespace tp_comercio_Vargas_Delgado
 
             if (Session["MarcaSeleccionada"] != null)
             {
-                int IdMarca = Session["MarcaSeleccionada"] != null ? ((Categoria)Session["MarcaSeleccionada"]).Id : 0;
+                int IdMarca = Session["MarcaSeleccionada"] != null ? ((Marca)Session["MarcaSeleccionada"]).Id : 0;
                 MarcaNegocio negocio = new MarcaNegocio();
                 negocio.eliminar(IdMarca);
 

@@ -33,12 +33,12 @@ namespace tp_comercio_Vargas_Delgado
         protected global::System.Web.UI.WebControls.Button btnFiltroCliente;
 
         /// <summary>
-        /// Repeater1 control.
+        /// dgvCliente control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater Repeater1;
+        protected global::System.Web.UI.WebControls.GridView dgvCliente;
     }
 }
