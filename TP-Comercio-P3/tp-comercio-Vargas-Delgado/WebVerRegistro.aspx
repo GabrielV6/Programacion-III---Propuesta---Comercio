@@ -14,7 +14,7 @@
                 <Columns>
                     <asp:BoundField HeaderText="ID Registro" DataField="Id" />
                     <asp:BoundField HeaderText="Tipo" DataField="Tipo" />
-                    <asp:BoundField HeaderText="Destinatario" DataField="Destinatario" />
+                    <asp:BoundField HeaderText="Proveedor" DataField="proveedor.RazonSocial" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Monto" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />

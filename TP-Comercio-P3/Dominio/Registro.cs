@@ -18,5 +18,8 @@ namespace Dominio
 
         [DisplayName("Articulo")]
         public Articulo articulo { get; set; }
+
+        [DisplayName("Proveedor")]
+        public Proveedor proveedor { get; set; }
     }
 }

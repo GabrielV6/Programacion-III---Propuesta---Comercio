@@ -239,3 +239,10 @@ select * from ARTICULOS
 select * from PROVEEDORES
 select * from CLIENTES
 
+SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor , P.RazonSocial , A.Stock 
+FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P 
+WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id
+
+-- crear consulta para registro que enlace el nombre del proveedor
+
+SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id

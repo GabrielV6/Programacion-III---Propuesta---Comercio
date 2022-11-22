@@ -17,7 +17,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id");
+                datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -28,8 +28,14 @@ namespace Negocio
                     aux.Cantidad = (int)datos.Lector["Cantidad"];
                     aux.Monto = (decimal)datos.Lector["Monto"];
                     aux.articulo = new Articulo();
-                    aux.articulo.Id = (int)datos.Lector["IdArticulo"];
-                    aux.articulo.Nombre = (string)datos.Lector["Articulo"];
+                    aux.articulo.Id = (int)datos.Lector["idArticulo"];
+                    aux.articulo.Nombre = (string)datos.Lector["Nombre"];
+                    
+                    aux.proveedor = new Proveedor();
+                    aux.proveedor.Id = (int)datos.Lector["Destinatario"];
+                    aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+                    
+
                     lista.Add(aux);
                 }
                 return lista;
@@ -83,7 +89,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Id=" + Id);
+                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo, P.RazonSocial FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Destinatario = P.Id AND R.Id=" + Id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -97,6 +103,9 @@ namespace Negocio
                     aux.articulo = new Articulo();
                     aux.articulo.Id = (int)datos.Lector["IdArticulo"];
                     aux.articulo.Nombre = (string)datos.Lector["Articulo"];
+
+                    
+                  
                     lista.Add(aux);
                 }
                 return lista;
