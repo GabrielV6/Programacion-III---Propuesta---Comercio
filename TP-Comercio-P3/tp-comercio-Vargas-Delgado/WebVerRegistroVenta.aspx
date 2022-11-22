@@ -16,7 +16,7 @@
                     <asp:BoundField HeaderText="Destinatario" DataField="Destinatario" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Monto" DataField="Monto" />
-                    <asp:BoundField HeaderText="Articulo" DataField="Articulo" />
+                    <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
                     <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>
