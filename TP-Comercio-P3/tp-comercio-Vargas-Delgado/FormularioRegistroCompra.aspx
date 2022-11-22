@@ -1,18 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FormularioRegistroVenta.aspx.cs" Inherits="tp_comercio_Vargas_Delgado.FormularioRegistroVenta" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="FormularioRegistroCompra.aspx.cs" Inherits="tp_comercio_Vargas_Delgado.FormularioRegistroCompra" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
-    <div class="mx-auto p-5" style="width: 400px;">
-        <h2 class="text-center">Agregar Registro de venta</h2>
+        <div class="mx-auto p-5" style="width: 400px;">
+        <h2 class="text-center">Editar registro de compra</h2>
     </div>
 
     <div class="container justify-content-sm-center">
         <div class="mb-3">
 
-            <label for="ddlCliente" class="form-label">Cliente</label>
-            <asp:DropDownList ID="ddlCliente" CssClass="form-select" runat="server"></asp:DropDownList>
+            <label for="ddlProveedor" class="form-label">Proveedor</label>
+            <asp:DropDownList ID="ddlProveedor" CssClass="form-select" runat="server"></asp:DropDownList>
 
             <label for="ddlArticulo" class="form-label">Articulo</label>
             <asp:DropDownList ID="ddlArticulo" CssClass="form-select" runat="server"></asp:DropDownList>
@@ -40,7 +39,7 @@
         <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
     </div>
     <div class="container justify-content-sm-center">
-        <a href="./WebVerRegistroVenta.aspx">Volver</a>
+        <a href="./WebVerRegistroCompra.aspx">Volver</a>
     </div>
 
 </asp:Content>

@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 namespace tp_comercio_Vargas_Delgado
 {
-    public partial class FormularioRegistroVenta : System.Web.UI.Page
+    public partial class FormularioRegistroCompra : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -30,13 +30,13 @@ namespace tp_comercio_Vargas_Delgado
                     ddlArticulo.DataTextField = "Nombre";
                     ddlArticulo.DataBind();
 
-                    ClienteNegocio clienteNegocio = new ClienteNegocio();
-                    List<Cliente> listaCliente = clienteNegocio.listar();
+                    ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+                    List<Proveedor> listaProveedor = proveedorNegocio.listar();
 
-                    ddlCliente.DataSource = listaCliente;
-                    ddlCliente.DataValueField = "Id";
-                    ddlCliente.DataTextField = "Nombre";
-                    ddlCliente.DataBind();
+                    ddlProveedor.DataSource = listaProveedor;
+                    ddlProveedor.DataValueField = "Id";
+                    ddlProveedor.DataTextField = "RazonSocial";
+                    ddlProveedor.DataBind();
                 }
 
                 if (Session["RegistroSeleccionado"] != null && !IsPostBack)
@@ -45,7 +45,7 @@ namespace tp_comercio_Vargas_Delgado
 
                     if ((Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador))
                     {
-                        ddlCliente.SelectedValue = registro.Destinatario.ToString();
+                        ddlProveedor.SelectedValue = registro.Destinatario.ToString();
                         txtCantidad.Text = registro.Cantidad.ToString();
                         txtMonto.Text = registro.Monto.ToString();
                         ddlArticulo.SelectedValue = registro.articulo.Id.ToString();
@@ -67,9 +67,9 @@ namespace tp_comercio_Vargas_Delgado
 
             Registro registro = new Registro();
             registro.Id = IdRegistro;
-            int venta = 0;
-            registro.Tipo = venta;
-            registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
+            int compra = 1;
+            registro.Tipo = compra;
+            registro.Destinatario = int.Parse(ddlProveedor.SelectedValue);
             registro.Cantidad = int.Parse(txtCantidad.Text);
             registro.Monto = Convert.ToDecimal(txtMonto.Text);
             registro.articulo = new Articulo();
@@ -85,7 +85,7 @@ namespace tp_comercio_Vargas_Delgado
                 registroNegocio.modificar(registro);
                 Session.Remove("RegistroSeleccionado");
             }
-            Response.Redirect("WebVerRegistroVenta.aspx", false);
+            Response.Redirect("WebVerRegistroCompra.aspx", false);
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -97,7 +97,7 @@ namespace tp_comercio_Vargas_Delgado
                 negocio.eliminar(IdRegistro);
 
                 Session.Remove("RegistroSeleccionado");
-                Response.Redirect("WebVerRegistroVenta.aspx");
+                Response.Redirect("WebVerRegistroCompra.aspx");
             }
             else
             {

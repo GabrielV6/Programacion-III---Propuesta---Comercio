@@ -12,12 +12,10 @@
             <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField HeaderText="ID Registro" DataField="Id" />
-                    <asp:BoundField HeaderText="Tipo" DataField="Tipo" />
                     <asp:BoundField HeaderText="Destinatario" DataField="Destinatario" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Monto" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="Articulo" />
-                    <asp:BoundField HeaderText="Estado" DataField="Estado" />
                     <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>

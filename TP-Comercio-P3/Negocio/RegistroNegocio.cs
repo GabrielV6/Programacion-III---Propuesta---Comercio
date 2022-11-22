@@ -50,7 +50,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Tipo = " + tipo);
+                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Estado = 1 AND R.Tipo = " + tipo);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -83,7 +83,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Estado=1 AND R.Id=" + Id);
+                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Id=" + Id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -156,7 +156,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("delete from REGISTROS Where Id = @id");
+                datos.setearConsulta("update REGISTROS set Estado=0 Where Id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
             }
