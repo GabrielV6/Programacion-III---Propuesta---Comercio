@@ -27,6 +27,7 @@ namespace Negocio
                     aux.Destinatario = (int)datos.Lector["Destinatario"];
                     aux.Cantidad = (int)datos.Lector["Cantidad"];
                     aux.Monto = (decimal)datos.Lector["Monto"];
+                    
                     aux.articulo = new Articulo();
                     aux.articulo.Id = (int)datos.Lector["idArticulo"];
                     aux.articulo.Nombre = (string)datos.Lector["Nombre"];
@@ -56,7 +57,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Estado = 1 AND R.Tipo = " + tipo);
+                datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -66,9 +67,15 @@ namespace Negocio
                     aux.Destinatario = (int)datos.Lector["Destinatario"];
                     aux.Cantidad = (int)datos.Lector["Cantidad"];
                     aux.Monto = (decimal)datos.Lector["Monto"];
+                    
                     aux.articulo = new Articulo();
-                    aux.articulo.Id = (int)datos.Lector["IdArticulo"];
-                    aux.articulo.Nombre = (string)datos.Lector["Articulo"];
+                    aux.articulo.Id = (int)datos.Lector["idArticulo"];
+                    aux.articulo.Nombre = (string)datos.Lector["Nombre"];
+
+                    aux.proveedor = new Proveedor();
+                    aux.proveedor.Id = (int)datos.Lector["Destinatario"];
+                    aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+
                     lista.Add(aux);
                 }
                 return lista;
@@ -89,7 +96,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo, A.Nombre Articulo, P.RazonSocial FROM ARTICULOS A, REGISTROS R  WHERE R.IdArticulo = A.Id AND R.Destinatario = P.Id AND R.Id=" + Id);
+                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo,P.RazonSocial, A.Nombre FROM ARTICULOS A, REGISTROS R, PROVEEDORES P  WHERE R.IdArticulo = A.Id AND R.Destinatario = P.Id AND R.Id=" + Id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -100,12 +107,16 @@ namespace Negocio
                     aux.Destinatario = (int)datos.Lector["Destinatario"];
                     aux.Cantidad = (int)datos.Lector["Cantidad"];
                     aux.Monto = (decimal)datos.Lector["Monto"];
-                    aux.articulo = new Articulo();
-                    aux.articulo.Id = (int)datos.Lector["IdArticulo"];
-                    aux.articulo.Nombre = (string)datos.Lector["Articulo"];
-
                     
-                  
+                    aux.articulo = new Articulo();
+                    aux.articulo.Id = (int)datos.Lector["idArticulo"];
+                    aux.articulo.Nombre = (string)datos.Lector["Nombre"];
+
+                    aux.proveedor = new Proveedor();
+                    aux.proveedor.Id = (int)datos.Lector["Destinatario"];
+                    aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+
+
                     lista.Add(aux);
                 }
                 return lista;
@@ -123,7 +134,8 @@ namespace Negocio
         {
             AccesoDatos datos = new AccesoDatos();
             try
-            {
+            {   
+                //TODO : SE DEBE VERIFICAR QUE ESTE OK...
                 string valores = "values('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "'," + registro.Monto + ",'" + registro.articulo.Id + ")";
                 datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) " + valores);
                 datos.ejecutarAccion();
@@ -142,6 +154,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
+                //TODO : SE DEBE VERIFICAR QUE ESTE OK...
                 datos.setearConsulta("update REGISTROS set Tipo = @tipo, Destinatario = @destinatario, Cantidad = @cantidad, Monto = @monto, IdArticulo = @idArticulo Where Id = @id");
                 datos.setearParametro("@id", registro.Id);
                 datos.setearParametro("@tipo", registro.Tipo);

@@ -12,7 +12,7 @@
             <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField HeaderText="ID Registro" DataField="Id" />
-                    <asp:BoundField HeaderText="Destinatario" DataField="Destinatario" />
+                    <asp:BoundField HeaderText="Proveedor" DataField="proveedor.RazonSocial" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Monto" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
