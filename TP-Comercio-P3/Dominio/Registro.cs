@@ -21,5 +21,8 @@ namespace Dominio
 
         [DisplayName("Proveedor")]
         public Proveedor proveedor { get; set; }
+
+        [DisplayName("Cliente")]
+        public Cliente cliente { get; set; }
     }
 }

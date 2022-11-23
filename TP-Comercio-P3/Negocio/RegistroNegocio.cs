@@ -57,7 +57,14 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
+                if (tipo == 1) //si es compra, se muestran proveedores
+                {
+                    datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
+                }
+                else 
+                {
+                    datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, C.Nombre Cliente, A.Nombre FROM REGISTROS R, CLIENTES C, ARTICULOS A WHERE R.Destinatario = C.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
+                }
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -72,9 +79,18 @@ namespace Negocio
                     aux.articulo.Id = (int)datos.Lector["idArticulo"];
                     aux.articulo.Nombre = (string)datos.Lector["Nombre"];
 
-                    aux.proveedor = new Proveedor();
-                    aux.proveedor.Id = (int)datos.Lector["Destinatario"];
-                    aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+                    if (tipo == 1) 
+                    {
+                        aux.proveedor = new Proveedor();
+                        aux.proveedor.Id = (int)datos.Lector["Destinatario"];
+                        aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
+                    }
+                    else 
+                    {
+                        aux.cliente = new Cliente();
+                        aux.cliente.Id = (int)datos.Lector["Destinatario"];
+                        aux.cliente.Nombre = (string)datos.Lector["Cliente"];
+                    }
 
                     lista.Add(aux);
                 }
