@@ -36,7 +36,6 @@ namespace Negocio
                     aux.proveedor.Id = (int)datos.Lector["Destinatario"];
                     aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
                     
-
                     lista.Add(aux);
                 }
                 return lista;
@@ -151,10 +150,14 @@ namespace Negocio
         {
             AccesoDatos datos = new AccesoDatos();
             try
-            {   
+            {
                 //TODO : SE DEBE VERIFICAR QUE ESTE OK...
-                string valores = "values('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "'," + registro.Monto + ",'" + registro.articulo.Id + ")";
-                datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) " + valores);
+                datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idarticulo)" );
+                datos.setearParametro("@tipo", registro.Tipo);
+                datos.setearParametro("@destinatario", registro.Destinatario);
+                datos.setearParametro("@cantidad", registro.Cantidad);
+                datos.setearParametro("@monto", registro.Monto);
+                datos.setearParametro("@idArticulo", registro.articulo.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
