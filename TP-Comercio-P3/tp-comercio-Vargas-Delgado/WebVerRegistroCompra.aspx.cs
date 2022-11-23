@@ -19,7 +19,7 @@ namespace tp_comercio_Vargas_Delgado
             ListaRegistro = negocio.listarPorTipo(compra);
             Session.Add("ListaRegistro", ListaRegistro);
 
-            dgvRegistro.DataSource = negocio.listar();
+            dgvRegistro.DataSource = negocio.listarPorTipo(compra);
             dgvRegistro.DataBind();
 
             if (!IsPostBack)

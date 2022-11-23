@@ -113,6 +113,8 @@ namespace Negocio
             try
             {
                 datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo,P.RazonSocial, A.Nombre FROM ARTICULOS A, REGISTROS R, PROVEEDORES P  WHERE R.IdArticulo = A.Id AND R.Destinatario = P.Id AND R.Id=" + Id);
+              //  datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Id=" + Id);
+
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -131,7 +133,6 @@ namespace Negocio
                     aux.proveedor = new Proveedor();
                     aux.proveedor.Id = (int)datos.Lector["Destinatario"];
                     aux.proveedor.RazonSocial = (string)datos.Lector["RazonSocial"];
-
 
                     lista.Add(aux);
                 }
