@@ -85,6 +85,17 @@ namespace tp_comercio_Vargas_Delgado
                 registroNegocio.modificar(registro);
                 Session.Remove("RegistroSeleccionado");
             }
+            //reescribe el stock del articulo con la cantidad comprada 
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            Articulo articulo = new Articulo();
+            articulo.Id = registro.articulo.Id;
+            articulo.Stock = registro.Cantidad;
+            // actualiza el ultimo proveedor
+            Proveedor proveedor = new Proveedor();
+            articulo.proveedor = proveedor;
+            articulo.proveedor.Id = registro.Destinatario;
+            articuloNegocio.modificarPorCompra(articulo);
+
             Response.Redirect("WebVerRegistroCompra.aspx", false);
         }
 

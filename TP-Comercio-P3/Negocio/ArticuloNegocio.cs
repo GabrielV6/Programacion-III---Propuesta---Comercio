@@ -180,6 +180,28 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void modificarPorCompra(Articulo articulo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {              
+                datos.setearConsulta("update ARTICULOS set Stock = @stock, Proveedor = @proveedor Where Id = @id");
+                datos.setearParametro("@stock", articulo.Stock);
+                datos.setearParametro("@proveedor", articulo.proveedor.Id);
+                datos.setearParametro("@id", articulo.Id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
