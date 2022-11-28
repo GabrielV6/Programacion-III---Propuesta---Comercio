@@ -21,8 +21,12 @@ namespace tp_comercio_Vargas_Delgado
 
             if (!IsPostBack)
             {
-                Repeater1.DataSource = ListaArticulo;
-                Repeater1.DataBind();
+                //Queda inactivado porque usamos GridView en vez de tarjetas
+                //Repeater1.DataSource = ListaArticulo;
+                //Repeater1.DataBind();
+
+                dgvArticulo.DataSource = ListaArticulo;
+                dgvArticulo.DataBind();
             }
             if (Session["usuariologueado"] == null)
             {
@@ -30,21 +34,29 @@ namespace tp_comercio_Vargas_Delgado
                 Response.Redirect("Logon.aspx");
             }
         }
-        protected void btnEliminar_Click(object sender, EventArgs e)
-        {
-            int idArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            negocio.eliminar(idArticulo);
-            Response.Redirect("WebVerArticulo.aspx");
-        }
+        
+//Queda inactivado porque usamos GridView en vez de tarjetas
+        //protected void btnEliminar_Click(object sender, EventArgs e)
+        //{
+        //    int idArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    ArticuloNegocio negocio = new ArticuloNegocio();
+        //    negocio.eliminar(idArticulo);
+        //    Response.Redirect("WebVerArticulo.aspx");
+        //}
+        
         protected void listaFiltrada()
         {
             string filtro = txtFiltro.Text;
             ListaArticulo = (List<Articulo>)Session["ListaArticulo"];
             ListaArticulo = ListaArticulo.FindAll(x => x.Nombre.Contains(filtro));
 
-            Repeater1.DataSource = ListaArticulo;
-            Repeater1.DataBind();
+            // Queda inactivado porque usamos GridView en vez de tarjetas
+
+            //Repeater1.DataSource = ListaArticulo;
+            //Repeater1.DataBind();
+
+            dgvArticulo.DataSource = ListaArticulo;
+            dgvArticulo.DataBind();
         }
         protected void btnFiltro_Click(object sender, EventArgs e)
         {
@@ -55,18 +67,40 @@ namespace tp_comercio_Vargas_Delgado
             else
             {
                 ListaArticulo = (List<Articulo>)Session["ListaArticulo"];
-                Repeater1.DataSource = ListaArticulo;
-                Repeater1.DataBind();
+
+                // Queda inactivado porque usamos GridView en vez de tarjetas
+
+                //Repeater1.DataSource = ListaArticulo;
+                //Repeater1.DataBind();
+
+                dgvArticulo.DataSource = ListaArticulo;
+                dgvArticulo.DataBind();
             }
         }
-        protected void btnEditar_Click(object sender, EventArgs e)
+        //protected void btnEditar_Click(object sender, EventArgs e)
+        //{
+        //    int IdArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
+        //    ArticuloNegocio negocio = new ArticuloNegocio();
+        //    Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
+        //    Session.Add("ArticuloSeleccionado", selecionado);
+        //    Response.Redirect("FormularioArticulo.aspx");
+        //}
+
+        protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int IdArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
+            // int IdProveedor = Convert.ToInt32(((Button)sender).CommandArgument);
+            //List<Proveedor> lista = negocio.ListaParaEditar(IdProveedor);
+
+            int IdArticulo = Convert.ToInt32(dgvArticulo.SelectedDataKey.Value.ToString());
             ArticuloNegocio negocio = new ArticuloNegocio();
             Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
+
+            //enviar datos selecionado al formulario de proveedores
+           
             Session.Add("ArticuloSeleccionado", selecionado);
             Response.Redirect("FormularioArticulo.aspx");
-        }
 
+        }
+        
     }
 }

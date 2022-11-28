@@ -18,9 +18,9 @@
     </div>
 
     <div class="container">
-        <div class="row row-cols-1 row-cols-sm-5 g-3 justify-content-md-center">
+        <div class="row justify-content-md-center">
 
-            <asp:Repeater ID="Repeater1" runat="server">
+            <%-- <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
 
                     <div class="col">
@@ -51,7 +51,24 @@
                         </div>
                     </div>
                 </ItemTemplate>
-            </asp:Repeater>
+            </asp:Repeater>--%>
+
+            <asp:GridView ID="dgvArticulo" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+
+                <Columns>
+
+                    <asp:BoundField HeaderText="Nombre Articulo" DataField="Nombre" />
+                    <asp:BoundField HeaderText="Precio " DataField="Precio" />
+                    <asp:BoundField HeaderText="Categoria " DataField="Categoria.Descripcion" />
+                    <asp:BoundField HeaderText="Marca " DataField="Marca.DescripcionMarca" />
+                    <asp:BoundField HeaderText="Stock " DataField="Stock" />
+                     <asp:BoundField HeaderText="Proveedor " DataField="Proveedor.RazonSocial" />
+
+
+                    <asp:CommandField ShowSelectButton="true" SelectText="📝" HeaderText="Accion" />
+                </Columns>
+
+            </asp:GridView>
         </div>
     </div>
 </asp:Content>

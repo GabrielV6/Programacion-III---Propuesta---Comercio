@@ -236,6 +236,7 @@ INSERT INTO REGISTROS(Tipo, Destinatario, idArticulo, Cantidad, Monto) values (0
 
 select * from REGISTROS
 select * from ARTICULOS
+select * from CATEGORIAS
 select * from PROVEEDORES
 select * from CLIENTES
 
@@ -247,3 +248,7 @@ WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id
 
 SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id
 
+
+-- crear consulta que reciba un ID de registro y levante todos los campos con sus inner joins a la tabla Proveedores y articulos para traer los nombres.
+
+SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Id = 1000

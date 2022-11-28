@@ -15,6 +15,12 @@ namespace tp_comercio_Vargas_Delgado
         {
             try
             {
+                if (Session["usuariologueado"] == null)
+                {
+
+                    Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
+                    Response.Redirect("Logon.aspx");
+                }
                 if (!IsPostBack)
                 {
                     MarcaNegocio marcaNegocio = new MarcaNegocio();
@@ -94,6 +100,30 @@ namespace tp_comercio_Vargas_Delgado
         protected void txtImagenUrl_TextChanged(object sender, EventArgs e)
         {
             imgArticulo.ImageUrl = txtImagenUrl.Text;
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            
+
+            if (Session["ArticuloSeleccionado"] != null)
+            {
+                int IdArticulo = Session["ArticuloSeleccionado"] != null ? ((Articulo)Session["ArticuloSeleccionado"]).Id : 0;
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                negocio.eliminar(IdArticulo);
+
+                //remover proveedor de la session
+                Session.Remove("ArticuloSeleccionado");
+
+                //redirecciona a la vista
+                Response.Redirect("WebVerArticulo.aspx");
+            }
+            else
+            {
+                lblMensaje.Text = "Debe seleccionar un articulo para eliminarlo";
+
+            }
+
         }
     }
 }

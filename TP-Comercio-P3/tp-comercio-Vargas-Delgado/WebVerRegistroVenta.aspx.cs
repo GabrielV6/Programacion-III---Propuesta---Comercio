@@ -38,9 +38,9 @@ namespace tp_comercio_Vargas_Delgado
         {
             int IdRegistro = Convert.ToInt32(dgvRegistro.SelectedDataKey.Value.ToString());
             RegistroNegocio negocio = new RegistroNegocio();
-            Registro selecionado = (negocio.ListaParaEditar(IdRegistro))[0];
+            Registro selecionado2 = (negocio.ListaParaEditar(IdRegistro))[0];
 
-            Session.Add("RegistroSeleccionado", selecionado);
+            Session.Add("RegistroSeleccionado", selecionado2);
             Response.Redirect("FormularioRegistroVenta.aspx");
         }
     }

@@ -60,6 +60,15 @@
         <div class="row">
             <div class="col">
                 <asp:Button Text="Aceptar" ID="btnAceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" runat="server" />
+                <%
+                    if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
+                    {
+                %>
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-warning" BackColor="Red" OnClick="btnEliminar_Click" />
+                <%
+                    }
+                %>
+                <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
                 <a href="./WebVerArticulo.aspx">Volver</a>
             </div>
         </div>

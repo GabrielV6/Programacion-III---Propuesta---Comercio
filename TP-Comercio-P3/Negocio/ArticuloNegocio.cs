@@ -17,7 +17,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor , P.RazonSocial , A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id");
+                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor , P.RazonSocial , A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id AND A.estado=1");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -208,7 +208,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("delete from ARTICULOS Where Id = @id");
+                datos.setearConsulta("Update ARTICULOS set estado=0 where id= @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
             }
