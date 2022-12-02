@@ -80,9 +80,7 @@ namespace Negocio
                     aux.categoria = new Categoria();
                     aux.categoria.Id = (int)datos.Lector["IdCategoria"];
                     aux.categoria.Descripcion = (string)datos.Lector["Tipo"];
-
                     aux.Stock = (int)datos.Lector["Stock"];
-
                     lista.Add(aux);
                 }
                 return lista;
