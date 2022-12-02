@@ -24,15 +24,6 @@ namespace tp_comercio_Vargas_Delgado
         protected global::System.Web.UI.HtmlControls.HtmlForm formulario_login;
 
         /// <summary>
-        /// lblBienvenida control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblBienvenida;
-
-        /// <summary>
         /// lblUsuario control.
         /// </summary>
         /// <remarks>
@@ -69,15 +60,6 @@ namespace tp_comercio_Vargas_Delgado
         protected global::System.Web.UI.WebControls.TextBox tbxContraseña;
 
         /// <summary>
-        /// lblError control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblError;
-
-        /// <summary>
         /// btnIngresar control.
         /// </summary>
         /// <remarks>
@@ -85,5 +67,14 @@ namespace tp_comercio_Vargas_Delgado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnIngresar;
+
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
     }
 }
