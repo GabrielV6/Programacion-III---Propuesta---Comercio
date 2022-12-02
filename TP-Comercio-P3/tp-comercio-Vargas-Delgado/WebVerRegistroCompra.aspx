@@ -7,7 +7,7 @@
         <h2 class="text-center">Registros de compras</h2>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-md-center">
             <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
                 <Columns>
@@ -20,5 +20,6 @@
                 </Columns>
             </asp:GridView>
         </div>
+        <asp:Button ID="btnAgregar" runat="server" class="btn btn-outline-primary" OnClick="btnAgregar_Click"  Text="Agregar" />
     </div>
 </asp:Content>

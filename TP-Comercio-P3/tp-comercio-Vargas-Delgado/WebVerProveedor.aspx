@@ -8,7 +8,7 @@
         <h2 class="text-center">Listado de Provedores</h2>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <asp:TextBox ID="txtFiltroProveedor" runat="server"></asp:TextBox>
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-md-center">
             <%-- 
             <asp:Repeater ID="Repeater1" runat="server">
@@ -61,9 +61,8 @@
                 </Columns>
 
             </asp:GridView>
-
-
         </div>
+        <asp:Button ID="btnAgregar" runat="server" class="btn btn-outline-primary" OnClick="btnAgregar_Click"  Text="Agregar" />
     </div>
 
 

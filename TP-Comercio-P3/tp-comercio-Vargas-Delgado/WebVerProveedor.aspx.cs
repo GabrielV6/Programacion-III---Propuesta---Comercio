@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Negocio;
-
+using System.Configuration;
 
 namespace tp_comercio_Vargas_Delgado
 {
@@ -117,5 +117,9 @@ namespace tp_comercio_Vargas_Delgado
 
         }
 
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FormularioProveedores.aspx");
+        }
     }
 }

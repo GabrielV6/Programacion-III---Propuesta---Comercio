@@ -34,8 +34,8 @@ namespace tp_comercio_Vargas_Delgado
                 Response.Redirect("Logon.aspx");
             }
         }
-        
-//Queda inactivado porque usamos GridView en vez de tarjetas
+
+        //Queda inactivado porque usamos GridView en vez de tarjetas
         //protected void btnEliminar_Click(object sender, EventArgs e)
         //{
         //    int idArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
@@ -43,7 +43,7 @@ namespace tp_comercio_Vargas_Delgado
         //    negocio.eliminar(idArticulo);
         //    Response.Redirect("WebVerArticulo.aspx");
         //}
-        
+
         protected void listaFiltrada()
         {
             string filtro = txtFiltro.Text;
@@ -96,11 +96,17 @@ namespace tp_comercio_Vargas_Delgado
             Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
 
             //enviar datos selecionado al formulario de proveedores
-           
+
             Session.Add("ArticuloSeleccionado", selecionado);
             Response.Redirect("FormularioArticulo.aspx");
 
         }
-        
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FormularioArticulo.aspx");
+        }
     }
+
+
 }

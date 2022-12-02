@@ -6,12 +6,13 @@
     width: 100%;
     min-height: 100%;
     padding: 20px;
+
 }
 
 #formcontent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
-    background: #fff;
+    background: #3F2D3D17;
     padding: 30px;
     width: 90%;
     max-width: 450px;
@@ -19,5 +20,32 @@
     padding: 0px;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.Navbar {
+    height: 80px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 35px;
+    display: flex;
+}
+
+.logo {
+    font-family: 'Andada Pro', serif;
+    color: orangered;
+    font-weight: bolder;
+    float: left;
+}
+
+.Navbar_icons {
+    display: flex;
+    position: relative;
+    float: right;
+}
+
+.Search, .Help, .Sign_In {
+    display: flex;
+    margin-right: 10px;
     text-align: center;
 }

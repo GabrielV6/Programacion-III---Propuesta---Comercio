@@ -43,5 +43,11 @@ namespace tp_comercio_Vargas_Delgado
             Session.Add("RegistroSeleccionado", selecionado2);
             Response.Redirect("FormularioRegistroVenta.aspx");
         }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FormularioRegistroVenta.aspx");
+        }
+        
     }
 }

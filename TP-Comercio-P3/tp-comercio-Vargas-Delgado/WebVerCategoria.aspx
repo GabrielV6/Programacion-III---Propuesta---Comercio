@@ -8,7 +8,7 @@
         <h2 class="text-center">Listado de Categorias</h2>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <asp:TextBox ID="txtFiltro" runat="server" />
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-md-center">
             <%-- <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
