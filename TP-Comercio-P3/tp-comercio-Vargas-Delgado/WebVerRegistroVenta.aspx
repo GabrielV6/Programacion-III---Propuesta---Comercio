@@ -10,7 +10,7 @@
 
     <div class="container-fluid">
         <div class="row justify-content-md-center">
-            <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+            <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-grey table-bordered" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField HeaderText="ID Registro" DataField="Id" />
                     <asp:BoundField HeaderText="Cliente" DataField="cliente.Nombre" />

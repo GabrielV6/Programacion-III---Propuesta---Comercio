@@ -52,7 +52,7 @@
                 </ItemTemplate>
             </asp:Repeater>--%>
 
-            <asp:GridView ID="dgvCliente" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-dark table-bordered" AutoGenerateColumns="false">
+            <asp:GridView ID="dgvCliente" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-grey table-bordered" AutoGenerateColumns="false">
 
                 <Columns>
 

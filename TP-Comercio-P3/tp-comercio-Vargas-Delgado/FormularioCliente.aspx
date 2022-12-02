@@ -41,6 +41,10 @@
             }
         %>
         <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
-    </div>
+    </div> 
 
+    <div class="container justify-content-sm-center">
+        <a href="./WebVerCliente.aspx">Volver</a>
+        
+    </div>
 </asp:Content>
