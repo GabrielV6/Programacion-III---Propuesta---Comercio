@@ -20,6 +20,6 @@
                 </Columns>
             </asp:GridView>
         </div>
-        <asp:Button ID="btnAgregar" runat="server" class="btn btn-outline-primary" OnClick="btnAgregar_Click"  Text="Agregar" />
+        <asp:Button ID="btnAgregar" runat="server" class="u-border-none u-btn u-btn-submit u-button-style u-palette-2-base u-btn-1" OnClick="btnAgregar_Click"  Text="Agregar" />
     </div>
 </asp:Content>

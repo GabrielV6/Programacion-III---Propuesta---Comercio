@@ -132,6 +132,7 @@
                         <div class="text-right">
                             <asp:Button ID="btnCerrar" runat="server" class="btn btn-light" Text="Cerrar Sesion" OnClick="btnCerrar_Click" />
                         </div>
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -139,20 +140,27 @@
         <!-- Botones principales-->
         <div class="container">
             <a href="Default.aspx" class="btn btn-success btn-block">
-                <h4>INICIO</h4>
-            </a>
+                <h4>Inicio</h4>
+            </a>        
             <!-- Boton principal de la pagina -->
 
             <div class="btn-group btn-group-justified">
-                <a href="WebVerCliente.aspx" class="btn btn-warning btn-lg">Cliente</a>
+                <a href="WebVerCliente.aspx" class="btn btn-secondary btn-lg">Cliente</a>
                 <a href="WebVerProveedor.aspx" class="btn btn-primary btn-lg">Proveedor</a>
-                <a href="WebVerArticulo.aspx" class="btn btn-danger btn-lg">Articulos</a>
-                <a href="WebVerRegistroVenta.aspx" class="btn btn-warning btn-lg">Venta</a>
-                <a href="WebVerRegistroCompra.aspx" class="btn btn-primary btn-lg">Compra</a>
+                <a href="WebVerArticulo.aspx" class="btn btn-secondary btn-lg">Articulos</a>
+                <a href="WebVerRegistroVenta.aspx" class="btn btn-primary btn-lg">Venta</a>
+                <a href="WebVerRegistroCompra.aspx" class="btn btn-secondary btn-lg">Compra</a>
+                <a href="WebVerCategoria.aspx" class="btn btn-primary btn-lg">Categoria</a>
+                <a href="WebVerMarca.aspx" class="btn btn-secondary btn-lg">Marca</a>
 
 
             </div>
             <br>
+            <div class="btn-group btn-group-justified">
+                <a href="#" class="btn btn-warning btn-lg">Reportes</a>
+                <a href="#" class="btn btn-primary btn-lg">Proyeccion</a>
+
+            </div>
 
             <!-- Bootstrap core JavaScript
     ================================================== -->

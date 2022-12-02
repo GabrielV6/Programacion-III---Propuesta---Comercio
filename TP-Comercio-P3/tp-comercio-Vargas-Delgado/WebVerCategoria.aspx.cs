@@ -109,5 +109,10 @@ namespace tp_comercio_Vargas_Delgado
             Response.Redirect("FormularioCategoria.aspx");
 
         }
+
+        protected void btnAgregar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("FormularioCategoria.aspx");
+        }
     }
 }
