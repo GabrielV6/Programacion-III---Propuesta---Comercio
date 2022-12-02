@@ -85,13 +85,14 @@ namespace tp_comercio_Vargas_Delgado
                 registroNegocio.modificar(registro);
                 Session.Remove("RegistroSeleccionado");
             }
-            //reescribe el stock del articulo con la cantidad comprada 
+
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             Articulo articulo = new Articulo();
-            //busca el stock anterior
+            // busca el stock anterior del producto
             List<Articulo> articulos = new List<Articulo>();
             articulos = articuloNegocio.listaParaEditar(registro.articulo.Id);
             articulo.Id = registro.articulo.Id;
+            // se suma el stock anterior a la cantidad comprada
             articulo.Stock = articulos[0].Stock + registro.Cantidad;
             // actualiza el ultimo proveedor
             Proveedor proveedor = new Proveedor();
