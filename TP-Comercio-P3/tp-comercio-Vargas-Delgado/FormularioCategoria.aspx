@@ -11,7 +11,7 @@
     <div class="container justify-content-sm-center">
         <div class="mb-3">
             <label for="txtDescripcion" class="form-label">Nombre</label>
-            <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" />
+            <asp:TextBox runat="server" ID="txtDescripcion" CssClass="form-control" required="" />
         </div>
         <div class="mb-3">
             <h7>El codigo se agregara de manera automatica</h7>
