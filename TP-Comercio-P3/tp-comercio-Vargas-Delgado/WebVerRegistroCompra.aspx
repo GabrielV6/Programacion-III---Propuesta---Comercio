@@ -16,7 +16,7 @@
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Monto" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
-                    <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Accion" />
+                 <%--   <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Accion" /> --%>
                 </Columns>
             </asp:GridView>
         </div>

@@ -76,7 +76,7 @@
                       </div>
                       <div class="u-form-checkbox u-form-group">
                         <input type="checkbox" id="checkbox-a30d" name="remember" value="On">
-                        <label for="checkbox-a30d" class="u-label">Remember me</label>
+                        <label for="checkbox-a30d" class="u-label">Recordar credenciales</label>
                       </div>
                       <div class="u-align-left u-form-group u-form-submit">
                         <asp:Button ID="btnIngresar" class="u-border-none u-btn u-btn-submit u-button-style u-palette-2-base u-btn-1" runat="server" OnClick="BtnIngresar_Click" Text="Ingresar" />
@@ -86,8 +86,6 @@
                     </form>
                   </div>
                     <asp:Label runat="server" CssClass="alert-danger" ID="lblError"></asp:Label>
-                  <a href="#" class="u-border-active-palette-2-base u-border-hover-palette-1-base u-border-none u-btn u-button-style u-login-control u-login-forgot-password u-none u-text-grey-40 u-text-hover-palette-4-base u-btn-2">Forgot password?</a>
-                  <a href="#" class="u-border-active-palette-2-base u-border-hover-palette-1-base u-border-none u-btn u-button-style u-login-control u-login-create-account u-none u-text-grey-40 u-text-hover-palette-4-base u-btn-3">Don't have an account?</a>
                 </div>
               </div>
             </div>
