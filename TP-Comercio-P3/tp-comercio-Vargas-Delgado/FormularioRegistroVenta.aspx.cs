@@ -93,6 +93,13 @@ namespace tp_comercio_Vargas_Delgado
             articulos = articuloNegocio.listaParaEditar(registro.articulo.Id);
             articulo = articulos[0];
             // se resta la cantidad vendida  del stock actual
+
+            if (articulos[0].Stock < registro.Cantidad)
+            {
+                Response.Write("<script>alert('El articulo no posee esa cantidad de items')</script>");
+                return;
+            }
+
             articulo.Stock = articulos[0].Stock - registro.Cantidad;
             articuloNegocio.modificarPorCompra(articulo);
 
