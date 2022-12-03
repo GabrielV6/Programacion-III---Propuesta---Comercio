@@ -50,7 +50,6 @@ namespace tp_comercio_Vargas_Delgado
                     ddlCategoria.SelectedValue = articulo.categoria.Id.ToString();
                     txtImagenUrl.Text = articulo.ImagenUrl;
                     txtImagenUrl_TextChanged(sender, e);
-                    txtStock.Text = articulo.Stock.ToString();
                 }
             }
             catch (Exception ex)
@@ -62,6 +61,10 @@ namespace tp_comercio_Vargas_Delgado
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
+
             try
             {
                 int IdArticulo = Session["ArticuloSeleccionado"] != null ? ((Articulo)Session["ArticuloSeleccionado"]).Id : 0;
@@ -77,7 +80,6 @@ namespace tp_comercio_Vargas_Delgado
                 articulo.marca.Id = int.Parse(ddlMarca.SelectedValue);
                 articulo.categoria = new Categoria();
                 articulo.categoria.Id = int.Parse(ddlCategoria.SelectedValue);
-                articulo.Stock = int.Parse(txtStock.Text);
 
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
                 if (IdArticulo == 0)
