@@ -11,21 +11,16 @@ using System.Web.UI.WebControls;
 namespace tp_comercio_Vargas_Delgado
 {
     public partial class FormularioProveedores : System.Web.UI.Page
-    {
-        
-        
+    {       
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuariologueado"] == null)
             {
-
                 Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
                 Response.Redirect("Logon.aspx");
             }
             else
-            {
-
-         
+            {   
                 if (Session["ProveedorSeleccionado"] != null && !IsPostBack)
                 {
                     Proveedor proveedor = (Proveedor)Session["ProveedorSeleccionado"];
@@ -39,7 +34,6 @@ namespace tp_comercio_Vargas_Delgado
                     }
                     else
                     {
-
                         txtRazonSocial.Text = proveedor.RazonSocial;
                         txtRazonSocial.ReadOnly = true;
                         
@@ -51,17 +45,16 @@ namespace tp_comercio_Vargas_Delgado
                         
                         txtTelefono.Text = proveedor.Telefono;
                         txtTelefono.ReadOnly = true;
-                        
-
-                    }
-                  
+                    }                
                 }
             }
-
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
-        {   
+        {
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
             //Guardo el ID de la session para pasarlo al nuevo objeto
             int IdProveedor = Session["ProveedorSeleccionado"] != null ? ((Proveedor)Session["ProveedorSeleccionado"]).Id : 0;
             
@@ -73,19 +66,16 @@ namespace tp_comercio_Vargas_Delgado
             proveedor.Email = txtEmail.Text;
             proveedor.Telefono = txtTelefono.Text;
             
-
             ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
             if (IdProveedor ==0)
             {
                 proveedorNegocio.agregar(proveedor);
             }
             else
-                {
-            
+            {        
                 proveedorNegocio.modificar(proveedor);
                 Session.Remove("ProveedorSeleccionado");
             }
-            
 
             Response.Redirect("WebVerProveedor.aspx", false);
         }
