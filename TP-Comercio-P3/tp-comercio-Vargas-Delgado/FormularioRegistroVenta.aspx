@@ -18,10 +18,26 @@
             <asp:DropDownList ID="ddlArticulo" CssClass="form-select" runat="server"></asp:DropDownList>
 
             <label for="txtCantidad" class="form-label">Cantidad</label>
-            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" required=""></asp:TextBox>
+            <asp:RangeValidator ID="Range1"
+                ControlToValidate="txtCantidad"
+                MinimumValue="1"
+                MaximumValue="99000000"
+                Type="Integer"
+                EnableClientScript="false"
+                Text="Por favor, ingrese una cantidad valido"
+                runat="server" />
 
             <label for="txtMonto" class="form-label">Monto</label>
-            <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control" required=""></asp:TextBox>
+            <asp:RangeValidator ID="Range2"
+                ControlToValidate="txtMonto"
+                MinimumValue="1"
+                MaximumValue="99000000"
+                Type="Integer"
+                EnableClientScript="false"
+                Text="Por favor, ingrese un monto valido"
+                runat="server" />
 
         </div>
         <div class="mb-3">

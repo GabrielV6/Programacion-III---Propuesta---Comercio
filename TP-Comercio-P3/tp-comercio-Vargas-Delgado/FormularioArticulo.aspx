@@ -6,7 +6,7 @@
     <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
 
     <div class="mx-auto p-5" style="width: 400px;">
-        <h2 class="text-center">Agregar Articulo</h2>
+        <h2 class="text-center">Formulario Articulo</h2>
     </div>
 
     <div class="container justify-content-sm-center">

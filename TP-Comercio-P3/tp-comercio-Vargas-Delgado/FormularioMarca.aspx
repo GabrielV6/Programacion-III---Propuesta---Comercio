@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <div class="mx-auto p-5" style="width: 400px;">
-        <h2 class="text-center">Agregar Marca</h2>
+        <h2 class="text-center">Formulario Marca</h2>
     </div>
 
     <div class="container justify-content-sm-center">
