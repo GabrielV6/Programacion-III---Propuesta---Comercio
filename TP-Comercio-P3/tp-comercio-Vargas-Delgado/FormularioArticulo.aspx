@@ -14,7 +14,7 @@
             <div class="col">
                 <div class="mb-3">
                     <label for="txtCodigo" class="form-label">Codigo</label>
-                    <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" />
+                    <asp:TextBox runat="server" ID="txtCodigo" CssClass="form-control" required=""/>
                 </div>
                 <div class="mb-3">
                     <label for="txtNombre" class="form-label">Nombre</label>

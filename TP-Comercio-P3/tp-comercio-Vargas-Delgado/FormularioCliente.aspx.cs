@@ -76,6 +76,10 @@ namespace tp_comercio_Vargas_Delgado
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
+
             //Guardo el ID de la session para pasarlo al nuevo objeto
             int IdCliente = Session["ClienteSeleccionado"] != null ? ((Cliente)Session["ClienteSeleccionado"]).Id : 0;
 
