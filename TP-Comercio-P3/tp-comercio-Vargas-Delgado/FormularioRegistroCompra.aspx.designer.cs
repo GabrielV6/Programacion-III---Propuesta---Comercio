@@ -42,6 +42,15 @@ namespace tp_comercio_Vargas_Delgado
         protected global::System.Web.UI.WebControls.TextBox txtCantidad;
 
         /// <summary>
+        /// Range1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator Range1;
+
+        /// <summary>
         /// txtMonto control.
         /// </summary>
         /// <remarks>
@@ -49,6 +58,15 @@ namespace tp_comercio_Vargas_Delgado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtMonto;
+
+        /// <summary>
+        /// Range2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RangeValidator Range2;
 
         /// <summary>
         /// btnAceptar control.
