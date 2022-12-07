@@ -40,21 +40,39 @@
                 runat="server" />
 
         </div>
+
         <div class="mb-3">
             <h7>El codigo se agregara de manera automatica</h7>
         </div>
-        <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAceptar_Click" />
 
-        <asp:Button ID="btnAceptar" runat="server" Text="Finalizar venta" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
-        <%
-            if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
-            {
-        %>
-        <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-warning" BackColor="Red" OnClick="btnEliminar_Click" />
-        <%
-            }
-        %>
-        <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
+        <div class="mb-3">
+            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarArticulo_Click" />
+        </div>
+
+        <div class="row justify-content-md-center">
+            <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-grey table-bordered" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:BoundField HeaderText="ID Registro" DataField="Id" />
+                    <asp:BoundField HeaderText="Cliente" DataField="cliente.Nombre" />
+                    <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
+                    <asp:BoundField HeaderText="Precio por unidad" DataField="Monto" />
+                    <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
+                </Columns>
+            </asp:GridView>
+        </div>
+
+        <div class="mb-3">
+            <asp:Button ID="btnAceptar" runat="server" Text="Finalizar venta" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
+            <%
+                if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
+                {
+            %>
+            <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-warning" BackColor="Red" OnClick="btnEliminar_Click" />
+            <%
+                }
+            %>
+            <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
+        </div>
     </div>
     <div class="container justify-content-sm-center">
         <a href="./WebVerRegistroVenta.aspx">Volver</a>

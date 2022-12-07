@@ -12,7 +12,6 @@ namespace tp_comercio_Vargas_Delgado
     public partial class FormularioRegistroVenta : System.Web.UI.Page
     {
         public List<Registro> ListaRegistro { get; set; }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuariologueado"] == null)
@@ -22,24 +21,32 @@ namespace tp_comercio_Vargas_Delgado
             }
             else
             {
-                if (!IsPostBack)
+
+                if (Session["ListaVenta"] == null)
                 {
-                    ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-                    List<Articulo> listaArticulo = articuloNegocio.listar();
+                    List<Registro> ListaVenta = new List<Registro>();
+                    Session.Add("ListaVenta", ListaVenta);
 
-                    ddlArticulo.DataSource = listaArticulo;
-                    ddlArticulo.DataValueField = "Id";
-                    ddlArticulo.DataTextField = "Nombre";
-                    ddlArticulo.DataBind();
-
-                    ClienteNegocio clienteNegocio = new ClienteNegocio();
-                    List<Cliente> listaCliente = clienteNegocio.listar();
-
-                    ddlCliente.DataSource = listaCliente;
-                    ddlCliente.DataValueField = "Id";
-                    ddlCliente.DataTextField = "Nombre";
-                    ddlCliente.DataBind();
                 }
+
+                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+                List<Articulo> listaArticulo = articuloNegocio.listar();
+
+                ddlArticulo.DataSource = listaArticulo;
+                ddlArticulo.DataValueField = "Id";
+                ddlArticulo.DataTextField = "Nombre";
+                ddlArticulo.DataBind();
+
+                ClienteNegocio clienteNegocio = new ClienteNegocio();
+                List<Cliente> listaCliente = clienteNegocio.listar();
+
+                ddlCliente.DataSource = listaCliente;
+                ddlCliente.DataValueField = "Id";
+                ddlCliente.DataTextField = "Nombre";
+                ddlCliente.DataBind();
+
+                dgvRegistro.DataSource = Session["ListaVenta"];
+                dgvRegistro.DataBind();
 
                 if (Session["RegistroSeleccionado"] != null && !IsPostBack)
                 {
@@ -63,11 +70,9 @@ namespace tp_comercio_Vargas_Delgado
             }
         }
 
-        protected void btnAceptar_Click(object sender, EventArgs e)
+        protected void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
-
-            List<Registro> ListaRegistro = new List<Registro>();
 
             Registro registro = new Registro();
             registro.Id = IdRegistro;
@@ -79,19 +84,36 @@ namespace tp_comercio_Vargas_Delgado
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
-            ListaRegistro.Add(registro);
-            ListaRegistro.Add(registro);
+            List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
+            Lista.Add(registro);
+        }
+            protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
 
+            Registro registro = new Registro();
+            registro.Id = IdRegistro;
+            int venta = 0;
+            registro.Tipo = venta;
+            registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
+            registro.Cantidad = int.Parse(txtCantidad.Text);
+            registro.Monto = Convert.ToDecimal(txtMonto.Text);
+            registro.articulo = new Articulo();
+            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
+
+            List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
+            /*
             RegistroNegocio registroNegocio = new RegistroNegocio();
             if (IdRegistro == 0)
             {
-                registroNegocio.agregar(ListaRegistro);
+                registroNegocio.agregar(Lista);
             }
             else
             {
                 registroNegocio.modificar(registro);
                 Session.Remove("RegistroSeleccionado");
             }
+            */
             /* comentado temporal
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             Articulo articulo = new Articulo();
@@ -110,7 +132,7 @@ namespace tp_comercio_Vargas_Delgado
             articulo.Stock = articulos[0].Stock - registro.Cantidad;
             articuloNegocio.modificarPorCompra(articulo);
             */
-            Response.Redirect("WebVerRegistroVenta.aspx", false);
+            //Response.Redirect("WebVerRegistroVenta.aspx", false);
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -130,5 +152,14 @@ namespace tp_comercio_Vargas_Delgado
 
             }
         }
+
+        protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int IdRegistro = Convert.ToInt32(dgvRegistro.SelectedDataKey.Value.ToString());
+            RegistroNegocio negocio = new RegistroNegocio();
+            negocio.eliminar(IdRegistro);
+            Response.Redirect("WebVerRegistroVenta.aspx");
+        }
+
     }
 }
