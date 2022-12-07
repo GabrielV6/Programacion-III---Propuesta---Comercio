@@ -87,6 +87,13 @@ namespace tp_comercio_Vargas_Delgado
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
+            registro.cliente = new Cliente();
+            registro.cliente.Nombre = ddlCliente.SelectedItem.Text;
+
+            registro.articulo = new Articulo();
+            registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
+            
+
             List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
             Lista.Add(registro);
 
