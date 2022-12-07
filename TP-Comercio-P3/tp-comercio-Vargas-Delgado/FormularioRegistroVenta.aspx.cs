@@ -14,6 +14,7 @@ namespace tp_comercio_Vargas_Delgado
         public List<Registro> ListaRegistro { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Session["usuariologueado"] == null)
             {
                 Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
@@ -22,35 +23,38 @@ namespace tp_comercio_Vargas_Delgado
             else
             {
 
-                if (Session["ListaVenta"] == null)
+                if (!IsPostBack)
                 {
-                    List<Registro> ListaVenta = new List<Registro>();
-                    Session.Add("ListaVenta", ListaVenta);
 
+                    if (Session["ListaVenta"] == null)
+                    {
+                        List<Registro> ListaVenta = new List<Registro>();
+                        Session.Add("ListaVenta", ListaVenta);
+
+                    }
+
+                    ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+                    List<Articulo> listaArticulo = articuloNegocio.listar();
+
+                    ddlArticulo.DataSource = listaArticulo;
+
+
+                    ddlArticulo.DataValueField = "Id";
+                    ddlArticulo.DataTextField = "Nombre";
+
+                    ddlArticulo.DataBind();
+
+                    ClienteNegocio clienteNegocio = new ClienteNegocio();
+                    List<Cliente> listaCliente = clienteNegocio.listar();
+
+                    ddlCliente.DataSource = listaCliente;
+                    ddlCliente.DataValueField = "Id";
+                    ddlCliente.DataTextField = "Nombre";
+                    ddlCliente.DataBind();
+
+                    dgvRegistro.DataSource = Session["ListaVenta"];
+                    dgvRegistro.DataBind();
                 }
-
-                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-                List<Articulo> listaArticulo = articuloNegocio.listar();
-
-                ddlArticulo.DataSource = listaArticulo;
-                
-                   
-                ddlArticulo.DataValueField = "Id";
-                ddlArticulo.DataTextField = "Nombre";
-                
-                ddlArticulo.DataBind();
-
-                ClienteNegocio clienteNegocio = new ClienteNegocio();
-                List<Cliente> listaCliente = clienteNegocio.listar();
-
-                ddlCliente.DataSource = listaCliente;
-                ddlCliente.DataValueField = "Id";
-                ddlCliente.DataTextField = "Nombre";
-                ddlCliente.DataBind();
-
-                dgvRegistro.DataSource = Session["ListaVenta"];
-                dgvRegistro.DataBind();
-
                 if (Session["RegistroSeleccionado"] != null && !IsPostBack)
                 {
                     Registro registro = (Registro)Session["RegistroSeleccionado"];
@@ -92,7 +96,7 @@ namespace tp_comercio_Vargas_Delgado
 
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
-            
+
 
             List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
             Lista.Add(registro);
@@ -104,7 +108,7 @@ namespace tp_comercio_Vargas_Delgado
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
-            {
+        {
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
 
             Registro registro = new Registro();

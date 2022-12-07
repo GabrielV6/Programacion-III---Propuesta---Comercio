@@ -46,7 +46,7 @@
         </div>
 
         <div class="mb-3">
-            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarArticulo_Click" />
+            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarArticulo_Click"/>
         </div>
 
         <div class="row justify-content-md-center">
