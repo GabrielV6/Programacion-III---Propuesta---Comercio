@@ -63,15 +63,15 @@ namespace tp_comercio_Vargas_Delgado
                     {
                         ddlCliente.SelectedValue = registro.Destinatario.ToString();
                         txtCantidad.Text = registro.Cantidad.ToString();
-                        txtMonto.Text = registro.Monto.ToString();
+                        //txtMonto.Text = registro.Monto.ToString();
                         ddlArticulo.SelectedValue = registro.articulo.Id.ToString();
                     }
                     else
                     {
                         txtCantidad.Text = registro.Cantidad.ToString();
                         txtCantidad.ReadOnly = true;
-                        txtMonto.Text = registro.Monto.ToString();
-                        txtMonto.ReadOnly = true;
+                        //txtMonto.Text = registro.Monto.ToString();
+                        //txtMonto.ReadOnly = true;
                     }
                 }
             }
@@ -80,14 +80,25 @@ namespace tp_comercio_Vargas_Delgado
         protected void btnAgregarArticulo_Click(object sender, EventArgs e)
         {
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
+            float PrecioTotal = 0;
 
+            
             Registro registro = new Registro();
             registro.Id = IdRegistro;
             int venta = 0;
             registro.Tipo = venta;
             registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
             registro.Cantidad = int.Parse(txtCantidad.Text);
-            registro.Monto = Convert.ToDecimal(txtMonto.Text);
+
+            int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];  
+
+
+
+            PrecioTotal = (float)+(selecionado.Precio * int.Parse(txtCantidad.Text));
+
+            registro.Monto = (decimal?)PrecioTotal;
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
@@ -117,7 +128,7 @@ namespace tp_comercio_Vargas_Delgado
             registro.Tipo = venta;
             registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
             registro.Cantidad = int.Parse(txtCantidad.Text);
-            registro.Monto = Convert.ToDecimal(txtMonto.Text);
+            //registro.Monto = Convert.ToDecimal(txtMonto.Text);
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 

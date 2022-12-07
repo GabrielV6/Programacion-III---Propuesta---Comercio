@@ -28,7 +28,7 @@
                 Text="Por favor, ingrese una cantidad valido"
                 runat="server" />
 
-            <label for="txtMonto" class="form-label">Monto</label>
+            <%--<label for="txtMonto" class="form-label">Monto</label>
             <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control" required=""></asp:TextBox>
             <asp:RangeValidator ID="Range2"
                 ControlToValidate="txtMonto"
@@ -37,7 +37,7 @@
                 Type="Integer"
                 EnableClientScript="false"
                 Text="Por favor, ingrese un monto valido"
-                runat="server" />
+                runat="server" />--%>
 
         </div>
 

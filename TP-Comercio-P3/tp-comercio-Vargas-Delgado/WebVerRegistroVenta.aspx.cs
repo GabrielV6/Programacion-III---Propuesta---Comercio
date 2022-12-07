@@ -33,6 +33,8 @@ namespace tp_comercio_Vargas_Delgado
                 Session.Add("Error de acceso", "Debe iniciar sesión para acceder a esta página");
                 Response.Redirect("Logon.aspx");
             }
+
+            Session.Remove("ListaVenta");
         }
         protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
         {
