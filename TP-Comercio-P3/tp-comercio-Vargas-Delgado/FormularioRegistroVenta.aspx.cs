@@ -33,8 +33,11 @@ namespace tp_comercio_Vargas_Delgado
                 List<Articulo> listaArticulo = articuloNegocio.listar();
 
                 ddlArticulo.DataSource = listaArticulo;
+                
+                   
                 ddlArticulo.DataValueField = "Id";
                 ddlArticulo.DataTextField = "Nombre";
+                
                 ddlArticulo.DataBind();
 
                 ClienteNegocio clienteNegocio = new ClienteNegocio();
@@ -86,9 +89,15 @@ namespace tp_comercio_Vargas_Delgado
 
             List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
             Lista.Add(registro);
+
+            //llamar al page load
+            Response.Redirect("FormularioRegistroVenta.aspx");
+
+
         }
-            protected void btnAceptar_Click(object sender, EventArgs e)
-        {
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+            {
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
 
             Registro registro = new Registro();
