@@ -43,8 +43,9 @@
         <div class="mb-3">
             <h7>El codigo se agregara de manera automatica</h7>
         </div>
+        <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAceptar_Click" />
 
-        <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
+        <asp:Button ID="btnAceptar" runat="server" Text="Finalizar compra" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
         <%
             if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
             {

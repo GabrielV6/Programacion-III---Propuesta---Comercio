@@ -75,7 +75,6 @@
     <Content Include="FormularioCliente.aspx" />
     <Content Include="FormularioMarca.aspx" />
     <Content Include="FormularioProveedores.aspx" />
-    <Content Include="FormularioRegistro.aspx" />
     <Content Include="FormularioRegistroCompra.aspx" />
     <Content Include="FormularioRegistroVenta.aspx" />
     <Content Include="Global.asax" />
@@ -86,7 +85,6 @@
     <Content Include="WebVerCliente.aspx" />
     <Content Include="WebVerArticulo.aspx" />
     <Content Include="WebVerMarca.aspx" />
-    <Content Include="WebVerRegistro.aspx" />
     <Content Include="WebVerRegistroCompra.aspx" />
     <Content Include="WebVerRegistroVenta.aspx" />
   </ItemGroup>
@@ -139,13 +137,6 @@
     </Compile>
     <Compile Include="FormularioProveedores.aspx.designer.cs">
       <DependentUpon>FormularioProveedores.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="FormularioRegistro.aspx.cs">
-      <DependentUpon>FormularioRegistro.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="FormularioRegistro.aspx.designer.cs">
-      <DependentUpon>FormularioRegistro.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioRegistroCompra.aspx.cs">
       <DependentUpon>FormularioRegistroCompra.aspx</DependentUpon>
@@ -213,13 +204,6 @@
     </Compile>
     <Compile Include="WebVerMarca.aspx.designer.cs">
       <DependentUpon>WebVerMarca.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebVerRegistro.aspx.cs">
-      <DependentUpon>WebVerRegistro.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebVerRegistro.aspx.designer.cs">
-      <DependentUpon>WebVerRegistro.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebVerRegistroCompra.aspx.cs">
       <DependentUpon>WebVerRegistroCompra.aspx</DependentUpon>

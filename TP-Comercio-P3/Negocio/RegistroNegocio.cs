@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 using Dominio;
@@ -144,12 +145,12 @@ namespace Negocio
                 datos.cerrarConexion();
             }
         }
-        public void agregar(Registro registro)
+        public void agregar(List<Registro> Lista)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                //TODO : SE DEBE VERIFICAR QUE ESTE OK...
+                /* TODO : SE DEBE VERIFICAR QUE ESTE OK...
                 datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idarticulo)" );
                 datos.setearParametro("@tipo", registro.Tipo);
                 datos.setearParametro("@destinatario", registro.Destinatario);
@@ -157,6 +158,20 @@ namespace Negocio
                 datos.setearParametro("@monto", registro.Monto);
                 datos.setearParametro("@idArticulo", registro.articulo.Id);
                 datos.ejecutarAccion();
+                */
+                string sql = "";
+                foreach (Registro registro in Lista)
+                {
+                    sql = "insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idArticulo)";
+                    sql = sql.Replace("@tipo", registro.Tipo.ToString());
+                    sql = sql.Replace("@destinatario", registro.Destinatario.ToString());
+                    sql = sql.Replace("@cantidad", registro.Cantidad.ToString());
+                    sql = sql.Replace("@monto", registro.Monto.ToString());
+                    sql = sql.Replace("@idArticulo", registro.articulo.Id.ToString());
+                    datos.setearConsulta(sql);
+                    datos.ejecutarAccion();
+                }
+
             }
             catch (Exception ex)
             {

@@ -11,6 +11,8 @@ namespace tp_comercio_Vargas_Delgado
 {
     public partial class FormularioRegistroVenta : System.Web.UI.Page
     {
+        public List<Registro> ListaRegistro { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuariologueado"] == null)
@@ -65,6 +67,8 @@ namespace tp_comercio_Vargas_Delgado
         {
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
 
+            List<Registro> ListaRegistro = new List<Registro>();
+
             Registro registro = new Registro();
             registro.Id = IdRegistro;
             int venta = 0;
@@ -75,17 +79,20 @@ namespace tp_comercio_Vargas_Delgado
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
+            ListaRegistro.Add(registro);
+            ListaRegistro.Add(registro);
+
             RegistroNegocio registroNegocio = new RegistroNegocio();
             if (IdRegistro == 0)
             {
-                registroNegocio.agregar(registro);
+                registroNegocio.agregar(ListaRegistro);
             }
             else
             {
                 registroNegocio.modificar(registro);
                 Session.Remove("RegistroSeleccionado");
             }
-
+            /* comentado temporal
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             Articulo articulo = new Articulo();
             // busca el stock del producto
@@ -102,7 +109,7 @@ namespace tp_comercio_Vargas_Delgado
 
             articulo.Stock = articulos[0].Stock - registro.Cantidad;
             articuloNegocio.modificarPorCompra(articulo);
-
+            */
             Response.Redirect("WebVerRegistroVenta.aspx", false);
         }
 

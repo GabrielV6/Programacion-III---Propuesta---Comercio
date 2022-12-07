@@ -69,6 +69,15 @@ namespace tp_comercio_Vargas_Delgado
         protected global::System.Web.UI.WebControls.RangeValidator Range2;
 
         /// <summary>
+        /// btnAgregarArticulo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAgregarArticulo;
+
+        /// <summary>
         /// btnAceptar control.
         /// </summary>
         /// <remarks>

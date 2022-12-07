@@ -61,8 +61,9 @@ namespace Negocio
             comando.Connection = conexion;
             try
             {
-                conexion.Open();
-                comando.ExecuteNonQuery();
+                if (conexion.State != ConnectionState.Open) 
+                    conexion.Open();
+                    comando.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

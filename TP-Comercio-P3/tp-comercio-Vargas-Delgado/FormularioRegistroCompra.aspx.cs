@@ -82,7 +82,7 @@ namespace tp_comercio_Vargas_Delgado
             RegistroNegocio registroNegocio = new RegistroNegocio();
             if (IdRegistro == 0)
             {
-                registroNegocio.agregar(registro);
+                //registroNegocio.agregar(registro);
             }
             else
             {
