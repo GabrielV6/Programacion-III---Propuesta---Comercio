@@ -38,7 +38,6 @@ namespace tp_comercio_Vargas_Delgado
 
                     ddlArticulo.DataSource = listaArticulo;
 
-
                     ddlArticulo.DataValueField = "Id";
                     ddlArticulo.DataTextField = "Nombre";
 
@@ -122,7 +121,7 @@ namespace tp_comercio_Vargas_Delgado
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
-
+            /*
             Registro registro = new Registro();
             registro.Id = IdRegistro;
             int venta = 0;
@@ -132,8 +131,22 @@ namespace tp_comercio_Vargas_Delgado
             //registro.Monto = Convert.ToDecimal(txtMonto.Text);
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
-
+            */
             List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
+
+            foreach (Registro registro in Lista)
+            {
+                registro.Id = 0;
+            }
+
+            RegistroNegocio registroNegocio = new RegistroNegocio();
+
+            registroNegocio.agregar(Lista);
+
+            Session.Remove("ListaVenta");
+            Response.Redirect("WebVerRegistroVenta.aspx");
+
+
             /*
             RegistroNegocio registroNegocio = new RegistroNegocio();
             if (IdRegistro == 0)
@@ -181,7 +194,6 @@ namespace tp_comercio_Vargas_Delgado
             else
             {
                 lblMensaje.Text = "Debe seleccionar un registro para eliminarlo";
-
             }
         }
 
@@ -198,6 +210,7 @@ namespace tp_comercio_Vargas_Delgado
                     ListaAux.Add(registro);
                 }
             }
+
             Session.Remove("ListaVenta");
             Session.Add("ListaVenta", ListaAux);
             Response.Redirect("FormularioRegistroVenta.aspx");

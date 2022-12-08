@@ -60,7 +60,6 @@
                     <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>
-
         </div>
 
         <div class="mb-3">
