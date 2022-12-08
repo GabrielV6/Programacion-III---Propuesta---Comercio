@@ -108,7 +108,13 @@ namespace tp_comercio_Vargas_Delgado
             int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
             ArticuloNegocio negocio = new ArticuloNegocio();
             Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
-       
+
+            if (selecionado.Stock < registro.Cantidad)
+            {
+                Response.Write("<script>alert('El articulo no posee esa cantidad de items')</script>");
+                return;
+            }
+
             registro.Monto = selecionado.Precio;
 
             PrecioTotalPorArticulo = (float)+(selecionado.Precio * int.Parse(txtCantidad.Text));
