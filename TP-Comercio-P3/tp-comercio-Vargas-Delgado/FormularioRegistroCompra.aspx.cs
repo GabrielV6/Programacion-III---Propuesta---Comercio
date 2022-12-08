@@ -108,7 +108,7 @@ namespace tp_comercio_Vargas_Delgado
 
             registro.proveedor = new Proveedor();
             registro.proveedor.RazonSocial = ddlProveedor.SelectedItem.Text;
-            registro.proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+            registro.Destinatario = int.Parse(ddlProveedor.SelectedValue);
 
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
@@ -126,37 +126,21 @@ namespace tp_comercio_Vargas_Delgado
 
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            Page.Validate();
-            if (!Page.IsValid)
-                return;
-
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
 
-            List<Registro> ListaRegistro = new List<Registro>();
+            List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
 
-            Registro registro = new Registro();
-            registro.Id = IdRegistro;
-            int compra = 1;
-            registro.Tipo = compra;
-            registro.Destinatario = int.Parse(ddlProveedor.SelectedValue);
-            registro.Cantidad = int.Parse(txtCantidad.Text);
-            registro.Monto = Convert.ToDecimal(txtMonto.Text);
-            registro.articulo = new Articulo();
-            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
-
-            ListaRegistro.Add(registro);
-            ListaRegistro.Add(registro);
+            //foreach (Registro registro in Lista)
+            //{
+            //    registro.Id = 0;
+            //}
 
             RegistroNegocio registroNegocio = new RegistroNegocio();
-            if (IdRegistro == 0)
-            {
-                registroNegocio.agregar(ListaRegistro);
-            }
-            else
-            {
-                registroNegocio.modificar(registro);
-                Session.Remove("RegistroSeleccionado");
-            }
+
+            registroNegocio.agregar(Lista);
+
+            Session.Remove("ListaCompra");
+            Response.Redirect("WebVerRegistroCompra.aspx");
             /*
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             Articulo articulo = new Articulo();
