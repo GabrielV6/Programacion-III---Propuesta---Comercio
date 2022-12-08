@@ -61,7 +61,7 @@
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Precio por unidad" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
-                    <asp:BoundField HeaderText="Total Abonado $ARG" DataField="MontoTotal" />
+                    <asp:BoundField HeaderText="Total x Articulo $ARG" DataField="MontoTotal" />
                      <asp:CommandField ShowSelectButton="true" SelectText="❌" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>

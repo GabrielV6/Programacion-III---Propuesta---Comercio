@@ -96,7 +96,7 @@ namespace tp_comercio_Vargas_Delgado
 
             registro.Id = Session["ListaCompra"] != null ? ((List<Registro>)Session["ListaCompra"]).Count + 1 : 1;
          
-            
+            // TODO: Si necesitamos algun otro dato debemos agregarlo al registro (bien sea de proveedor o de articulo)
 
             registro.Tipo = compra;
             registro.Cantidad = int.Parse(txtCantidad.Text);
@@ -105,15 +105,14 @@ namespace tp_comercio_Vargas_Delgado
             registro.MontoTotal = registro.Cantidad * registro.Monto;
 
             int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
-            
-            registro.articulo = new Articulo();
-            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
             registro.proveedor = new Proveedor();
             registro.proveedor.RazonSocial = ddlProveedor.SelectedItem.Text;
+            registro.proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
 
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
+            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
 
             List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
