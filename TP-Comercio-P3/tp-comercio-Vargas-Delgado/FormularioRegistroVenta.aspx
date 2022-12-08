@@ -63,6 +63,10 @@
         </div>
 
         <div class="mb-3">
+            <asp:Label Text="" ID="TotalFactura" runat="server" />
+        </div>
+
+        <div class="mb-3">
 
             <asp:Button ID="btnAceptar" runat="server" Text="Finalizar venta" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
             <%

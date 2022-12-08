@@ -30,7 +30,7 @@ namespace tp_comercio_Vargas_Delgado
                     {
                         List<Registro> ListaVenta = new List<Registro>();
                         Session.Add("ListaVenta", ListaVenta);
-
+                        TotalFactura.Text = "Monto total por venta: 0"; 
                     }
 
                     ArticuloNegocio articuloNegocio = new ArticuloNegocio();
@@ -53,6 +53,18 @@ namespace tp_comercio_Vargas_Delgado
                     
                     dgvRegistro.DataSource = Session["ListaVenta"];
                     dgvRegistro.DataBind();
+
+                    List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
+
+                    Nullable<decimal> totalVenta =0;
+
+                    foreach (Registro registro in Lista)
+                    {
+                        totalVenta += registro.MontoTotal;
+                    }
+
+                    TotalFactura.Text = "Monto total por venta: " + totalVenta.ToString();
+
                 }
                 if (Session["RegistroSeleccionado"] != null && !IsPostBack)
                 {
@@ -83,7 +95,7 @@ namespace tp_comercio_Vargas_Delgado
             //int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
             //registro.Id = IdRegistro;
             
-            float PrecioTotal = 0;
+            float PrecioTotalPorArticulo = 0;
          
             Registro registro = new Registro();
             
@@ -99,8 +111,8 @@ namespace tp_comercio_Vargas_Delgado
        
             registro.Monto = selecionado.Precio;
 
-            PrecioTotal = (float)+(selecionado.Precio * int.Parse(txtCantidad.Text));
-            registro.MontoTotal = (decimal?)PrecioTotal;
+            PrecioTotalPorArticulo = (float)+(selecionado.Precio * int.Parse(txtCantidad.Text));
+            registro.MontoTotal = (decimal?)PrecioTotalPorArticulo;
             
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
@@ -121,17 +133,7 @@ namespace tp_comercio_Vargas_Delgado
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
-            /*
-            Registro registro = new Registro();
-            registro.Id = IdRegistro;
-            int venta = 0;
-            registro.Tipo = venta;
-            registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
-            registro.Cantidad = int.Parse(txtCantidad.Text);
-            //registro.Monto = Convert.ToDecimal(txtMonto.Text);
-            registro.articulo = new Articulo();
-            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
-            */
+
             List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
 
             foreach (Registro registro in Lista)
@@ -146,19 +148,6 @@ namespace tp_comercio_Vargas_Delgado
             Session.Remove("ListaVenta");
             Response.Redirect("WebVerRegistroVenta.aspx");
 
-
-            /*
-            RegistroNegocio registroNegocio = new RegistroNegocio();
-            if (IdRegistro == 0)
-            {
-                registroNegocio.agregar(Lista);
-            }
-            else
-            {
-                registroNegocio.modificar(registro);
-                Session.Remove("RegistroSeleccionado");
-            }
-            */
             /* comentado temporal
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             Articulo articulo = new Articulo();
