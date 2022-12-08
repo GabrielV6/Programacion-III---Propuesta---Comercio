@@ -85,8 +85,7 @@ namespace tp_comercio_Vargas_Delgado
             //registro.Id = IdRegistro;
             
             float PrecioTotal = 0;
-
-           
+         
             Registro registro = new Registro();
             
             int venta = 0;
@@ -113,14 +112,11 @@ namespace tp_comercio_Vargas_Delgado
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
 
-
             List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
             Lista.Add(registro);
 
             //llamar al page load
             Response.Redirect("FormularioRegistroVenta.aspx");
-
-
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -192,10 +188,22 @@ namespace tp_comercio_Vargas_Delgado
         protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
         {
             int IdRegistro = Convert.ToInt32(dgvRegistro.SelectedDataKey.Value.ToString());
-            RegistroNegocio negocio = new RegistroNegocio();
-            negocio.eliminar(IdRegistro);
-            Response.Redirect("WebVerRegistroVenta.aspx");
-        }
+            List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
+            List<Registro> ListaAux = new List<Registro>();
 
+            foreach (Registro registro in Lista)
+            {
+                if (registro.Id != IdRegistro) 
+                { 
+                    ListaAux.Add(registro);
+                }
+            }
+            Session.Remove("ListaVenta");
+            Session.Add("ListaVenta", ListaAux);
+            Response.Redirect("FormularioRegistroVenta.aspx");
+            // RegistroNegocio negocio = new RegistroNegocio();
+            // negocio.eliminar(IdRegistro);
+            // Response.Redirect("WebVerRegistroVenta.aspx");
+        }
     }
 }

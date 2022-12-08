@@ -38,15 +38,14 @@
                 EnableClientScript="false"
                 Text="Por favor, ingrese un monto valido"
                 runat="server" />--%>
-
         </div>
 
         <div class="mb-3">
-            <h7>El codigo se agregara de manera automatica</h7>
+            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarArticulo_Click" />
         </div>
 
         <div class="mb-3">
-            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarArticulo_Click"/>
+            <h7>Presione 'Agregar articulo' para agregar un articulo a la lista</h7>
         </div>
 
         <div class="row justify-content-md-center">
@@ -57,20 +56,20 @@
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Precio x Unidad $ARG" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
-                    <asp:BoundField HeaderText="Total A Pagar $ARG" DataField="MontoTotal" />
+                    <asp:BoundField HeaderText="Total x Articulo $ARG" DataField="MontoTotal" />
+                    <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>
-            
+
         </div>
 
         <div class="mb-3">
-  
+
             <asp:Button ID="btnAceptar" runat="server" Text="Finalizar venta" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
             <%
                 if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)
                 {
             %>
-            <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" CssClass="btn btn-warning" BackColor="Red" OnClick="btnEliminar_Click" />
             <%
                 }
             %>
