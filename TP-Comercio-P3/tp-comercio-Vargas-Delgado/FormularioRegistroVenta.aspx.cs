@@ -51,7 +51,7 @@ namespace tp_comercio_Vargas_Delgado
                     ddlCliente.DataValueField = "Id";
                     ddlCliente.DataTextField = "Nombre";
                     ddlCliente.DataBind();
-
+                    
                     dgvRegistro.DataSource = Session["ListaVenta"];
                     dgvRegistro.DataBind();
                 }
@@ -78,27 +78,32 @@ namespace tp_comercio_Vargas_Delgado
         }
 
         protected void btnAgregarArticulo_Click(object sender, EventArgs e)
-        {
-            int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
+        {       
+            // TODO: LOGICA DESACTIVA POR EL MOMENTO (ES PARA GUARDAR Y EDITAR ... PERO QUIZAS NO HABILITEMOS LA LOGICA PARA EDITAR.
+
+            //int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
+            //registro.Id = IdRegistro;
+            
             float PrecioTotal = 0;
 
-            
+           
             Registro registro = new Registro();
-            registro.Id = IdRegistro;
+            
             int venta = 0;
+            registro.Id = Session["ListaVenta"] != null ? ((List<Registro>)Session["ListaVenta"]).Count + 1 : 1;
             registro.Tipo = venta;
             registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
             registro.Cantidad = int.Parse(txtCantidad.Text);
 
             int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
             ArticuloNegocio negocio = new ArticuloNegocio();
-            Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];  
-
-
+            Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
+       
+            registro.Monto = selecionado.Precio;
 
             PrecioTotal = (float)+(selecionado.Precio * int.Parse(txtCantidad.Text));
-
-            registro.Monto = (decimal?)PrecioTotal;
+            registro.MontoTotal = (decimal?)PrecioTotal;
+            
             registro.articulo = new Articulo();
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 

@@ -52,16 +52,19 @@
         <div class="row justify-content-md-center">
             <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-grey table-bordered" AutoGenerateColumns="false">
                 <Columns>
-                    <asp:BoundField HeaderText="ID Registro" DataField="Id" />
+                    <asp:BoundField HeaderText="Item" DataField="Id" />
                     <asp:BoundField HeaderText="Cliente" DataField="cliente.Nombre" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
-                    <asp:BoundField HeaderText="Precio por unidad" DataField="Monto" />
+                    <asp:BoundField HeaderText="Precio x Unidad $ARG" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
+                    <asp:BoundField HeaderText="Total A Pagar $ARG" DataField="MontoTotal" />
                 </Columns>
             </asp:GridView>
+            
         </div>
 
         <div class="mb-3">
+  
             <asp:Button ID="btnAceptar" runat="server" Text="Finalizar venta" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
             <%
                 if (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) == Dominio.RolUsuario.Administrador)

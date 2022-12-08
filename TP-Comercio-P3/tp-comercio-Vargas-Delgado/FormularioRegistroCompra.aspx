@@ -28,7 +28,7 @@
                 Text="Por favor, ingrese una cantidad valido"
                 runat="server" />
 
-            <label for="txtMonto" class="form-label">Monto</label>
+            <label for="txtMonto" class="form-label">Monto x Unidad</label>
             <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control" required=""></asp:TextBox>
             <asp:RangeValidator ID="Range2"
                 ControlToValidate="txtMonto"
@@ -43,7 +43,27 @@
         <div class="mb-3">
             <h7>El codigo se agregara de manera automatica</h7>
         </div>
-        <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAceptar_Click" />
+
+
+        <div class="mb-3">
+            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarCompra_Click" />
+        </div>
+
+        
+        <div class="row justify-content-md-center">
+            <asp:GridView ID="dgvRegistroCompra" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-grey table-bordered" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:BoundField HeaderText="Item" DataField="Id" />
+                    <asp:BoundField HeaderText="Proveedor" DataField="proveedor.RazonSocial" />
+                    <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
+                    <asp:BoundField HeaderText="Precio por unidad" DataField="Monto" />
+                    <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
+                    <asp:BoundField HeaderText="Total Abonado $ARG" DataField="MontoTotal" />
+                </Columns>
+            </asp:GridView>
+        </div>
+     
+    <div class="mb-3">
 
         <asp:Button ID="btnAceptar" runat="server" Text="Finalizar compra" CssClass="btn btn-warning" OnClick="btnAceptar_Click" />
         <%

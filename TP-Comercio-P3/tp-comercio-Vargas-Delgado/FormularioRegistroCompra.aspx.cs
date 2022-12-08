@@ -12,7 +12,7 @@ namespace tp_comercio_Vargas_Delgado
     public partial class FormularioRegistroCompra : System.Web.UI.Page
     {
         public List<Registro> ListaRegistro { get; set; }
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Session["usuariologueado"] == null)
@@ -24,6 +24,14 @@ namespace tp_comercio_Vargas_Delgado
             {
                 if (!IsPostBack)
                 {
+
+                    if (Session["ListaCompra"] == null)
+                    {
+                        List<Registro> ListaCompra = new List<Registro>();
+                        Session.Add("ListaCompra", ListaCompra);
+
+                    }
+                    
                     ArticuloNegocio articuloNegocio = new ArticuloNegocio();
                     List<Articulo> listaArticulo = articuloNegocio.listar();
 
@@ -39,6 +47,9 @@ namespace tp_comercio_Vargas_Delgado
                     ddlProveedor.DataValueField = "Id";
                     ddlProveedor.DataTextField = "RazonSocial";
                     ddlProveedor.DataBind();
+
+                    dgvRegistroCompra.DataSource = Session["ListaCompra"];
+                    dgvRegistroCompra.DataBind();
                 }
 
                 if (Session["RegistroSeleccionado"] != null && !IsPostBack)
@@ -61,6 +72,45 @@ namespace tp_comercio_Vargas_Delgado
                     }
                 }
             }
+        }
+        
+        protected void btnAgregarCompra_Click(object sender, EventArgs e)
+        {
+
+            Registro registro = new Registro();
+
+            int compra = 1;
+            // el registro.Id sera igual al valor que tiene la sesscion en ID  +1 
+
+            registro.Id = Session["ListaCompra"] != null ? ((List<Registro>)Session["ListaCompra"]).Count + 1 : 1;
+         
+            
+
+            registro.Tipo = compra;
+            registro.Cantidad = int.Parse(txtCantidad.Text);
+
+            registro.Monto = Convert.ToDecimal(txtMonto.Text);
+            registro.MontoTotal = registro.Cantidad * registro.Monto;
+
+            int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
+            
+            registro.articulo = new Articulo();
+            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
+
+            registro.proveedor = new Proveedor();
+            registro.proveedor.RazonSocial = ddlProveedor.SelectedItem.Text;
+
+            registro.articulo = new Articulo();
+            registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
+
+
+            List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
+            Lista.Add(registro);
+
+            //llamar al page load
+            Response.Redirect("FormularioRegistroCompra.aspx");
+
+
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -130,6 +180,14 @@ namespace tp_comercio_Vargas_Delgado
             {
                 lblMensaje.Text = "Debe seleccionar un registro para eliminarlo";
             }
+        }
+
+        protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int IdRegistro = Convert.ToInt32(dgvRegistroCompra.SelectedDataKey.Value.ToString());
+            RegistroNegocio negocio = new RegistroNegocio();
+            //negocio.eliminar(IdRegistro);
+            Response.Redirect("WebVerRegistroCompra.aspx");
         }
     }
 }

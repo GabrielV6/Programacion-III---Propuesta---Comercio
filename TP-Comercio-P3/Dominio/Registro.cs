@@ -14,6 +14,7 @@ namespace Dominio
         public int Destinatario { get; set; }
         public int Cantidad { get; set; }
         public Nullable<decimal> Monto { get; set; }
+        public Nullable<decimal> MontoTotal { get; set; }
         public int Estado { get; set; }
 
         [DisplayName("Articulo")]
