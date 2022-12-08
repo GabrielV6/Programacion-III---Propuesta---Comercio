@@ -44,6 +44,10 @@
 
             <div class="col">
                 <div class="mb-3">
+                    <label for="ddlProveedor" class="form-label">Proveedor</label>
+                    <asp:DropDownList ID="ddlProveedor" CssClass="form-select" runat="server"></asp:DropDownList>
+                </div>
+                <div class="mb-3">
                     <label for="txtDescripcion" class="form-label">Descripcion</label>
                     <asp:TextBox runat="server" TextMode="MultiLine" ID="txtDescripcion" CssClass="form-control" required="" />
                 </div>

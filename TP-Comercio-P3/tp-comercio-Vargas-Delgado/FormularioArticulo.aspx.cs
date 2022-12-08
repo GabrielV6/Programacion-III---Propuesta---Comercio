@@ -38,6 +38,14 @@ namespace tp_comercio_Vargas_Delgado
                     ddlCategoria.DataValueField = "Id";
                     ddlCategoria.DataTextField = "Descripcion";
                     ddlCategoria.DataBind();
+
+                    ProveedorNegocio proveedorNegocio = new ProveedorNegocio();
+                    List<Proveedor> listaProveedor = proveedorNegocio.listar();
+
+                    ddlProveedor.DataSource = listaProveedor;
+                    ddlProveedor.DataValueField = "Id";
+                    ddlProveedor.DataTextField = "RazonSocial";
+                    ddlProveedor.DataBind();
                 }
                 if (Session["ArticuloSeleccionado"] != null && !IsPostBack)
                 {
@@ -80,6 +88,8 @@ namespace tp_comercio_Vargas_Delgado
                 articulo.marca.Id = int.Parse(ddlMarca.SelectedValue);
                 articulo.categoria = new Categoria();
                 articulo.categoria.Id = int.Parse(ddlCategoria.SelectedValue);
+                articulo.proveedor = new Proveedor();
+                articulo.proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
 
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
                 if (IdArticulo == 0)
