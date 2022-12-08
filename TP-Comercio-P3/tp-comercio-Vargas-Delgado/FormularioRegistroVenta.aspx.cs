@@ -30,7 +30,7 @@ namespace tp_comercio_Vargas_Delgado
                     {
                         List<Registro> ListaVenta = new List<Registro>();
                         Session.Add("ListaVenta", ListaVenta);
-                        TotalFactura.Text = "Monto total por venta: 0"; 
+                        TotalFactura.Text = "Monto total por venta: $0"; 
                     }
 
                     ArticuloNegocio articuloNegocio = new ArticuloNegocio();
@@ -63,7 +63,7 @@ namespace tp_comercio_Vargas_Delgado
                         totalVenta += registro.MontoTotal;
                     }
 
-                    TotalFactura.Text = "Monto total por venta: " + totalVenta.ToString();
+                    TotalFactura.Text = "Monto total por venta: $" + totalVenta.ToString();
 
                 }
                 if (Session["RegistroSeleccionado"] != null && !IsPostBack)

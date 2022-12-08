@@ -29,6 +29,7 @@ namespace tp_comercio_Vargas_Delgado
                     {
                         List<Registro> ListaCompra = new List<Registro>();
                         Session.Add("ListaCompra", ListaCompra);
+                        TotalCompra.Text = "Monto total por venta: $0";
 
                     }
                     
@@ -50,6 +51,17 @@ namespace tp_comercio_Vargas_Delgado
 
                     dgvRegistroCompra.DataSource = Session["ListaCompra"];
                     dgvRegistroCompra.DataBind();
+
+                    List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
+
+                    Nullable<decimal> totalCompra = 0;
+
+                    foreach (Registro registro in Lista)
+                    {
+                        totalCompra += registro.MontoTotal;
+                    }
+
+                    TotalCompra.Text = "Monto total por compra: $" + totalCompra.ToString();
                 }
 
                 if (Session["RegistroSeleccionado"] != null && !IsPostBack)
@@ -185,9 +197,25 @@ namespace tp_comercio_Vargas_Delgado
         protected void dgv_SelectedIndexChanged(object sender, EventArgs e)
         {
             int IdRegistro = Convert.ToInt32(dgvRegistroCompra.SelectedDataKey.Value.ToString());
-            RegistroNegocio negocio = new RegistroNegocio();
-            //negocio.eliminar(IdRegistro);
-            Response.Redirect("WebVerRegistroCompra.aspx");
+            List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
+            List<Registro> ListaAux = new List<Registro>();
+
+
+            foreach (Registro registro in Lista)
+            {
+                if (registro.Id != IdRegistro)
+                {
+                    ListaAux.Add(registro);
+                }
+            }
+
+            Session.Remove("ListaCompra");
+            Session.Add("ListaCompra", ListaAux);
+            Response.Redirect("FormularioRegistroCompra.aspx");
+            
+            //RegistroNegocio negocio = new RegistroNegocio();
+            ////negocio.eliminar(IdRegistro);
+            //Response.Redirect("WebVerRegistroCompra.aspx");
         }
     }
 }
