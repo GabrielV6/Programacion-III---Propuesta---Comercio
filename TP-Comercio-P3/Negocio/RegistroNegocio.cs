@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
@@ -150,26 +151,23 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                /* TODO : SE DEBE VERIFICAR QUE ESTE OK...
-                datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idarticulo)" );
-                datos.setearParametro("@tipo", registro.Tipo);
-                datos.setearParametro("@destinatario", registro.Destinatario);
-                datos.setearParametro("@cantidad", registro.Cantidad);
-                datos.setearParametro("@monto", registro.Monto);
-                datos.setearParametro("@idArticulo", registro.articulo.Id);
-                datos.ejecutarAccion();
-                */
-                string sql = "";
+
                 foreach (Registro registro in Lista)
                 {
-                    sql = "insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idArticulo)";
-                    sql = sql.Replace("@tipo", registro.Tipo.ToString());
-                    sql = sql.Replace("@destinatario", registro.Destinatario.ToString());
-                    sql = sql.Replace("@cantidad", registro.Cantidad.ToString());
-                    sql = sql.Replace("@monto", registro.Monto.ToString());
-                    sql = sql.Replace("@idArticulo", registro.articulo.Id.ToString());
-                    datos.setearConsulta(sql);
+                    string sql = "values ('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "','" + registro.Monto + "','" + registro.articulo.Id + "')";
+                    datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) " + sql);
+                    
                     datos.ejecutarAccion();
+
+                    //TODO: dejo comentada ya que me separa el monto con "," y la consulta lo toma como otra columna.
+                    
+                    //sql = "insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idArticulo)";
+                    //sql = sql.Replace("@tipo", registro.Tipo.ToString());
+                    //sql = sql.Replace("@destinatario", registro.Destinatario.ToString());
+                    //sql = sql.Replace("@cantidad", registro.Cantidad.ToString());
+                    //sql = sql.Replace("@monto", registro.Monto.ToString());
+                    //sql = sql.Replace("@idArticulo", registro.articulo.Id.ToString());
+                    //datos.setearConsulta(sql)
                 }
 
             }

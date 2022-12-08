@@ -95,7 +95,7 @@ namespace tp_comercio_Vargas_Delgado
             //int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
             //registro.Id = IdRegistro;
             
-            float PrecioTotalPorArticulo = 0;
+            decimal PrecioTotalPorArticulo;
          
             Registro registro = new Registro();
             
@@ -112,9 +112,27 @@ namespace tp_comercio_Vargas_Delgado
             List<Registro> ListaDeRegistros = (List<Registro>)Session["ListaVenta"];
             
             int cantidadPorArticulo = 0;
+            
+            registro.Monto = decimal.Round((decimal)selecionado.Precio,2);
+            PrecioTotalPorArticulo = ((decimal)selecionado.Precio * int.Parse(txtCantidad.Text));
+            
+            PrecioTotalPorArticulo = decimal.Round(PrecioTotalPorArticulo, 2);
+            registro.MontoTotal = (decimal?)PrecioTotalPorArticulo;
+
+            registro.articulo = new Articulo();
+            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
+
+
+            registro.cliente = new Cliente();
+            registro.cliente.Nombre = ddlCliente.SelectedItem.Text;
+
+            registro.articulo = new Articulo();
+            registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
+            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
+
             foreach (Registro registros in ListaDeRegistros)
             {
-                if(registros.articulo.Nombre == selecionado.Nombre)
+                if(registros.articulo.Id == selecionado.Id)
                     cantidadPorArticulo += registros.Cantidad;
             }
 
@@ -123,23 +141,9 @@ namespace tp_comercio_Vargas_Delgado
                 Response.Write("<script>alert('El articulo no posee esa cantidad de items')</script>");
                 return;
             }
-
-            registro.Monto = selecionado.Precio;
-
-            PrecioTotalPorArticulo = (float)+(selecionado.Precio * int.Parse(txtCantidad.Text));
-            registro.MontoTotal = (decimal?)PrecioTotalPorArticulo;
             
-            registro.articulo = new Articulo();
-            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
-
-            registro.cliente = new Cliente();
-            registro.cliente.Nombre = ddlCliente.SelectedItem.Text;
-
-            registro.articulo = new Articulo();
-            registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
-
             ListaDeRegistros.Add(registro);
-
+            
             //llamar al page load
             Response.Redirect("FormularioRegistroVenta.aspx");
         }
@@ -150,10 +154,10 @@ namespace tp_comercio_Vargas_Delgado
 
             List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
 
-            foreach (Registro registro in Lista)
-            {
-                registro.Id = 0;
-            }
+            //foreach (Registro registro in Lista)
+            //{
+            //    registro.Id = 0;
+            //}
 
             RegistroNegocio registroNegocio = new RegistroNegocio();
 
