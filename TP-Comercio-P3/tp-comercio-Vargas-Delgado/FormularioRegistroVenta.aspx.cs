@@ -109,7 +109,16 @@ namespace tp_comercio_Vargas_Delgado
             ArticuloNegocio negocio = new ArticuloNegocio();
             Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
 
-            if (selecionado.Stock < registro.Cantidad)
+            List<Registro> ListaDeRegistros = (List<Registro>)Session["ListaVenta"];
+            
+            int cantidadPorArticulo = 0;
+            foreach (Registro registros in ListaDeRegistros)
+            {
+                if(registros.articulo.Nombre == selecionado.Nombre)
+                    cantidadPorArticulo += registros.Cantidad;
+            }
+
+            if (selecionado.Stock < cantidadPorArticulo + registro.Cantidad)
             {
                 Response.Write("<script>alert('El articulo no posee esa cantidad de items')</script>");
                 return;
@@ -129,8 +138,7 @@ namespace tp_comercio_Vargas_Delgado
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
 
-            List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
-            Lista.Add(registro);
+            ListaDeRegistros.Add(registro);
 
             //llamar al page load
             Response.Redirect("FormularioRegistroVenta.aspx");
