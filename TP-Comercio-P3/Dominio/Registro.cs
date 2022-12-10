@@ -25,5 +25,7 @@ namespace Dominio
 
         [DisplayName("Cliente")]
         public Cliente cliente { get; set; }
+        public int IdFactura { get; set; }
+
     }
 }

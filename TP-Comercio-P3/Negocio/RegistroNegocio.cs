@@ -154,9 +154,8 @@ namespace Negocio
 
                 foreach (Registro registro in Lista)
                 {
-                    string sql = "values ('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "','" + registro.Monto + "','" + registro.articulo.Id + "')";
-                    datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) " + sql);
-                    
+                    string sql = "values ('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "','" + registro.Monto + "','" + registro.articulo.Id + "','" + registro.IdFactura + "')";
+                    datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo, IdFactura) " + sql);                    
                     datos.ejecutarAccion();
 
                     //TODO: dejo comentada ya que me separa el monto con "," y la consulta lo toma como otra columna.
@@ -212,6 +211,31 @@ namespace Negocio
                 datos.setearConsulta("update REGISTROS set Estado=0 Where Id = @id");
                 datos.setearParametro("@id", id);
                 datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        public int ultimaFactura()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearConsulta("select Max(IdFactura) from registros");
+                datos.ejecutarAccion();
+                int ultimaFactura = 0;
+
+                while (datos.Lector.Read())
+                {
+                    ultimaFactura = (int)datos.Lector["IdFactura"];
+                }
+                return ultimaFactura;
             }
             catch (Exception ex)
             {
