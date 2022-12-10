@@ -51,7 +51,7 @@ namespace tp_comercio_Vargas_Delgado
 
                     dgvRegistroCompra.DataSource = Session["ListaCompra"];
                     dgvRegistroCompra.DataBind();
-
+                  ;
                     List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
 
                     Nullable<decimal> totalCompra = 0;
@@ -59,6 +59,10 @@ namespace tp_comercio_Vargas_Delgado
                     foreach (Registro registro in Lista)
                     {
                         totalCompra += registro.MontoTotal;
+
+
+                        ddlProveedor.SelectedItem.Text = Lista[Lista.Count - 1].proveedor.RazonSocial;
+                        ddlProveedor.Enabled = false;
                     }
 
                     TotalCompra.Text = "Monto total por compra: $" + totalCompra.ToString();
@@ -105,19 +109,48 @@ namespace tp_comercio_Vargas_Delgado
             registro.MontoTotal = registro.Cantidad * registro.Monto;
 
             int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
-
+            
             registro.proveedor = new Proveedor();
-            registro.proveedor.RazonSocial = ddlProveedor.SelectedItem.Text;
-            registro.Destinatario = int.Parse(ddlProveedor.SelectedValue);
+            List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
+            
+            //revisar si el proveedor es el mismo que el anterior
+
+            if (Session["ListaCompra"] != null)
+            {
+               
+                if (Lista.Count > 0)
+                {
+                    if (Lista[Lista.Count - 1].proveedor.Id == int.Parse(ddlProveedor.SelectedValue))
+                    {
+                        registro.proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+                    }
+                    else
+                    {
+                        registro.proveedor.Id = Lista[Lista.Count - 1].proveedor.Id;
+                        registro.proveedor.RazonSocial = Lista[Lista.Count - 1].proveedor.RazonSocial;
+                        registro.Destinatario = Lista[Lista.Count - 1].Destinatario;
+
+                    }
+                }
+                else
+                {
+                    
+                    registro.proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+                    registro.proveedor.RazonSocial = ddlProveedor.SelectedItem.Text;
+                    registro.Destinatario = int.Parse(ddlProveedor.SelectedValue);
+                }
+            }
+        
 
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
-
-
-            List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
+            
             Lista.Add(registro);
 
+            //grisar el ddlProveedor que no permita cambiarlo una vez se selecciono uno en la lista
+
+            
             //llamar al page load
             Response.Redirect("FormularioRegistroCompra.aspx");
 
