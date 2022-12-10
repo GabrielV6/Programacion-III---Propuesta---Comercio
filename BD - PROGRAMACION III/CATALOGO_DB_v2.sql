@@ -260,5 +260,7 @@ ADD IdFactura INT NULL
 
 -- completar los registros anteriores (o por lo menos uno)
 update registros set IdFactura = 1000 where Id <= 3000
+-- actualizar los registros de compra (Tipo=0) para que los remitos comiencen con 5000
+update registros set IdFactura = 5000 where Id <= 3000 and Tipo=0
 
 Select * FROM ARTICULOS	

@@ -163,12 +163,15 @@ namespace tp_comercio_Vargas_Delgado
 
             List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
 
-            //foreach (Registro registro in Lista)
-            //{
-            //    registro.Id = 0;
-            //}
-
             RegistroNegocio registroNegocio = new RegistroNegocio();
+
+            int tipo = 1;
+            int ultimaFactura = registroNegocio.ultimaFactura(tipo);
+
+            foreach (Registro registro in Lista)
+            {
+                registro.IdFactura = ultimaFactura + 1;
+            }
 
             registroNegocio.agregar(Lista);
 
