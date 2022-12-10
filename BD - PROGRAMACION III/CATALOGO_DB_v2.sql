@@ -260,3 +260,5 @@ ADD IdFactura INT NULL
 
 -- completar los registros anteriores (o por lo menos uno)
 update registros set IdFactura = 1000 where Id <= 3000
+
+Select * FROM ARTICULOS	

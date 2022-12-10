@@ -62,6 +62,7 @@ namespace tp_comercio_Vargas_Delgado
                     foreach (Registro registro in Lista)
                     {
                         totalVenta += registro.MontoTotal;
+                        registro.Destinatario = Lista[Lista.Count - 1].cliente.Id;
                         ddlCliente.SelectedItem.Text = Lista[Lista.Count - 1].cliente.Nombre;
                         ddlCliente.Enabled = false;
                     }
@@ -105,7 +106,6 @@ namespace tp_comercio_Vargas_Delgado
             int venta = 0;
             registro.Id = Session["ListaVenta"] != null ? ((List<Registro>)Session["ListaVenta"]).Count + 1 : 1;
             registro.Tipo = venta;
-            registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
             registro.Cantidad = int.Parse(txtCantidad.Text);
 
             int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
@@ -138,6 +138,7 @@ namespace tp_comercio_Vargas_Delgado
                     }
                     else
                     {
+                        registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
                         registro.cliente.Id = ListaDeRegistros[ListaDeRegistros.Count - 1].cliente.Id;
                         registro.cliente.Nombre = ListaDeRegistros[ListaDeRegistros.Count - 1].cliente.Nombre;
 
@@ -145,7 +146,7 @@ namespace tp_comercio_Vargas_Delgado
                 }
                 else
                 {
-
+                    registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
                     registro.cliente.Id = int.Parse(ddlCliente.SelectedValue);
                     registro.cliente.Nombre = ddlCliente.SelectedItem.Text;
 

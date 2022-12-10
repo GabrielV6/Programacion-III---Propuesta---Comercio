@@ -163,7 +163,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, Precio = @precio, ImagenURL = @img, IdMarca = @idMarca, IdCategoria = @idCategoria, Stock = @stock Where Id = @id");
+                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, Precio = @precio, ImagenURL = @img, IdMarca = @idMarca, IdCategoria = @idCategoria, Stock = @stock, Proveedor = @proveedor Where Id = @id");
                 datos.setearParametro("@codigo", articulo.Codigo);
                 datos.setearParametro("@nombre", articulo.Nombre);
                 datos.setearParametro("@desc", articulo.Descripcion);
@@ -173,6 +173,7 @@ namespace Negocio
                 datos.setearParametro("@idCategoria", articulo.categoria.Id);
                 datos.setearParametro("@id", articulo.Id);
                 datos.setearParametro("@stock", articulo.Stock);
+                datos.setearParametro("@proveedor", articulo.proveedor.Id);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
