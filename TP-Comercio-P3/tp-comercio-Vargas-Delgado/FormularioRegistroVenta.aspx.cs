@@ -1,6 +1,7 @@
 ﻿using Dominio;
 using Negocio;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -61,6 +62,8 @@ namespace tp_comercio_Vargas_Delgado
                     foreach (Registro registro in Lista)
                     {
                         totalVenta += registro.MontoTotal;
+                        ddlCliente.SelectedItem.Text = Lista[Lista.Count - 1].cliente.Nombre;
+                        ddlCliente.Enabled = false;
                     }
 
                     TotalFactura.Text = "Monto total por venta: $" + totalVenta.ToString();
@@ -119,13 +122,36 @@ namespace tp_comercio_Vargas_Delgado
             PrecioTotalPorArticulo = decimal.Round(PrecioTotalPorArticulo, 2);
             registro.MontoTotal = (decimal?)PrecioTotalPorArticulo;
 
-            registro.articulo = new Articulo();
-            registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
-
-
             registro.cliente = new Cliente();
-            registro.cliente.Nombre = ddlCliente.SelectedItem.Text;
+        
 
+            //revisar si el proveedor es el mismo que el anterior
+
+            if (Session["ListaVenta"] != null)
+            {
+
+                if (ListaDeRegistros.Count > 0)
+                {
+                    if (ListaDeRegistros[ListaDeRegistros.Count - 1].cliente.Id == int.Parse(ddlCliente.SelectedValue))
+                    {
+                        registro.cliente.Id = int.Parse(ddlCliente.SelectedValue);
+                    }
+                    else
+                    {
+                        registro.cliente.Id = ListaDeRegistros[ListaDeRegistros.Count - 1].cliente.Id;
+                        registro.cliente.Nombre = ListaDeRegistros[ListaDeRegistros.Count - 1].cliente.Nombre;
+
+                    }
+                }
+                else
+                {
+
+                    registro.cliente.Id = int.Parse(ddlCliente.SelectedValue);
+                    registro.cliente.Nombre = ddlCliente.SelectedItem.Text;
+
+                }
+            }
+            
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
@@ -134,6 +160,7 @@ namespace tp_comercio_Vargas_Delgado
             {
                 if(registros.articulo.Id == selecionado.Id)
                     cantidadPorArticulo += registros.Cantidad;
+                
             }
 
             if (selecionado.Stock < cantidadPorArticulo + registro.Cantidad)

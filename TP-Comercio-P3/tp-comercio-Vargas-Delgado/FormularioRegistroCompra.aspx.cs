@@ -51,7 +51,7 @@ namespace tp_comercio_Vargas_Delgado
 
                     dgvRegistroCompra.DataSource = Session["ListaCompra"];
                     dgvRegistroCompra.DataBind();
-                  ;
+                  
                     List<Registro> Lista = (List<Registro>)Session["ListaCompra"];
 
                     Nullable<decimal> totalCompra = 0;
