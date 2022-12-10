@@ -31,7 +31,7 @@ namespace tp_comercio_Vargas_Delgado
                     {
                         List<Registro> ListaVenta = new List<Registro>();
                         Session.Add("ListaVenta", ListaVenta);
-                        TotalFactura.Text = "Monto total por venta: $0"; 
+                        TotalFactura.Text = "Monto total por venta: $0";
                     }
 
                     ArticuloNegocio articuloNegocio = new ArticuloNegocio();
@@ -51,13 +51,13 @@ namespace tp_comercio_Vargas_Delgado
                     ddlCliente.DataValueField = "Id";
                     ddlCliente.DataTextField = "Nombre";
                     ddlCliente.DataBind();
-                    
+
                     dgvRegistro.DataSource = Session["ListaVenta"];
                     dgvRegistro.DataBind();
 
                     List<Registro> Lista = (List<Registro>)Session["ListaVenta"];
 
-                    Nullable<decimal> totalVenta =0;
+                    Nullable<decimal> totalVenta = 0;
 
                     foreach (Registro registro in Lista)
                     {
@@ -93,16 +93,16 @@ namespace tp_comercio_Vargas_Delgado
         }
 
         protected void btnAgregarArticulo_Click(object sender, EventArgs e)
-        {       
+        {
             // TODO: LOGICA DESACTIVA POR EL MOMENTO (ES PARA GUARDAR Y EDITAR ... PERO QUIZAS NO HABILITEMOS LA LOGICA PARA EDITAR.
 
             //int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
             //registro.Id = IdRegistro;
-            
+
             decimal PrecioTotalPorArticulo;
-         
+
             Registro registro = new Registro();
-            
+
             int venta = 0;
             registro.Id = Session["ListaVenta"] != null ? ((List<Registro>)Session["ListaVenta"]).Count + 1 : 1;
             registro.Tipo = venta;
@@ -113,17 +113,17 @@ namespace tp_comercio_Vargas_Delgado
             Articulo selecionado = (negocio.listaParaEditar(IdArticulo))[0];
 
             List<Registro> ListaDeRegistros = (List<Registro>)Session["ListaVenta"];
-            
+
             int cantidadPorArticulo = 0;
-            
-            registro.Monto = decimal.Round((decimal)selecionado.Precio,2);
+
+            registro.Monto = decimal.Round((decimal)selecionado.Precio, 2);
             PrecioTotalPorArticulo = ((decimal)selecionado.Precio * int.Parse(txtCantidad.Text));
-            
+
             PrecioTotalPorArticulo = decimal.Round(PrecioTotalPorArticulo, 2);
             registro.MontoTotal = (decimal?)PrecioTotalPorArticulo;
 
             registro.cliente = new Cliente();
-        
+
 
             //revisar si el proveedor es el mismo que el anterior
 
@@ -152,16 +152,16 @@ namespace tp_comercio_Vargas_Delgado
 
                 }
             }
-            
+
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
             foreach (Registro registros in ListaDeRegistros)
             {
-                if(registros.articulo.Id == selecionado.Id)
+                if (registros.articulo.Id == selecionado.Id)
                     cantidadPorArticulo += registros.Cantidad;
-                
+
             }
 
             if (selecionado.Stock < cantidadPorArticulo + registro.Cantidad)
@@ -169,9 +169,9 @@ namespace tp_comercio_Vargas_Delgado
                 Response.Write("<script>alert('El articulo no posee esa cantidad de items')</script>");
                 return;
             }
-            
+
             ListaDeRegistros.Add(registro);
-            
+
             //llamar al page load
             Response.Redirect("FormularioRegistroVenta.aspx");
         }
@@ -188,34 +188,32 @@ namespace tp_comercio_Vargas_Delgado
             int ultimaFactura = registroNegocio.ultimaFactura(tipo);
 
             foreach (Registro registro in Lista)
-            { 
+            {
                 registro.IdFactura = ultimaFactura + 1;
             }
 
             registroNegocio.agregar(Lista);
 
-            Session.Remove("ListaVenta");
-            Response.Redirect("WebVerRegistroVenta.aspx");
+            //actualiza stock en articulos
 
-            /* comentado temporal
-            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
-            Articulo articulo = new Articulo();
-            // busca el stock del producto
-            List<Articulo> articulos = new List<Articulo>();
-            articulos = articuloNegocio.listaParaEditar(registro.articulo.Id);
-            articulo = articulos[0];
-            // se resta la cantidad vendida  del stock actual
-
-            if (articulos[0].Stock < registro.Cantidad)
+            foreach (Registro registro in Lista)
             {
-                Response.Write("<script>alert('El articulo no posee esa cantidad de items')</script>");
-                return;
+                ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+                Articulo articulo = new Articulo();
+
+                // busca el stock del producto
+                List<Articulo> articulos = new List<Articulo>();
+                articulos = articuloNegocio.listaParaEditar(registro.articulo.Id);
+                articulo = articulos[0];
+
+                // se resta la cantidad vendida  del stock actual
+                articulo.Stock = articulos[0].Stock - registro.Cantidad;
+
+                articuloNegocio.modificarPorCompra(articulo);             
             }
 
-            articulo.Stock = articulos[0].Stock - registro.Cantidad;
-            articuloNegocio.modificarPorCompra(articulo);
-            */
-            //Response.Redirect("WebVerRegistroVenta.aspx", false);
+            Session.Remove("ListaVenta");
+            Response.Redirect("WebVerRegistroVenta.aspx");
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
@@ -243,8 +241,8 @@ namespace tp_comercio_Vargas_Delgado
 
             foreach (Registro registro in Lista)
             {
-                if (registro.Id != IdRegistro) 
-                { 
+                if (registro.Id != IdRegistro)
+                {
                     ListaAux.Add(registro);
                 }
             }
