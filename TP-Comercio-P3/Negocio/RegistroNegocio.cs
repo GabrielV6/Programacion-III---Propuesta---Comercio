@@ -224,17 +224,25 @@ namespace Negocio
 
         public int ultimaFactura()
         {
+            List<Registro> lista = new List<Registro>();
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("select Max(IdFactura) from registros");
-                datos.ejecutarAccion();
-                int ultimaFactura = 0;
+                //datos.setearConsulta("select Max(IdFactura) from registros");
+                datos.setearConsulta("SELECT distinct R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdFactura FROM ARTICULOS A, REGISTROS R, PROVEEDORES P  WHERE IdFactura = (select Max(IdFactura) from REGISTROS)");
+                datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
                 {
-                    ultimaFactura = (int)datos.Lector["IdFactura"];
+                    // ultimaFactura = (int)datos.Lector[""];
+                    Registro aux = new Registro();
+                    aux.IdFactura = (int)datos.Lector["IdFactura"];
+                    lista.Add(aux);
+
                 }
+
+                int ultimaFactura = lista[0].IdFactura;
+
                 return ultimaFactura;
             }
             catch (Exception ex)

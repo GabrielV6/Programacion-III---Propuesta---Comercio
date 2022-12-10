@@ -156,8 +156,8 @@ namespace tp_comercio_Vargas_Delgado
 
             RegistroNegocio registroNegocio = new RegistroNegocio();
 
-            //int ultimaFactura = registroNegocio.ultimaFactura();
-            int ultimaFactura = 1000;
+            int ultimaFactura = registroNegocio.ultimaFactura();
+
             foreach (Registro registro in Lista)
             { 
                 registro.IdFactura = ultimaFactura + 1;

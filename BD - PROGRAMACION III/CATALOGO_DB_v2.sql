@@ -252,3 +252,11 @@ SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado
 -- crear consulta que reciba un ID de registro y levante todos los campos con sus inner joins a la tabla Proveedores y articulos para traer los nombres.
 
 SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Id = 1000
+
+-- agregar columna IdFactura en tabla Registros
+
+ALTER TABLE registros 
+ADD IdFactura INT NULL
+
+-- completar los registros anteriores (o por lo menos uno)
+update registros set IdFactura = 1000 where Id <= 3000
