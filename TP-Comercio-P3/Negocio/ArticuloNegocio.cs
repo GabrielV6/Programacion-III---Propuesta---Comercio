@@ -74,7 +74,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion, A.Precio, A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor, A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id AND A.Id=" + Id);
+                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion, A.Precio, A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor, A.Stock, A.Porcentaje FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id AND A.Id=" + Id);
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -87,6 +87,10 @@ namespace Negocio
                     precio = (decimal)datos.Lector["Precio"];
                     precio = decimal.Round(precio, 2);
                     aux.Precio = precio;
+
+                    porcentaje = (decimal)datos.Lector["Porcentaje"];
+                    porcentaje = decimal.Round(porcentaje, 2);
+                    aux.Porcentaje = porcentaje;
 
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
@@ -184,7 +188,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, Precio = @precio, ImagenURL = @img, IdMarca = @idMarca, IdCategoria = @idCategoria, Stock = @stock, Proveedor = @proveedor Where Id = @id");
+                datos.setearConsulta("update ARTICULOS set Codigo = @codigo, Nombre = @nombre, Descripcion = @desc, Precio = @precio, ImagenURL = @img, IdMarca = @idMarca, IdCategoria = @idCategoria, Stock = @stock, Proveedor = @proveedor, Porcentaje = @porcentaje Where Id = @id");
                 datos.setearParametro("@codigo", articulo.Codigo);
                 datos.setearParametro("@nombre", articulo.Nombre);
                 datos.setearParametro("@desc", articulo.Descripcion);
@@ -195,6 +199,8 @@ namespace Negocio
                 datos.setearParametro("@id", articulo.Id);
                 datos.setearParametro("@stock", articulo.Stock);
                 datos.setearParametro("@proveedor", articulo.proveedor.Id);
+                datos.setearParametro("@porcentaje", articulo.Porcentaje);
+
                 datos.ejecutarAccion();
             }
             catch (Exception ex)
@@ -213,10 +219,11 @@ namespace Negocio
 
             try
             {              
-                datos.setearConsulta("update ARTICULOS set Stock = @stock, Proveedor = @proveedor, Precio = @precio Where Id = @id");
+                datos.setearConsulta("update ARTICULOS set Stock = @stock, Proveedor = @proveedor, Precio = @precio, Porcentaje = @porcentaje Where Id = @id");
                 datos.setearParametro("@stock", articulo.Stock);
                 datos.setearParametro("@proveedor", articulo.proveedor.Id);
                 datos.setearParametro("@precio", articulo.Precio);
+                datos.setearParametro("@porcentaje", articulo.Porcentaje);
                 datos.setearParametro("@id", articulo.Id);
                 datos.ejecutarAccion();
             }
