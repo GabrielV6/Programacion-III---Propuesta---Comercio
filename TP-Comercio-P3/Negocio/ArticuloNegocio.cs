@@ -206,9 +206,10 @@ namespace Negocio
 
             try
             {              
-                datos.setearConsulta("update ARTICULOS set Stock = @stock, Proveedor = @proveedor Where Id = @id");
+                datos.setearConsulta("update ARTICULOS set Stock = @stock, Proveedor = @proveedor, Precio = @precio Where Id = @id");
                 datos.setearParametro("@stock", articulo.Stock);
                 datos.setearParametro("@proveedor", articulo.proveedor.Id);
+                datos.setearParametro("@precio", articulo.Precio);
                 datos.setearParametro("@id", articulo.Id);
                 datos.ejecutarAccion();
             }
