@@ -10,10 +10,13 @@ using Dominio;
 namespace Negocio
 {
     public class ArticuloNegocio
-    {
+    {   
+        public decimal precio;
+        
         public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
+            
             AccesoDatos datos = new AccesoDatos();
             try
             {
@@ -25,8 +28,13 @@ namespace Negocio
                     aux.Id = (int)datos.Lector["Id"];
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Telefono"];
-                    aux.Descripcion = (string)datos.Lector["Descripcion"];              
-                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    precio = (decimal)datos.Lector["Precio"];
+                    precio = decimal.Round(precio, 2);
+                    aux.Precio = precio;
+
+
                     aux.Stock = (int)datos.Lector["Stock"];
 
                     if (!(datos.Lector["ImagenURL"] is DBNull))
@@ -69,7 +77,10 @@ namespace Negocio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Telefono"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    
+                    precio = (decimal)datos.Lector["Precio"];
+                    precio = decimal.Round(precio, 2);
+                    aux.Precio = precio;
 
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
@@ -114,7 +125,10 @@ namespace Negocio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Telefono"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    
+                    precio = (decimal)datos.Lector["Precio"];
+                    precio = decimal.Round(precio, 2);
+                    aux.Precio = precio;
 
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
@@ -307,7 +321,11 @@ namespace Negocio
                     aux.Codigo = (string)datos.Lector["Codigo"];
                     aux.Nombre = (string)datos.Lector["Telefono"];
                     aux.Descripcion = (string)datos.Lector["Descripcion"];
-                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    
+                    precio = (decimal)datos.Lector["Precio"];
+                    precio = decimal.Round(precio, 2);
+                    aux.Precio = precio;
+                    
                     // agrego esta validacion solo aca porque me parece que deberia ser el unico campo de tendria que aceptar NULL
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];

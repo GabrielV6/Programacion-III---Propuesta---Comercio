@@ -9,19 +9,43 @@
     </div>
 
     <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <asp:TextBox ID="txtFiltro" runat="server" />
+                <asp:Button Text="Filtrar" ID="btnFiltro" class="btn btn-outline-warning" OnClick="btnFiltro_Click" runat="server" />
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
         <div class="row justify-content-md-center">
             <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-grey table-bordered" AutoGenerateColumns="false">
                 <Columns>
-                    <asp:BoundField HeaderText="ID Registro" DataField="Id" />
+                    <%--<asp:BoundField HeaderText="ID Registro" DataField="Id" />--%>
+                    <asp:BoundField HeaderText="Factura N°" DataField="IdFactura" />
                     <asp:BoundField HeaderText="Cliente" DataField="cliente.Nombre" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
                     <asp:BoundField HeaderText="Monto" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
-                 <%--   <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Accion" /> --%>
+
+                    <%--   <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Accion" /> --%>
                 </Columns>
             </asp:GridView>
-            
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <asp:Label ID="lblMontoFactura" runat="server" Text="Total Factura $"></asp:Label>
+                        <asp:TextBox ID="txtMontoFactura" runat="server" ReadOnly="true"></asp:TextBox>
+
+                    </div>
+                </div>
+            </div>
+
+            </br>
+            </br>
         </div>
-        <asp:Button ID="btnAgregar" runat="server" class="u-border-none u-btn u-btn-submit u-button-style u-palette-2-base u-btn-1" OnClick="btnAgregar_Click"  Text="Agregar" />
+        <asp:Button ID="btnAgregar" runat="server" class="u-border-none u-btn u-btn-submit u-button-style u-palette-2-base u-btn-1" OnClick="btnAgregar_Click" Text="Agregar" />
     </div>
+
 </asp:Content>

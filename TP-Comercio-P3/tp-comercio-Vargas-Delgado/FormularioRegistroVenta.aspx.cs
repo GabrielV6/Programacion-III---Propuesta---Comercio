@@ -135,6 +135,8 @@ namespace tp_comercio_Vargas_Delgado
                     if (ListaDeRegistros[ListaDeRegistros.Count - 1].cliente.Id == int.Parse(ddlCliente.SelectedValue))
                     {
                         registro.cliente.Id = int.Parse(ddlCliente.SelectedValue);
+                        registro.Destinatario = int.Parse(ddlCliente.SelectedValue);
+                        registro.cliente.Nombre = ddlCliente.SelectedItem.Text;
                     }
                     else
                     {

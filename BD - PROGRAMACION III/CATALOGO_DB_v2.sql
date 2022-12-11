@@ -256,11 +256,15 @@ SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado
 -- agregar columna IdFactura en tabla Registros
 
 ALTER TABLE registros 
-ADD IdFactura INT NULL
+ADD IdFactura INT Not NULL
 
 -- completar los registros anteriores (o por lo menos uno)
 update registros set IdFactura = 1000 where Id <= 3000
 -- actualizar los registros de compra (Tipo=0) para que los remitos comiencen con 5000
 update registros set IdFactura = 5000 where Id <= 3000 and Tipo=0
 
-Select * FROM ARTICULOS	
+Select * FROM REGISTROS	
+
+Select * FROM ARTICULOS
+
+

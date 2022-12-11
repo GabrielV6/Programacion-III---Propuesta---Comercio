@@ -60,11 +60,11 @@ namespace Negocio
             {
                 if (tipo == 1) //si es compra se muestran proveedores
                 {
-                    datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
+                    datos.setearConsulta("SELECT R.IdFactura, R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
                 }
                 else // si es venta se muestran los clientes
                 {
-                    datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, C.Nombre Cliente, A.Nombre FROM REGISTROS R, CLIENTES C, ARTICULOS A WHERE R.Destinatario = C.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
+                    datos.setearConsulta("SELECT R.IdFactura, R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, C.Nombre Cliente, A.Nombre FROM REGISTROS R, CLIENTES C, ARTICULOS A WHERE R.Destinatario = C.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
                 }
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -74,8 +74,11 @@ namespace Negocio
                     aux.Tipo = (int)datos.Lector["Tipo"];
                     aux.Destinatario = (int)datos.Lector["Destinatario"];
                     aux.Cantidad = (int)datos.Lector["Cantidad"];
-                    aux.Monto = (decimal)datos.Lector["Monto"];
-                    
+                    decimal monto = (decimal)datos.Lector["Monto"];
+                    monto = decimal.Round(monto, 2);
+                    aux.Monto = monto;
+                    aux.IdFactura = (int)datos.Lector["IdFactura"];
+
                     aux.articulo = new Articulo();
                     aux.articulo.Id = (int)datos.Lector["idArticulo"];
                     aux.articulo.Nombre = (string)datos.Lector["Nombre"];
@@ -154,12 +157,15 @@ namespace Negocio
 
                 foreach (Registro registro in Lista)
                 {
-                    string sql = "values ('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "','" + registro.Monto + "','" + registro.articulo.Id + "','" + registro.IdFactura + "')";
+                    string monto = registro.Monto.ToString().Replace(",", ".");
+                    string sql = "values ('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "','" + monto + "','" + registro.articulo.Id + "','" + registro.IdFactura + "')";
+                    
+
                     datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo, IdFactura) " + sql);                    
                     datos.ejecutarAccion();
 
-                    //TODO: dejo comentada ya que me separa el monto con "," y la consulta lo toma como otra columna.
-                    
+                  
+             
                     //sql = "insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idArticulo)";
                     //sql = sql.Replace("@tipo", registro.Tipo.ToString());
                     //sql = sql.Replace("@destinatario", registro.Destinatario.ToString());
@@ -167,6 +173,7 @@ namespace Negocio
                     //sql = sql.Replace("@monto", registro.Monto.ToString());
                     //sql = sql.Replace("@idArticulo", registro.articulo.Id.ToString());
                     //datos.setearConsulta(sql)
+                    
                 }
 
             }
@@ -228,6 +235,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
+                int ultimaFactura;
                 datos.setearConsulta("SELECT distinct R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdFactura FROM ARTICULOS A, REGISTROS R, PROVEEDORES P  WHERE IdFactura = (select Max(IdFactura) from REGISTROS WHERE Tipo = @tipo)");
                 datos.setearParametro("@tipo", tipo);
                 datos.ejecutarLectura();
@@ -239,7 +247,19 @@ namespace Negocio
                     lista.Add(aux);
                 }
 
-                int ultimaFactura = lista[0].IdFactura;
+                if (lista.Count < 1 && tipo ==0)
+                {
+                    ultimaFactura = 100000;
+                    return ultimaFactura;
+
+                }
+                 if(lista.Count < 1 && tipo == 1)
+                {
+                    ultimaFactura = 900000;
+                    return ultimaFactura;
+                }
+                
+                ultimaFactura = lista[0].IdFactura;
                 return ultimaFactura;
             }
             catch (Exception ex)

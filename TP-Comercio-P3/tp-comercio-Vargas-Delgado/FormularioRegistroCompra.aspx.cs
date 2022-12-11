@@ -104,8 +104,10 @@ namespace tp_comercio_Vargas_Delgado
 
             registro.Tipo = compra;
             registro.Cantidad = int.Parse(txtCantidad.Text);
+            decimal monto = Convert.ToDecimal(txtMonto.Text);
+            monto = decimal.Round(monto, 2);
 
-            registro.Monto = Convert.ToDecimal(txtMonto.Text);
+            registro.Monto = monto;
             registro.MontoTotal = registro.Cantidad * registro.Monto;
 
             int IdArticulo = int.Parse(ddlArticulo.SelectedValue);
