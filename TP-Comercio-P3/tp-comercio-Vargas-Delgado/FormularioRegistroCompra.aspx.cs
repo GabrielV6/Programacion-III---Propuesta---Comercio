@@ -125,6 +125,8 @@ namespace tp_comercio_Vargas_Delgado
                     if (Lista[Lista.Count - 1].proveedor.Id == int.Parse(ddlProveedor.SelectedValue))
                     {
                         registro.proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+                        registro.proveedor.RazonSocial = ddlProveedor.SelectedItem.Text;
+                        registro.Destinatario = int.Parse(ddlProveedor.SelectedValue);
                     }
                     else
                     {
