@@ -13,8 +13,13 @@ namespace Dominio
         public string Codigo { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-                
+              
         public Nullable<decimal> Precio { get; set; }
+
+        public Nullable<decimal> Porcentaje { get; set; }
+
+        public int Stock { get; set; }
+
         public string ImagenUrl { get; set; }
 
         [DisplayName("Marca")]
@@ -25,8 +30,5 @@ namespace Dominio
 
         [DisplayName("Proveedor")]
         public Proveedor proveedor { get; set; }
-
-        public int Stock { get; set; }
-
     }
 }

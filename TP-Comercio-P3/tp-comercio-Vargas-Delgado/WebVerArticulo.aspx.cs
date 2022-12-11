@@ -21,10 +21,6 @@ namespace tp_comercio_Vargas_Delgado
 
             if (!IsPostBack)
             {
-                //Queda inactivado porque usamos GridView en vez de tarjetas
-                //Repeater1.DataSource = ListaArticulo;
-                //Repeater1.DataBind();
-
                 dgvArticulo.DataSource = ListaArticulo;
                 dgvArticulo.DataBind();
             }
@@ -35,25 +31,11 @@ namespace tp_comercio_Vargas_Delgado
             }
         }
 
-        //Queda inactivado porque usamos GridView en vez de tarjetas
-        //protected void btnEliminar_Click(object sender, EventArgs e)
-        //{
-        //    int idArticulo = Convert.ToInt32(((Button)sender).CommandArgument);
-        //    ArticuloNegocio negocio = new ArticuloNegocio();
-        //    negocio.eliminar(idArticulo);
-        //    Response.Redirect("WebVerArticulo.aspx");
-        //}
-
         protected void listaFiltrada()
         {
             string filtro = txtFiltro.Text;
             ListaArticulo = (List<Articulo>)Session["ListaArticulo"];
             ListaArticulo = ListaArticulo.FindAll(x => x.Nombre.Contains(filtro));
-
-            // Queda inactivado porque usamos GridView en vez de tarjetas
-
-            //Repeater1.DataSource = ListaArticulo;
-            //Repeater1.DataBind();
 
             dgvArticulo.DataSource = ListaArticulo;
             dgvArticulo.DataBind();
@@ -67,12 +49,6 @@ namespace tp_comercio_Vargas_Delgado
             else
             {
                 ListaArticulo = (List<Articulo>)Session["ListaArticulo"];
-
-                // Queda inactivado porque usamos GridView en vez de tarjetas
-
-                //Repeater1.DataSource = ListaArticulo;
-                //Repeater1.DataBind();
-
                 dgvArticulo.DataSource = ListaArticulo;
                 dgvArticulo.DataBind();
             }

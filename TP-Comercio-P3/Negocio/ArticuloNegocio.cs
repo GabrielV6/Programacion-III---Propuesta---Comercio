@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Linq.Expressions;
 using Dominio;
+using System.Diagnostics.Contracts;
 
 namespace Negocio
 {
     public class ArticuloNegocio
     {   
         public decimal precio;
-        
+        public decimal porcentaje;
+
         public List<Articulo> listar()
         {
             List<Articulo> lista = new List<Articulo>();
@@ -20,7 +22,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor , P.RazonSocial , A.Stock FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id AND A.estado=1");
+                datos.setearConsulta("SELECT A.Codigo, A.Nombre Telefono, A.Descripcion,A.Precio,A.ImagenUrl, A.IdMarca, A.IdCategoria, A.Id, M.Descripcion Modelo , C.Descripcion Tipo, A.Proveedor , P.RazonSocial , A.Stock, A.Porcentaje FROM ARTICULOS A, MARCAS M , CATEGORIAS C, PROVEEDORES P WHERE A.IdMarca = M.id AND A.IdCategoria = C.Id AND A.Proveedor = P.Id AND A.estado=1");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -34,9 +36,13 @@ namespace Negocio
                     precio = decimal.Round(precio, 2);
                     aux.Precio = precio;
 
-
                     aux.Stock = (int)datos.Lector["Stock"];
 
+                    porcentaje = (decimal)datos.Lector["Porcentaje"];
+                    porcentaje = decimal.Round(porcentaje, 2);
+                    aux.Porcentaje = porcentaje;
+             
+                    
                     if (!(datos.Lector["ImagenURL"] is DBNull))
                         aux.ImagenUrl = (string)datos.Lector["ImagenURL"];
 
@@ -157,10 +163,11 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ", " + articulo.Stock + ",1, @proveedor )";
+                string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ", " + articulo.Stock + ",1, @proveedor, @porcentaje )";
              //   string valores = "values('" + articulo.Codigo + "','" + articulo.Nombre + "','" + articulo.Descripcion + "'," + articulo.Precio + ",'" + articulo.ImagenUrl + " ', " + articulo.marca.Id + ", " + articulo.categoria.Id + ", " + articulo.Stock + ",1, 1003)";
-                datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio,ImagenURL, IdMarca, IdCategoria, Stock, Estado, Proveedor) " + valores);
+                datos.setearConsulta("insert into ARTICULOS (Codigo,Nombre,Descripcion,Precio,ImagenURL, IdMarca, IdCategoria, Stock, Estado, Proveedor, Porcentaje) " + valores);
                 datos.setearParametro("@proveedor", articulo.proveedor.Id);
+                datos.setearParametro("@porcentaje", articulo.Porcentaje);
                 datos.ejecutarAccion();
             }
             catch (Exception ex)

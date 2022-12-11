@@ -48,21 +48,32 @@
                     <asp:DropDownList ID="ddlProveedor" CssClass="form-select" runat="server"></asp:DropDownList>
                 </div>
                 <div class="mb-3">
-                    <label for="txtDescripcion" class="form-label">Descripcion</label>
-                    <asp:TextBox runat="server" TextMode="MultiLine" ID="txtDescripcion" CssClass="form-control" required="" />
+                    <label for="txtPorcentaje" class="form-label">Porcentaje estimado de ganancia</label>
+                    <asp:TextBox runat="server" ID="txtPorcentaje" CssClass="form-control" required="" />
+                    <asp:RangeValidator ID="RangeValidator1"
+                        ControlToValidate="txtPrecio"
+                        MinimumValue="0"
+                        MaximumValue="100"
+                        Type="Integer"
+                        EnableClientScript="false"
+                        Text="Por favor, ingrese un precio valido"
+                        runat="server" />
+                    <div class="mb-3">
+                        <label for="txtDescripcion" class="form-label">Descripcion</label>
+                        <asp:TextBox runat="server" TextMode="MultiLine" ID="txtDescripcion" CssClass="form-control" required="" />
+                    </div>
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                        <ContentTemplate>
+                            <div class="mb-3">
+                                <label for="txtImagenUrl" class="form-label">Imagen</label>
+                                <asp:TextBox runat="server" ID="txtImagenUrl" CssClass="form-control"
+                                    AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged" required="" />
+                            </div>
+                            <asp:Image ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png"
+                                runat="server" ID="imgArticulo" Width="50%" />
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
-                <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                    <ContentTemplate>
-                        <div class="mb-3">
-                            <label for="txtImagenUrl" class="form-label">Imagen</label>
-                            <asp:TextBox runat="server" ID="txtImagenUrl" CssClass="form-control"
-                                AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged" required="" />
-                        </div>
-                        <asp:Image ImageUrl="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png"
-                            runat="server" ID="imgArticulo" Width="50%" />
-                    </ContentTemplate>
-                </asp:UpdatePanel>
-            </div>
         </div>
         <div class="row">
             <div class="col">

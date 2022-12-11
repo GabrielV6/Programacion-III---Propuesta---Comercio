@@ -54,6 +54,7 @@ namespace tp_comercio_Vargas_Delgado
                     txtNombre.Text = articulo.Nombre;
                     txtDescripcion.Text = articulo.Descripcion;
                     txtPrecio.Text = articulo.Precio.ToString();
+                    txtPorcentaje.Text = articulo.Porcentaje.ToString();
                     ddlMarca.SelectedValue = articulo.marca.Id.ToString();
                     ddlCategoria.SelectedValue = articulo.categoria.Id.ToString();
                     txtImagenUrl.Text = articulo.ImagenUrl;
@@ -69,10 +70,6 @@ namespace tp_comercio_Vargas_Delgado
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            //Page.Validate();
-            //if (!Page.IsValid)
-            //    return;
-
             try
             {
                 int IdArticulo = Session["ArticuloSeleccionado"] != null ? ((Articulo)Session["ArticuloSeleccionado"]).Id : 0;
@@ -83,6 +80,7 @@ namespace tp_comercio_Vargas_Delgado
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.Precio = Convert.ToDecimal(txtPrecio.Text);
+                articulo.Porcentaje = Convert.ToDecimal(txtPorcentaje.Text);
                 articulo.ImagenUrl = txtImagenUrl.Text;
                 articulo.marca = new Marca();
                 articulo.marca.Id = int.Parse(ddlMarca.SelectedValue);

@@ -263,6 +263,14 @@ update registros set IdFactura = 1000 where Id <= 3000
 -- actualizar los registros de compra (Tipo=0) para que los remitos comiencen con 5000
 update registros set IdFactura = 5000 where Id <= 3000 and Tipo=0
 
+-- agregar columna Porcentaje en tabla Articulos
+
+ALTER TABLE articulos 
+ADD Porcentaje money NULL
+
+-- completar los registros anteriores
+update articulos set Porcentaje = 10.00 where Id <= 3000
+
 Select * FROM REGISTROS	
 
 Select * FROM ARTICULOS
