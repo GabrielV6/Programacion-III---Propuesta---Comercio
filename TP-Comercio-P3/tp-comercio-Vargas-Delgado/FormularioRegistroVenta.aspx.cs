@@ -38,7 +38,6 @@ namespace tp_comercio_Vargas_Delgado
                     List<Articulo> listaArticulo = articuloNegocio.listar();
 
                     ddlArticulo.DataSource = listaArticulo;
-
                     ddlArticulo.DataValueField = "Id";
                     ddlArticulo.DataTextField = "Nombre";
 
@@ -115,9 +114,10 @@ namespace tp_comercio_Vargas_Delgado
             List<Registro> ListaDeRegistros = (List<Registro>)Session["ListaVenta"];
 
             int cantidadPorArticulo = 0;
-
+            decimal porcentajeDeGanancia = 0;
             registro.Monto = decimal.Round((decimal)selecionado.Precio, 2);
-            PrecioTotalPorArticulo = ((decimal)selecionado.Precio * int.Parse(txtCantidad.Text));
+            porcentajeDeGanancia = decimal.Round(((decimal)selecionado.Porcentaje)/100, 2);
+            PrecioTotalPorArticulo = ((decimal)selecionado.Precio * int.Parse(txtCantidad.Text) * (porcentajeDeGanancia + 1));
 
             PrecioTotalPorArticulo = decimal.Round(PrecioTotalPorArticulo, 2);
             registro.MontoTotal = (decimal?)PrecioTotalPorArticulo;
@@ -158,6 +158,7 @@ namespace tp_comercio_Vargas_Delgado
             registro.articulo = new Articulo();
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
+            registro.articulo.Porcentaje = selecionado.Porcentaje;
 
             foreach (Registro registros in ListaDeRegistros)
             {
