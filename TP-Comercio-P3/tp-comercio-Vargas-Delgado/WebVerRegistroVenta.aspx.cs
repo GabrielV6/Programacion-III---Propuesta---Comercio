@@ -78,10 +78,6 @@ namespace tp_comercio_Vargas_Delgado
             {
                 ListaRegistro = (List<Registro>)Session["ListaRegistro"];
 
-                // Queda inactivado porque usamos GridView en vez de tarjetas
-
-                //Repeater1.DataSource = ListaArticulo;
-                //Repeater1.DataBind();
                 txtMontoFactura.Text = "";
                 dgvRegistro.DataSource = ListaRegistro;
                 dgvRegistro.DataBind();

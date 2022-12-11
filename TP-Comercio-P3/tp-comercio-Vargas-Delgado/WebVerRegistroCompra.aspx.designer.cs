@@ -15,6 +15,24 @@ namespace tp_comercio_Vargas_Delgado
     {
 
         /// <summary>
+        /// txtFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFiltro;
+
+        /// <summary>
+        /// btnFiltro control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnFiltro;
+
+        /// <summary>
         /// dgvRegistro control.
         /// </summary>
         /// <remarks>
@@ -22,6 +40,24 @@ namespace tp_comercio_Vargas_Delgado
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView dgvRegistro;
+
+        /// <summary>
+        /// lblMontoRemito control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMontoRemito;
+
+        /// <summary>
+        /// txtMontoRemito control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtMontoRemito;
 
         /// <summary>
         /// btnAgregar control.

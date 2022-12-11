@@ -48,5 +48,40 @@ namespace tp_comercio_Vargas_Delgado
         {
             Response.Redirect("FormularioRegistroCompra.aspx");
         }
+
+        protected void listaFiltrada()
+        {
+            string filtro = txtFiltro.Text;
+            ListaRegistro = (List<Registro>)Session["ListaRegistro"];
+            ListaRegistro = ListaRegistro.FindAll(x => x.IdFactura.ToString().Contains(filtro));
+
+
+            // Acumulo los montos de los resultados filtrados
+            decimal total = 0;
+            foreach (Registro item in ListaRegistro)
+            {
+                total = decimal.Round((decimal)ListaRegistro.Sum(x => x.Monto), 2);
+            }
+            txtMontoRemito.Text = total.ToString();
+            txtMontoRemito.Enabled = false;
+            dgvRegistro.DataSource = ListaRegistro;
+            dgvRegistro.DataBind();
+
+        }
+        protected void btnFiltro_Click(object sender, EventArgs e)
+        {
+            if (txtFiltro.Text != "")
+            {
+                listaFiltrada();
+            }
+            else
+            {
+                ListaRegistro = (List<Registro>)Session["ListaRegistro"];
+
+                txtMontoRemito.Text = "";
+                dgvRegistro.DataSource = ListaRegistro;
+                dgvRegistro.DataBind();
+            }
+        }
     }
 }
