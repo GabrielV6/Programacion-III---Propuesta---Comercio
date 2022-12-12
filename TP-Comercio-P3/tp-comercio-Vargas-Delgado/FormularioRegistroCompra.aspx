@@ -38,8 +38,12 @@
                 MaximumValue="99000000"
                 Type="Integer"
                 EnableClientScript="false"
-                Text="Por favor, ingrese una cantidad valido"
+                Text="Por favor, ingrese una cantidad valida"
                 runat="server" />
+
+            <div class="mb-3">
+                <h7></h7>
+            </div>
 
             <label for="txtMonto" class="form-label">Monto x Unidad</label>
             <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
