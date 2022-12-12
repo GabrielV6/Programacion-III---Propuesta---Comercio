@@ -70,9 +70,9 @@ namespace tp_comercio_Vargas_Delgado
         }
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            Page.Validate();
-            if (!Page.IsValid)
-                return;
+            //Page.Validate();
+            //if (!Page.IsValid)
+            //    return;
 
             try
             {
@@ -92,8 +92,13 @@ namespace tp_comercio_Vargas_Delgado
                 articulo.categoria.Id = int.Parse(ddlCategoria.SelectedValue);
                 articulo.proveedor = new Proveedor();
                 articulo.proveedor.Id = int.Parse(ddlProveedor.SelectedValue);
+               
 
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+
+                List<Articulo> listaArticulos = articuloNegocio.listaParaEditar(articulo.Id);
+                articulo.Stock = listaArticulos[0].Stock;
+
                 if (IdArticulo == 0)
                 {
                     articuloNegocio.agregar(articulo);

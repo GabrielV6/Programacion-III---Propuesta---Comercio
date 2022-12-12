@@ -60,17 +60,17 @@
         <div class="mb-3">
             <h7>Presione 'Agregar articulo' para agregar un articulo a la lista</h7>
         </div>
-
         <div class="row justify-content-md-center">
             <asp:GridView ID="dgvRegistro" runat="server" OnSelectedIndexChanged="dgv_SelectedIndexChanged" DataKeyNames="Id" CssClass="table table-grey table-bordered" AutoGenerateColumns="false">
                 <Columns>
                     <asp:BoundField HeaderText="Item" DataField="Id" />
                     <asp:BoundField HeaderText="Cliente" DataField="cliente.Nombre" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
-                    <asp:BoundField HeaderText="Precio x Unidad $ARG" DataField="Monto" />
+                    <asp:BoundField HeaderText="Precio Costo x Unidad $" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
-                    <asp:BoundField HeaderText="Total x Articulo $ARG" DataField="MontoTotal" />
-                    <asp:BoundField HeaderText="Procentaje de Ganancia" DataField="articulo.Porcentaje" />
+                    <asp:BoundField HeaderText="Total Sin %" DataField="PrecioXCantidad" />
+                    <asp:BoundField HeaderText="Total x Articulo Con %" DataField="MontoTotal" />
+                    <asp:BoundField HeaderText="Porcentaje de Ganancia %" DataField="articulo.Porcentaje" />
                     <asp:CommandField ShowSelectButton="true" SelectText="❌" HeaderText="Accion" />
                 </Columns>
             </asp:GridView>

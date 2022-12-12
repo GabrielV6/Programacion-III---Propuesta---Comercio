@@ -23,10 +23,12 @@
                 <Columns>
                     <%--<asp:BoundField HeaderText="ID Registro" DataField="Id" />--%>
                     <asp:BoundField HeaderText="Factura N°" DataField="IdFactura" />
+                    <asp:BoundField HeaderText="Fecha Factura" DataField="Fecha" />
                     <asp:BoundField HeaderText="Cliente" DataField="cliente.Nombre" />
                     <asp:BoundField HeaderText="Cantidad" DataField="Cantidad" />
-                    <asp:BoundField HeaderText="Monto" DataField="Monto" />
+                    <asp:BoundField HeaderText="Precio costo $" DataField="Monto" />
                     <asp:BoundField HeaderText="Articulo" DataField="articulo.nombre" />
+                    <asp:BoundField HeaderText="% De Ganancia x Articulo" DataField="articulo.Porcentaje" />
 
                     <%--   <asp:CommandField ShowSelectButton="true" SelectText="Eliminar" HeaderText="Accion" /> --%>
                 </Columns>

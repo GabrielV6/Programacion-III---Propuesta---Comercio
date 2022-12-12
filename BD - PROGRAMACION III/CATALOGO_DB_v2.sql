@@ -271,8 +271,23 @@ ADD Porcentaje money NULL
 -- completar los registros anteriores
 update articulos set Porcentaje = 10.00 where Id <= 3000
 
+
+-- agregar columna porcentaje en tabla Registro
+
+ALTER TABLE registros
+ADD Porcentaje money NULL
+
+-- completar los registros anteriores
+update registros set Porcentaje = 10.00 where Id <= 3000
+
+-- borrar registros de registro
+
 Select * FROM REGISTROS	
 
 Select * FROM ARTICULOS
 
 
+-- Se add campo fecha para tabla registros
+
+ALTER TABLE REGISTROS
+ADD Fecha DATETIME NOT NULL

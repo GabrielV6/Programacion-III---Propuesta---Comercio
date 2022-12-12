@@ -19,7 +19,7 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id");
+                datos.setearConsulta("SELECT R.Fecha, R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id");
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
                 {
@@ -29,7 +29,8 @@ namespace Negocio
                     aux.Destinatario = (int)datos.Lector["Destinatario"];
                     aux.Cantidad = (int)datos.Lector["Cantidad"];
                     aux.Monto = (decimal)datos.Lector["Monto"];
-                    
+                    aux.Fecha = (DateTime)datos.Lector["Fecha"];
+
                     aux.articulo = new Articulo();
                     aux.articulo.Id = (int)datos.Lector["idArticulo"];
                     aux.articulo.Nombre = (string)datos.Lector["Nombre"];
@@ -58,13 +59,13 @@ namespace Negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                if (tipo == 1) //si es compra se muestran proveedores
+                if (tipo == 1) //si es compra se muestran proveedores (Compra = 1)
                 {
-                    datos.setearConsulta("SELECT R.IdFactura, R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
+                    datos.setearConsulta("SELECT R.Fecha, R.Porcentaje, R.IdFactura, R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, P.RazonSocial, A.Nombre FROM REGISTROS R, PROVEEDORES P, ARTICULOS A WHERE R.Destinatario = P.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
                 }
-                else // si es venta se muestran los clientes
+                else // si es venta se muestran los clientes (Venta = 0)
                 {
-                    datos.setearConsulta("SELECT R.IdFactura, R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, C.Nombre Cliente, A.Nombre FROM REGISTROS R, CLIENTES C, ARTICULOS A WHERE R.Destinatario = C.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
+                    datos.setearConsulta("SELECT R.Fecha, R.Porcentaje, R.IdFactura, R.Id, R.Tipo, R.Destinatario, R.idArticulo, R.Cantidad, R.Monto, R.Estado, C.Nombre AS NombreCliente, A.Nombre FROM REGISTROS R, CLIENTES C, ARTICULOS A WHERE R.Destinatario = C.Id AND R.idArticulo = A.Id AND R.Estado = 1 AND R.Tipo =" + tipo);
                 }
                 datos.ejecutarLectura();
                 while (datos.Lector.Read())
@@ -78,10 +79,16 @@ namespace Negocio
                     monto = decimal.Round(monto, 2);
                     aux.Monto = monto;
                     aux.IdFactura = (int)datos.Lector["IdFactura"];
+                    //mostrar fecha corta
+                    aux.Fecha = (DateTime)datos.Lector["Fecha"];
+                    aux.Porcentaje = (decimal)datos.Lector["Porcentaje"];
 
                     aux.articulo = new Articulo();
                     aux.articulo.Id = (int)datos.Lector["idArticulo"];
                     aux.articulo.Nombre = (string)datos.Lector["Nombre"];
+                    decimal porcentaje = (decimal)datos.Lector["Porcentaje"];
+                    porcentaje = decimal.Round(porcentaje, 2);
+                    aux.articulo.Porcentaje = porcentaje;
 
                     if (tipo == 1) 
                     {
@@ -93,7 +100,7 @@ namespace Negocio
                     {
                         aux.cliente = new Cliente();
                         aux.cliente.Id = (int)datos.Lector["Destinatario"];
-                        aux.cliente.Nombre = (string)datos.Lector["Cliente"];
+                        aux.cliente.Nombre = (string)datos.Lector["NombreCliente"];
                     }
 
                     lista.Add(aux);
@@ -116,7 +123,7 @@ namespace Negocio
 
             try
             {
-                datos.setearConsulta("SELECT R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo,P.RazonSocial, A.Nombre FROM ARTICULOS A, REGISTROS R, PROVEEDORES P  WHERE R.IdArticulo = A.Id AND R.Destinatario = P.Id AND R.Id=" + Id);
+                datos.setearConsulta("SELECT R.Fecha, R.Id, R.Tipo , R.Destinatario ,R.Cantidad ,R.Monto, R.IdArticulo,P.RazonSocial, A.Nombre FROM ARTICULOS A, REGISTROS R, PROVEEDORES P  WHERE R.IdArticulo = A.Id AND R.Destinatario = P.Id AND R.Id=" + Id);
                 datos.ejecutarLectura();
 
                 while (datos.Lector.Read())
@@ -127,6 +134,7 @@ namespace Negocio
                     aux.Destinatario = (int)datos.Lector["Destinatario"];
                     aux.Cantidad = (int)datos.Lector["Cantidad"];
                     aux.Monto = (decimal)datos.Lector["Monto"];
+                    aux.Fecha = (DateTime)datos.Lector["Fecha"];
                     
                     aux.articulo = new Articulo();
                     aux.articulo.Id = (int)datos.Lector["idArticulo"];
@@ -158,13 +166,19 @@ namespace Negocio
                 foreach (Registro registro in Lista)
                 {
                     string monto = registro.Monto.ToString().Replace(",", ".");
-                    string sql = "values ('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "','" + monto + "','" + registro.articulo.Id + "','" + registro.IdFactura + "')";
+                    string porcentaje = registro.Porcentaje.ToString().Replace(",", ".");
+
+                    //fecha del dia
+                    string fecha = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+
+                    string sql = "values ('" + registro.Tipo + "','" + registro.Destinatario + "','" + registro.Cantidad + "','" + monto + "','" + registro.articulo.Id + "','" + registro.IdFactura + "','" + porcentaje + "','" + fecha + "')";
                     
 
-                    datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo, IdFactura) " + sql);                    
+                    datos.setearConsulta("insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo, IdFactura, Porcentaje, Fecha) " + sql);                    
                     datos.ejecutarAccion();
 
-                  
+          
              
                     //sql = "insert into REGISTROS (Tipo, Destinatario, Cantidad, Monto, IdArticulo) values (@tipo, @destinatario, @cantidad, @monto, @idArticulo)";
                     //sql = sql.Replace("@tipo", registro.Tipo.ToString());

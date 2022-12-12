@@ -118,13 +118,17 @@ namespace tp_comercio_Vargas_Delgado
             List<Registro> ListaDeRegistros = (List<Registro>)Session["ListaVenta"];
 
             int cantidadPorArticulo = 0;
-            decimal porcentajeDeGanancia = 0;
+            //decimal porcentajeDeGanancia = 0;
             registro.Monto = decimal.Round((decimal)selecionado.Precio, 2);
-            porcentajeDeGanancia = decimal.Round(((decimal)selecionado.Porcentaje)/100, 2);
-            PrecioTotalPorArticulo = ((decimal)selecionado.Precio * int.Parse(txtCantidad.Text) * (porcentajeDeGanancia + 1));
+            registro.PrecioXCantidad = registro.Monto * registro.Cantidad;
+            //porcentajeDeGanancia = decimal.Round(((decimal)selecionado.Porcentaje)/100, 2);
+            PrecioTotalPorArticulo = ((decimal)selecionado.Precio * int.Parse(txtCantidad.Text) * (decimal.Round(((decimal)selecionado.Porcentaje) / 100, 3) + 1));
 
             PrecioTotalPorArticulo = decimal.Round(PrecioTotalPorArticulo, 2);
             registro.MontoTotal = (decimal?)PrecioTotalPorArticulo;
+
+           
+            registro.Porcentaje = (decimal)selecionado.Porcentaje;
 
             registro.cliente = new Cliente();
 
@@ -199,7 +203,16 @@ namespace tp_comercio_Vargas_Delgado
                 registro.IdFactura = ultimaFactura + 1;
             }
 
-            registroNegocio.agregar(Lista);
+            if (Lista.Count>0)
+            {
+                registroNegocio.agregar(Lista);
+                
+            }
+            else
+            {
+                Response.Write("<script>alert('No se ha podido agregar')</script>");
+                return;
+            }
 
             //actualiza stock en articulos
 

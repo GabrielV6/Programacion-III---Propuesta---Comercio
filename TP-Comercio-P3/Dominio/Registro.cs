@@ -15,6 +15,10 @@ namespace Dominio
         public int Cantidad { get; set; }
         public Nullable<decimal> Monto { get; set; }
         public Nullable<decimal> MontoTotal { get; set; }
+        public Nullable<decimal> Porcentaje { get; set; }
+        public Nullable<decimal> PrecioXCantidad { get; set; }
+        // atributo fecha
+        public DateTime Fecha { get; set; }
         public int Estado { get; set; }
 
         [DisplayName("Articulo")]

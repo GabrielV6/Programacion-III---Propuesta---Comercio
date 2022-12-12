@@ -60,7 +60,9 @@ namespace tp_comercio_Vargas_Delgado
             decimal total = 0;
             foreach (Registro item in ListaRegistro)
             {
-                total = decimal.Round((decimal)ListaRegistro.Sum(x => x.Monto), 2);
+                // Cantidad x Monto 
+                
+                total = decimal.Round((decimal)ListaRegistro.Sum(x => (x.Monto * x.Cantidad)*((x.Porcentaje/100)+1)), 2);
             }
             txtMontoFactura.Text = total.ToString();
             txtMontoFactura.Enabled = false;

@@ -153,6 +153,10 @@ namespace tp_comercio_Vargas_Delgado
             registro.articulo.Nombre = ddlArticulo.SelectedItem.Text;
             registro.articulo.Id = int.Parse(ddlArticulo.SelectedValue);
 
+            ArticuloNegocio articuloNegocio = new ArticuloNegocio();
+            List<Articulo> listaArticulo = articuloNegocio.listaParaEditar(registro.articulo.Id);
+
+            registro.Porcentaje = listaArticulo[0].Porcentaje;
             Lista.Add(registro);
 
             //grisar el ddlProveedor que no permita cambiarlo una vez se selecciono uno en la lista
@@ -180,7 +184,16 @@ namespace tp_comercio_Vargas_Delgado
                 registro.IdFactura = ultimaFactura + 1;
             }
 
-            registroNegocio.agregar(Lista);
+            if (Lista.Count > 0)
+            {
+                registroNegocio.agregar(Lista);
+
+            }
+            else
+            {
+                Response.Write("<script>alert('No se ha podido agregar')</script>");
+                return;
+            }
 
             //actualiza los articulos
 
