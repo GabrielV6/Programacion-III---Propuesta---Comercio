@@ -47,7 +47,7 @@ namespace tp_comercio_Vargas_Delgado
                     ddlProveedor.DataTextField = "RazonSocial";
                     ddlProveedor.DataBind();
                 }
-                if (Session["ArticuloSeleccionado"] != null && !IsPostBack)
+                if (Session["ArticuloSeleccionado"] != null && !IsPostBack ) 
                 {
                     Articulo articulo = (Articulo)Session["ArticuloSeleccionado"];
                     txtCodigo.Text = articulo.Codigo;
@@ -60,6 +60,43 @@ namespace tp_comercio_Vargas_Delgado
                     txtImagenUrl.Text = articulo.ImagenUrl;
                     txtImagenUrl_TextChanged(sender, e);
                 }
+                
+                if(Session["ArticuloSeleccionado"] != null && (Session["usuariologueado"] != null && ((Dominio.RolUsuario)Session["rolusuario"]) != Dominio.RolUsuario.Administrador) && !IsPostBack)
+                {
+                   
+
+                    Articulo articulo = (Articulo)Session["ArticuloSeleccionado"];
+                    txtCodigo.Text = articulo.Codigo;
+                    txtCodigo.ReadOnly = true;
+                    
+                    txtNombre.Text = articulo.Nombre;
+                    txtNombre.ReadOnly = true;
+                    
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtDescripcion.ReadOnly = true;
+                    
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    txtPrecio.ReadOnly = true;
+                 
+                    txtPorcentaje.Text = articulo.Porcentaje.ToString();
+                    txtPorcentaje.ReadOnly = true;
+
+                    ddlMarca.SelectedValue = articulo.marca.Id.ToString();
+                    ddlMarca.Enabled = false;
+
+              
+                    ddlCategoria.SelectedValue = articulo.categoria.Id.ToString();
+                    ddlCategoria.Enabled = false;
+                    
+                    txtImagenUrl.Text = articulo.ImagenUrl;
+                    txtImagenUrl.ReadOnly = true;
+                    txtImagenUrl_TextChanged(sender, e);
+
+                    ddlProveedor.Enabled = false;
+
+                }
+
+               
             }
             catch (Exception ex)
             {
@@ -96,8 +133,7 @@ namespace tp_comercio_Vargas_Delgado
 
                 ArticuloNegocio articuloNegocio = new ArticuloNegocio();
 
-                List<Articulo> listaArticulos = articuloNegocio.listaParaEditar(articulo.Id);
-                articulo.Stock = listaArticulos[0].Stock;
+
 
                 if (IdArticulo == 0)
                 {
@@ -105,6 +141,9 @@ namespace tp_comercio_Vargas_Delgado
                 }
                 else
                 {
+                    List<Articulo> listaArticulos = articuloNegocio.listaParaEditar(articulo.Id);
+                    articulo.Stock = listaArticulos[0].Stock;
+
                     articuloNegocio.modificar(articulo);
                     Session.Remove("ArticuloSeleccionado");
                 }

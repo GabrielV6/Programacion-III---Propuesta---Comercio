@@ -38,6 +38,7 @@
                 EnableClientScript="false"
                 Text="Por favor, ingrese un numero de telefono valido"
                 runat="server" />
+            <br />
 
             <label for="txtEmail" class="form-label" required="">Email</label>
             <asp:TextBox ID="txtEmailCliente" runat="server" CssClass="form-control" required=""></asp:TextBox>

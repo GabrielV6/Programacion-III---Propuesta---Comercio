@@ -80,6 +80,7 @@ namespace tp_comercio_Vargas_Delgado
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
+            Session.Remove("ArticuloSeleccionado");
             Response.Redirect("FormularioArticulo.aspx");
         }
     }
