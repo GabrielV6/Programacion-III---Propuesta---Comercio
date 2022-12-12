@@ -51,12 +51,12 @@
                     <label for="txtPorcentaje" class="form-label">Porcentaje estimado de ganancia</label>
                     <asp:TextBox runat="server" ID="txtPorcentaje" CssClass="form-control" required="" />
                     <asp:RangeValidator ID="RangeValidator1"
-                        ControlToValidate="txtPrecio"
+                        ControlToValidate="txtPorcentaje"
                         MinimumValue="0"
                         MaximumValue="100"
                         Type="Integer"
                         EnableClientScript="false"
-                        Text="Por favor, ingrese un precio valido"
+                        Text="Por favor, ingrese un porcentaje valido"
                         runat="server" />
                     <div class="mb-3">
                         <label for="txtDescripcion" class="form-label">Descripcion</label>
