@@ -92,6 +92,9 @@ namespace tp_comercio_Vargas_Delgado
 
         protected void btnAgregarCompra_Click(object sender, EventArgs e)
         {
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
 
             Registro registro = new Registro();
 
@@ -179,7 +182,7 @@ namespace tp_comercio_Vargas_Delgado
 
             registroNegocio.agregar(Lista);
 
-            //actualiza stock en articulos
+            //actualiza los articulos
 
             foreach (Registro registro in Lista)
             {
@@ -193,6 +196,8 @@ namespace tp_comercio_Vargas_Delgado
                 articulo.Stock = articulos[0].Stock + registro.Cantidad;
                 // actualiza el precio
                 articulo.Precio = registro.Monto;
+                // reescribe el porcentaje con el mismo valor
+                articulo.Porcentaje = articulos[0].Porcentaje;
                 // actualiza el ultimo proveedor
                 Proveedor proveedor = new Proveedor();
                 articulo.proveedor = proveedor;

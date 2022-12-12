@@ -4,6 +4,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+  <script>
+        function validar() {
+            var cantidad = document.getElementById("txtCantidad").value;
+            var monto = document.getElementById("txtMonto").value;
+
+            if (cantidad === "" || monto === "") {
+                alert("Por favor, completar los campos");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
     <div class="mx-auto p-5" style="width: 400px;">
         <h2 class="text-center">Registro de compra</h2>
     </div>
@@ -18,7 +31,7 @@
             <asp:DropDownList ID="ddlArticulo" CssClass="form-select" runat="server"></asp:DropDownList>
 
             <label for="txtCantidad" class="form-label">Cantidad</label>
-            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" required=""></asp:TextBox>
+            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
             <asp:RangeValidator ID="Range1"
                 ControlToValidate="txtCantidad"
                 MinimumValue="1"
@@ -29,7 +42,7 @@
                 runat="server" />
 
             <label for="txtMonto" class="form-label">Monto x Unidad</label>
-            <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control" required=""></asp:TextBox>
+            <asp:TextBox ID="txtMonto" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
             <asp:RangeValidator ID="Range2"
                 ControlToValidate="txtMonto"
                 MinimumValue="1"
@@ -46,7 +59,7 @@
 
 
         <div class="mb-3">
-            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarCompra_Click" />
+            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info"  OnClientClick="return validar()" OnClick="btnAgregarCompra_Click" />
         </div>
 
         <div class="mb-3">
