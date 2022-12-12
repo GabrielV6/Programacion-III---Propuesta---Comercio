@@ -98,6 +98,10 @@ namespace tp_comercio_Vargas_Delgado
             //int IdRegistro = Session["RegistroSeleccionado"] != null ? ((Registro)Session["RegistroSeleccionado"]).Id : 0;
             //registro.Id = IdRegistro;
 
+            Page.Validate();
+            if (!Page.IsValid)
+                return;
+
             decimal PrecioTotalPorArticulo;
 
             Registro registro = new Registro();

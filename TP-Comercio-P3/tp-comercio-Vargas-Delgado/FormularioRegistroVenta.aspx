@@ -4,6 +4,19 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
+    <script>
+        function validar() {
+            var cantidad = document.getElementById("txtCantidad").value;
+
+            if (cantidad === "")
+            {
+                alert("Por favor, completar los campos");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
     <div class="mx-auto p-5" style="width: 400px;">
         <h2 class="text-center">Registro de venta</h2>
     </div>
@@ -18,14 +31,14 @@
             <asp:DropDownList ID="ddlArticulo" CssClass="form-select" runat="server"></asp:DropDownList>
 
             <label for="txtCantidad" class="form-label">Cantidad</label>
-            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" required=""></asp:TextBox>
+            <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" ClientIDMode="Static"></asp:TextBox>
             <asp:RangeValidator ID="Range1"
                 ControlToValidate="txtCantidad"
                 MinimumValue="1"
                 MaximumValue="99000000"
                 Type="Integer"
                 EnableClientScript="false"
-                Text="Por favor, ingrese una cantidad valido"
+                Text="Por favor, ingrese una cantidad valida"
                 runat="server" />
 
             <%--<label for="txtMonto" class="form-label">Monto</label>
@@ -41,7 +54,7 @@
         </div>
 
         <div class="mb-3">
-            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClick="btnAgregarArticulo_Click" />
+            <asp:Button ID="btnAgregarArticulo" runat="server" Text="Agregar articulo" CssClass="btn btn-info" OnClientClick="return validar()" OnClick="btnAgregarArticulo_Click" />
         </div>
 
         <div class="mb-3">
